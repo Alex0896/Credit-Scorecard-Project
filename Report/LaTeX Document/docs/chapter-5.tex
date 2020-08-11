@@ -1,0 +1,63 @@
+\chapter{Alternative Uses - Covid-19} \label{cha:chapter-5}
+%
+%For the selection of my model I decided to use Akaike information criterion(AIC) and Bayesian information criterion(BIC) to determine the goodness of my model's fit. As mentioned earlier, the disadvantage of using the glmnet package is that it does not produce the maximum likelihood of the model. So in order to calculate AIC I had to use a different method to produce a meaningful value for AIC\cite{R2}.\\
+%
+%The glmnet package produces two values, dev.ratio and nulldev. With these I can calculate the deviance of my model of interest with the equation $(1-dev.ratio)*nulldev$. With this and knowing that $Deviance(null) - Deviance(fit) = -2(L(model) - L(null))$. I can use this as a substitute for the maximum log-likelihood since L(null) is a constant between all three models and can be ignored since we are only looking at the difference between AIC's and BIC's. Below is the R code for calculating the deviance, AIC and BIC in Table (\ref{Table 5.1}).
+%
+%\begin{lstlisting}[language=R]
+%#AIC, BIC and Deviance calculations
+%#RIDGE
+%k = 14
+%nullDev <- cv.ridge$glmnet.fit$nulldev
+%dev <- (1-0.7568)*nullDev  #Calcuated from (1-%dev)*nulldev
+%L2 <- nullDev - dev
+%AIC <- -L2 + 2*k
+%BIC <- -L2 + k*log(506)
+%\end{lstlisting}
+%
+%\begin{figure}[ht]
+%	\centering
+%	\begin{tabular}{l l l r r r r}
+%				&Model		&Model No.		&Deviance	&K	&AIC		&BIC\\
+%	\hline
+%				&Ridge		&1	&20.52036	&14	&-35.85613	&23.31538\\
+%	All Inc		&LASSO		&2	&19.25472	&11	&-43.12178	&3.370127\\
+%				&Elas Net	&3	&19.42347	&11	&-42.95302  &3.538879\\
+%	\hline
+%				&Ridge		&4	&20.97600	&13	&-37.40050	&17.54448\\
+%	TAX Del		&LASSO		&5	&20.39380	&8	&-47.98269	&-14.17040\\
+%				&Elas Net	&6	&20.40224	&8	&-47.97426	&-14.16196\\
+%	\hline
+%				&Ridge		&7	&22.04758	&12	&-38.32891	&12.38953\\
+%	NOX Del		&LASSO		&8	&22.04758	&6	&-50.32891	&-24.96969\\
+%				&Elas Net	&9	&22.16570	&6	&-50.21079	&-24.85157\\
+%	\end{tabular}
+%	\caption{Regression Estimates \label{Table 5.1}}
+%\end{figure}
+%
+%Another way I can judge my models is through hypothesis testing using the deviance of the models. I can use a likelihoods ratio test by using the difference in deviance of my model's of interests. Since the deviance for LASSO is the lowest in every set, I will be testing that. I am using this to test if the loss of accuracy in the smaller model is significant enough to reject it. The F test to be used is:
+%
+%\begin{equation}
+%F = \frac{(D_0 - D_1)/(p_1 - p_0)}{D_1/(n - p)}
+%\end{equation}
+%
+%And the hypothesis to be tested is:
+%
+%\begin{equation}
+%H_0 : \text{Model 8 } \text{ vs  } H_1 : \text{Model 2}
+%\end{equation}
+%
+%\begin{align}
+%\frac{(22.04 - 19.25)/(5)}{19.25/(495)} &\sim F(1 - 0.05)_{5,495} \\
+%14.36 &> 2.23
+%\end{align}
+%
+%Therefore I can reject $H_1$ in favour of $H_0$ at a level of 5\% and conclude that the loss of accuracy is not significant enough to change the model.\\
+%
+%From these results the chosen model for all three data sets should be the one produced by LASSO as both information criterion have selected LASSO to be the better model. Although because the difference in AIC and BIC for LASSO and Elastic Net is very small, depending on the chosen seed used in R, Elastic Net's AIC can sometimes be smaller than LASSO's so I think choosing either LASSO or Elastic Net would be suitable. I decided to go with LASSO. As we delete the variables TAX and NOX, the deviance increases which is expected as we are losing information each time we remove a variable but this has the effect of reducing the number of predictors LASSO and NET select when using the new data sets. Now for prediction power, the choice would be to stay with all 13 variables and use the LASSO model produced from that. But due to the effect of multicollinearity, some of the coefficients may not represent the true effect of that variable on the median value. We know the problem of multicollinearity is present in the original data with TAX and RAD having a inflation factor of 9 and 7.2 respectively as seen in section 2.\\
+%
+%If we wanted a subset of variables with a strong predicting power the choice I would go with is the LASSO model produced after TAX and NOX have been removed. LASSO produced a model with only a slight increase in deviance but removed 3 additional variables from the model after TAX and NOX were deleted from the data. Along with that, the AIC of our model is also smaller than when all the variables are included in the data set. So I have decided to pick this as my final model.
+%
+%\begin{equation}
+%\log(\text{MEDV}) = \beta_0 + \beta_1\text{CRIM} + \beta_2\text{RM} + \beta_3\text{PTRATIO} + \beta_4\text{B} + \beta_5\text{LSTAS}
+%\end{equation}

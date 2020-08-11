@@ -1,0 +1,164 @@
+\chapter{Selection} \label{cha:chapter-4}
+%
+%I ended up producing 3 sets of Ridge, LASSO and Elastic Net models. The produced estimates for each model can be seen in  (\ref{Table4.1}), Table (\ref{Table4.2}) and Table (\ref{Table4.3}) along with their chosen $\lambda$ from cross validation and the RMSE for each model. I chose to use lambda.1se over lambda.min as the selected lambda since the documentation recommends this choice. The R code I used to produce the Ridge models is below, the code is the same for all three with alpha changed. Due to these being penalized regression methods, I needed to standardize my variables before I could use the function cv.glmnet. Because of the presence of the categorical variable CHAS, I needed to standardize the data without this variable. In order to do this I used the function scale() which produces the same effect of taking away the mean and dividing by the standard deviance for each observation.\\
+%
+%glmnet and cv.glmnet do not produce the standard errors for each estimation but there are methods to produce them but I decided against listing them with the coefficients. I did this because of the methods being penalizing. Due to the penalization creating high bias in the estimates, the standard errors nessacerily don't provide meaningful information for interpretation.\cite{goeman2016l1}.\\
+%
+%LASSO and Elastic Net have appeared to produce very similar results with removing the same variables and producing similar coefficients each time. This is most likely due to that Elastic Net is more suited to data with significantly more variables than observations allowing it to remove highly correlated variables together. In our results, when a variables was removed elastic net was seen more often removing two or more variables at the same time.\\
+%
+%When looking at our coefficient plots in figures (\ref{COEF1}), (\ref{COEF2}) and (\ref{COEF3}) we can look at how the methods shrink our coefficients and for LASSO and elastic net, which coefficients they drop off and when they do. I decided to plot the graphs of the full data to see the trend of all our variable's coefficients. From the graphs we can see that LSTAS was chosen to be kept in the longest for all three graphs and AGE was the first coefficient to be removed then after that, very quickly after that, ZN was removed. One interesting point is in the full data set with TAX still in, you can see TAX and RAD following an almost identical curve until RAD is just removed before TAX. After that the coefficient of TAX begins to increase in size again and ends up being removed after some other variables have been removed. This is almost certainly due to the high collinearity between them both along with the fairly similar correlation with the response variable. From this it is possible that removing RAD, even though it had the smaller inflation, would result in TAX being left in in the second model unlike RAD has been.\\
+%
+%\begin{lstlisting}[language=R]
+%#Input Data
+%Data <- read.table("boston.housing.data",header = T)
+%x <- as.matrix(Data[,1:13])
+%y <- as.matrix(Data[,14])
+%#Remove CHAS and Standardize
+%x.cont <- x[,-4]
+%x.cont <- scale(x.cont)
+%#Add CHAS
+%x <- cbind(x.cont, x[,4])
+%
+%#Produce Glmnet Fit
+%library(glmnet)
+%set.seed(1) #Seed for reproduce ability
+%cv.ridge <- cv.glmnet(x, log(y), alpha=0, standardize=FALSE)
+%
+%# Results
+%plot(cv.ridge) #Plots mean square error
+%plot(cv.ridge$glmnet.fit, xvar="lambda", label=TRUE) #Plots coef graphs
+%cv.ridge$lambda.1se #Chosen lambda
+%coef(cv.ridge, s=cv.ridge$lambda.1se) #Coefficient table
+%cv.ridge$pred <- predict(cv.ridge, newx = x, s = "lambda.1se") #Predictions
+%cv.ridge$rmse <- mean((log(y) - cv.ridge$pred)^2) #Root mean squared error
+%cv.ridge$rmse 
+%\end{lstlisting}
+%
+%\begin{figure}[ht]
+%	\centering
+%	\begin{tabular}{l r r r}
+%	\multicolumn{4}{c}{Data Set 1}\\
+%	Variable	&Ridge			&LASSO			&Elastic Net\\
+%	\hline
+%	$\lambda$ 	&0.110071		&0.007241934	&0.01448387\\
+%	\hline
+%	$\beta_0$	&3.032622800	&3.03403124		&3.034002936\\
+%	CRIM     	&-0.064008179	&-0.06872488	&-0.067253625\\
+%	ZN       	&0.009548101	&.         		&.          \\
+%	INDUS    	&-0.013931833	&.         		&.          \\
+%	NOX       	&-0.036593124	&-0.04825837	&-0.045162977\\
+%	RM        	&0.086545058	&0.07600843		&0.078655535\\
+%	AGE       	&-0.011898769	&.         		&.          \\
+%	DIS       	&-0.047266508	&-0.05954217	&-0.054501993\\
+%	RAD       	&0.017608700	&0.01960632		&0.014619337\\
+%	TAX       	&-0.031845433	&-0.01698402	&-0.015810370\\
+%	PTRATIO   	&-0.062793060	&-0.07399842	&-0.072136644\\
+%	B         	&0.038056366	&0.03281628		&0.033099429\\
+%	LSTAS     	&-0.143779730	&-0.20547168	&-0.199092357\\
+%	CHAS      	&0.027325070	&0.00696304		&0.007372257\\
+%	\hline
+%	RMSE		&0.2013819		&0.1950815		&0.1959284\\	
+%	\end{tabular}
+%	\caption{Regression Estimates \label{Table4.1}}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%	\centering
+%	\begin{tabular}{l r r r}
+%	\multicolumn{4}{c}{Data Set 2}\\
+%	Variable	&Ridge 			&LASSO 			&Elastic Net\\
+%	\hline
+%	$\lambda$	&0.1208027		&0.01388938		&0.02531097\\
+%	\hline
+%	$\beta_0$ 	&3.0326787065	&3.03451287		&3.03451287\\
+%	CRIM        &-0.0652516715	&-0.06246545	&-0.06313683\\
+%	ZN          &0.0069716016	&.				&.\\
+%	INDUS       &-0.0209047913	&.				&.\\
+%	NOX         &-0.0387233569	&-0.02233285	&-0.02740610\\
+%	RM          &0.0868841912	&0.07672957		&0.07999936\\
+%	AGE         &-0.0128134450	&.				&.\\
+%	DIS         &-0.0439698917	&-0.02848306	&-0.02898603\\
+%	RAD         &0.0008558714	&.				&.\\
+%	PTRATIO     &-0.0646415393	&-0.06629390	&-0.06694681\\
+%	B           &0.0393031501	&0.02975365		&0.03133882\\
+%	LSTAS       &-0.1413462017	&-0.20485916	&-0.19418048\\
+%	CHAS        &0.0265168282	&.				&.\\
+%	\hline
+%	RMSE		&0.2036189		&0.2007459		&0.2007921\\
+%	\end{tabular}
+%	\caption{Regression Estimates after TAX is deleted \label{Table4.2}}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%	\centering
+%	\begin{tabular}{l r r r}
+%	\multicolumn{4}{c}{Data Set 3}\\
+%	Variable	&Ridge 			&LASSO 			&Elastic Net\\
+%	\hline
+%	$\lambda$	&0.1455073		&0.02923581		&0.05327716\\
+%	\hline
+%	$\beta_0$ 	&3.032739303	&3.03451287		&3.03451287\\
+%	CRIM   		&-0.065804762	&-0.05420436	&-0.05721313\\
+%	ZN      	&0.008897000	&.				&.\\
+%	INDUS    	&-0.029853791	&.				&.\\
+%	RM        	&0.088354647	&0.06957956		&0.07605300\\
+%	AGE        	&-0.020492166	&.				&.\\
+%	DIS    		&-0.035178628	&.				&.\\
+%	RAD     	&-0.006112453	&.				&.\\
+%	PTRATIO  	&-0.059708631	&-0.05531137	&-0.05661420\\
+%	B         	&0.041403531	&0.02088837		&0.02590545\\
+%	LSTAS      	&-0.144598353	&-0.20402847	&-0.18675554\\
+%	CHAS        &0.025640770	&.				&.\\
+%	\hline
+%	RMSE		&0.2087332		&0.2087313		&0.2092953\\
+%	\end{tabular}
+%	\caption{Regression Estimates after TAX and NOX are deleted \label{Table4.3}}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[scale=0.40]{figs/Plots1.pdf}
+%	\caption{Mean Squared Error for Ridge \label{MSE1}}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[scale=0.40]{figs/Plots2.pdf}
+%	\caption{Mean Squared Error for LASSO \label{MSE2}}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[scale=0.40]{figs/Plots3.pdf}
+%	\caption{Mean Squared Error for Elastic Net \label{MSE3}}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[scale=0.40]{figs/Plots4.pdf}
+%	\caption{Mean Squared Error's Compared \label{MSE4}}
+%\end{figure}
+%
+%\begin{landscape}
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[scale=0.65]{figs/PlotsC1.pdf}
+%	\caption{Coefficient Plot for Ridge \label{COEF1}}
+%\end{figure}
+%\end{landscape}
+%
+%\begin{landscape}
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[scale=0.65]{figs/PlotsC2.pdf}
+%	\caption{Coefficient Plot for LASSO \label{COEF2}}
+%\end{figure}
+%\end{landscape}
+%
+%\begin{landscape}
+%\begin{figure}[ht]
+%	\centering
+%	\includegraphics[scale=0.65]{figs/PlotsC3.pdf}
+%	\caption{Coefficient Plot for Elastic Net \label{COEF3}}
+%\end{figure}
+%\end{landscape}
