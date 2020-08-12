@@ -48,14 +48,26 @@ value_fit = value_ols.fit()
 predictions = value_fit.predict(value_missing_with_mort[['const', 'MORTDUE']])
 
 # Get mean before updating
-mort_mean = df.VALUE.mean()
+value_mean = df.VALUE.mean()
 
 df.VALUE.update(predictions)
-df.VALUE.fillna(mort_mean, inplace=True) # Fill any remaining with original mean
+df.VALUE.fillna(value_mean, inplace=True) # Fill any remaining with original mean
+
+df.iloc[:, :-1] = df.iloc[:, :-1].fillna(df.median())
+# df = df.fillna(df.median())
+
+## DEBTINC impute
+df_ = df.drop(['BAD', 'REASON', 'JOB'], axis=1)
+
+debt_missing_with_others = df_.loc[df_.DEBTINC.isna()] # 991
+debt_with_others = df_.loc[~df_.DEBTINC.isna()] # 4041
+debt_ols = sm.OLS(debt_with_others.DEBTINC, debt_with_others.iloc[:,:-1])
+debt_fit = debt_ols.fit()
+predictions = debt_fit.predict(debt_missing_with_others.iloc[:,:-1])
+
+df.DEBTINC.update(predictions)
 
 df.drop('const', axis=1, inplace=True)
-
-df = df.fillna(df.median())
 
 # Impute categorical variables
 np.random.seed(100) # Set seed for reproducability
