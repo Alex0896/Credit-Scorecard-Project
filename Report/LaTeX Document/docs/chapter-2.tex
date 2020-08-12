@@ -60,9 +60,28 @@ Moving onto imputing variable, for MORTDUE and VALUE I imputed their values usin
 	\end{tabular}
 \end{figure}
 
-For the remaining numerical variables I chose to take the median of the values as there was no highly correlated variables I could take to impute using linear regression. There is an argument that because DEBTINC is missing 991 (19.7 \%) that some other method from using the median value should be used but the only reasonable solution with the data available would be to drop the variable all together or drop the missing rows, both would result in a large loss of data. As this will most likely have a significant impact on the importance of the variable I planned to look into the performance of a few datasets with different solutions for this variable. \\
+For the remaining numerical variables excluding DEBTINC I chose to take the median of the values as there were only a small amount missing from each with no highly correlated variables to take a regression from. There is an argument that because DEBTINC is missing 991 (19.7 \%) that some other method from using the median value should be used. The decision was made to create two datasets, one with the rows with DEBTINC missing to be dropped and one with the values imputed from the rest of the dataset. The regression used was (\ref{DEBTINC_IMPUTE}), LOAN, MORTDUE, VALUE were dropped as they were deemed insiginficant. \\
 
-Last was the two categorical variables REASON ( DebtCon, HomeImp ) and JOB ( Other, Office, Sales, Mgr, ProfExe, Self ). REASON's categories were specified in the data dictionary but JOB's categories were not, for simplicity I am going to assume that the missing values are of the categories just specified. Their missing values were 138 and 127 respectively and I decided to impute these values using a weighted random sample with the weights being the counts of the respective category. Below is two table summarizing the imputes, I applied a seed to reproduce the sampling to remian consistent. 
+\begin{equation}\label{DEBTINC_IMPUTE}
+\text{DEBTINC} = \beta_{0} + \beta_{1}\text{YOJ} + \beta_{2}\text{DEROG} + \beta_{3}\text{DELINQ}  + \beta_{4}\text{CLAGE}  + \beta_{5}\text{NINQ}  + \beta_{6}\text{CLNO}
+\end{equation}
+
+\begin{figure}[ht]\label{DEBTINC_IMPUTE_COEFS}
+	\centering
+	\begin{tabular}{lr}
+	\hline
+	$\beta_{0}$   &  29.1963 \\
+	$\beta_{1}$     &  -0.0493 \\
+	$\beta_{2}$   &  -0.7669 \\
+	$\beta_{3}$  &   0.4193 \\
+	$\beta_{4}$   &   0.0007 \\
+	$\beta_{5}$    &   0.9362 \\
+	$\beta_{6}$    &   0.0748 \\
+	\bottomrule
+	\end{tabular}
+\end{figure}
+
+Last was the two categorical variables REASON ( DebtCon, HomeImp ) and JOB ( Other, Office, Sales, Mgr, ProfExe, Self ). REASON's categories were specified in the data dictionary but JOB's categories were not, for simplicity I am going to assume that the missing values are of the categories just specified. Their missing values were 138 and 127 respectively and I decided to impute these values using a weighted random sample with the weights being the counts of the respective category. Below is two table summarizing the imputes, I applied a seed to reproduce the sampling to remian consistent.
 
 \begin{figure}[ht]\label{REASON_IMPUTES}
 	\centering
@@ -116,7 +135,7 @@ With these two completed I had no more missing values an no other noticeable iss
 	CLAGE & 67 & Median taken \\
 	NINQ & 178 & Median taken\\
 	CLNO & 0 & N/A \\
-	DEBTINC & 991 & Median taken\\
+	DEBTINC & 991 & Imputed from a linear regression (\ref{DEBTINC_IMPUTE}).\\
 	\end{tabular}
 \end{figure}
 
@@ -159,7 +178,7 @@ With these two completed I had no more missing values an no other noticeable iss
 	max   &     1.00 &  62700.00 &  207687.00 &  271738.00 &    29.00 &     3.00 &     4.00 &   398.40 &     7.00 &    48.00 &    48.28 \\
 	\bottomrule
 	\end{tabular}
-	\caption{Summary After Outliers Removed \label{SUM_AFT_TBL}}
+	\caption{Summary After Cleaning \label{SUM_AFT_TBL}}
 \end{figure}
 \end{landscape}
 
@@ -190,8 +209,12 @@ With these two completed I had no more missing values an no other noticeable iss
 
 \section{Variables}
 
-With the data cleaned I then was able to look more into the properties of the variables and their relationship with the default outcome. First looking at the summary data found in Table
+With data cleaned the remaining observations was 5032 of 12 independ variables with no missing values. A summary of the numerical values can be found in Table (\ref{SUM_AFT_TBL}). There you can see the remaining data has a bad rate of 17\% which equates to 857 defaulted applicants. 
  \ref{SUM_TBL}
+
+\subsection*{LOAN}
+
+LOAN, the amount requested for the home equity loan by the applicant can be seen in Figure (\ref{loan_dist}). The initial assumption was that higher loan values would have a higher bad rate due to the larger amount to pay back, increasing the length and difficulty for the applicant to pay back the loan. Looking at the figure this does not appear to be the case, although small, larger loans tend to be payed off more often. The reasons for this are unclear, a couple suggested could be that since we do not know exactly how this data was gathered the case could be that for larger loans the bank/company offering these loans had higher cutoffs on their applicant scoring to prevent higher risks in higher potential loss causing a shift down in the bad rate. Another could be the arguement that larger requested loans are coming from owners of higher valued properties, which could be the case when looking at the correlation table \ref{CORR_TBL}. A higher property value indicates a better economic status and less likely to default on a loan. It would be reasonable to expect this variable to have a significant effect on the credit score.
 
 \begin{figure}[!ht]
 	\centering
@@ -199,11 +222,17 @@ With the data cleaned I then was able to look more into the properties of the va
 	\caption{Distribution of LOAN by BAD. \label{loan_dist}}
 \end{figure}
 
+\subsection*{MORTDUE}
+
+MORTDUE, the outstanding balance on the applicants existing mortgage. Assumption here would be similar to LOAN, a higher outstanding balance on their mortgage mean a large amount of debt and an increased risk of defaulting due to the larger payments. Looking at figure (\ref{mortdue_dist}) you can see it does not follow this assumption, again a small but clear difference in the distribution shows that applicants with a higher outstanding balance on their mortgage are less likely to default. Whatever the reason behind this is would most likely be the same as the reason behind LOAN.
+
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.40]{figs/mortdue_dist.pdf}
 	\caption{Distribution of MORTDUE by BAD. \label{mortdue_dist}}
 \end{figure}
+
+\subsection*{VALUE}
 
 \begin{figure}[!ht]
 	\centering
@@ -211,11 +240,19 @@ With the data cleaned I then was able to look more into the properties of the va
 	\caption{Distribution of VALUE by BAD. \label{value_dist}}
 \end{figure}
 
+\subsection*{REASON}
+
+REASON, the reason for the applicant's request. There are only two categories as seen in \ref{reason_cat}, DebtCon, the loan would be used for a debt consolidation. HomeImp, the loan is being used for a home improvement. 
+
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.40]{figs/reason_cat.pdf}
 	\caption{Category plot of REASON by BAD. \label{reason_cat}}
 \end{figure}
+
+\subsection*{JOB}
+
+JOB, categorical job occupation. Categories can be seen in \ref{job_cat} 
 
 \begin{figure}[!ht]
 	\centering
@@ -223,11 +260,15 @@ With the data cleaned I then was able to look more into the properties of the va
 	\caption{Category plot of JOB by BAD. \label{job_cat}}
 \end{figure}
 
+\subsection*{YOJ}
+
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[scale=0.40]{figs/yoj_box.pdf}
-	\caption{Boxplot of YOJ by BAD. \label{yoj_box}}
+	\includegraphics[scale=0.40]{figs/yoj_dist.pdf}
+	\caption{Distribution of YOJ by BAD. \label{yoj_dist}}
 \end{figure}
+
+\subsection*{DEROG}
 
 \begin{figure}[!ht]
 	\centering
@@ -235,29 +276,39 @@ With the data cleaned I then was able to look more into the properties of the va
 	\caption{Category plot of DEROG by BAD. \label{derog_cat}}
 \end{figure}
 
+\subsection*{DELINQ}
+
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.40]{figs/delinq_cat.pdf}
 	\caption{Category plot of DELINQ by BAD. \label{delinq_cat}}
 \end{figure}
 
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[scale=0.40]{figs/clage_dist.pdf}
-	\caption{Distribution of CLAGE by BAD. \label{clage_dist}}
-\end{figure}
+\subsection*{CLAGE}
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.40]{figs/clage_dist.pdf}
 	\caption{Distribution of CLAGE by BAD. \label{clage_dist}}
 \end{figure}
+
+\subsection*{NINQ}
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.40]{figs/ninq_cat.pdf}
 	\caption{Category plot of NINQ by BAD. \label{ninq_cat}}
 \end{figure}
+
+\subsection*{CLNO}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=0.40]{figs/clno_dist.pdf}
+	\caption{Distribution of CLNO by BAD. \label{clno_dist}}
+\end{figure}
+
+\subsection*{DEBTINC}
 
 \begin{figure}[!ht]
 	\centering

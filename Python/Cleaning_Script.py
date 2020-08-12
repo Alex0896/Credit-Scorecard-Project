@@ -10,6 +10,10 @@ import statsmodels.api as sm
 
 df = pd.read_csv("E:/GitHub/Credit-Scorecard-Project/Python/hmeq.csv")
 
+# df = df.dropna()
+
+# df.to_csv('hmeq_clean.csv', index=False)
+
 # Get number of nulls in each row
 na_in_rows = df.isna().sum(axis=1)
 
@@ -55,6 +59,8 @@ df.VALUE.fillna(value_mean, inplace=True) # Fill any remaining with original mea
 
 df.iloc[:, :-1] = df.iloc[:, :-1].fillna(df.median())
 # df = df.fillna(df.median())
+
+# df = df.dropna()
 
 ## DEBTINC impute
 df_ = df.drop(['BAD', 'REASON', 'JOB'], axis=1)
