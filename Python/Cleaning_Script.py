@@ -63,15 +63,20 @@ df.iloc[:, :-1] = df.iloc[:, :-1].fillna(df.median())
 # df = df.dropna()
 
 ## DEBTINC impute
-df_ = df.drop(['BAD', 'REASON', 'JOB'], axis=1)
+# df_ = df.drop(['BAD', 'REASON', 'JOB'], axis=1)
 
-debt_missing_with_others = df_.loc[df_.DEBTINC.isna()] # 991
-debt_with_others = df_.loc[~df_.DEBTINC.isna()] # 4041
-debt_ols = sm.OLS(debt_with_others.DEBTINC, debt_with_others.iloc[:,:-1])
-debt_fit = debt_ols.fit()
-predictions = debt_fit.predict(debt_missing_with_others.iloc[:,:-1])
+# debt_missing_with_others = df_.loc[df_.DEBTINC.isna()] # 991
+# debt_with_others = df_.loc[~df_.DEBTINC.isna()] # 4041
+# debt_ols = sm.OLS(debt_with_others.DEBTINC, debt_with_others.iloc[:,:-1])
+# debt_fit = debt_ols.fit()
+# predictions = debt_fit.predict(debt_missing_with_others.iloc[:,:-1])
 
-df.DEBTINC.update(predictions)
+# df.DEBTINC.update(predictions)
+
+# df = df.dropna(subset=['DEBTINC'])
+
+# Drop DEBTINC
+df = df.drop('DEBTINC', axis=1)
 
 df.drop('const', axis=1, inplace=True)
 

@@ -14,11 +14,24 @@ import statsmodels.api as sm
 
 df = pd.read_csv("E:\GitHub\Credit-Scorecard-Project\Python\hmeq_clean.csv")
 
+df.drop(['REASON', 'MORTDUE'], axis=1, inplace=True)
+
 df.LOAN = np.log(df.LOAN)
-df.MORTDUE = np.log(df.MORTDUE)
+# df.MORTDUE = np.log(df.MORTDUE)
 df.VALUE = np.log(df.VALUE)
+# df.YOJ = np.log(df.YOJ)
 
 bins = sc.woebin(df, 'BAD')
+
+# Fix JOB
+break_list = {'JOB': df.JOB.unique().tolist()}
+job_bins = sc.woebin(df, 'BAD', x=['JOB'], breaks_list=break_list)
+
+bins['JOB'] = job_bins['JOB']
+
+# fig, axs = plt.subplots(ncols=2)
+# sc.woebin_plot(bins)
+
 
 for k, bin_ in bins.items():
     print(k)
@@ -51,8 +64,14 @@ test_pred = fit.predict(X_test)
 
 
 # Plot diagnositcs
-train_perf = sc.perf_eva(y_train, train_pred, title = "train")
-test_perf = sc.perf_eva(y_test, test_pred, title = "test")
+# train_perf = sc.perf_eva(y_train, train_pred, title = "train", plot_type=['ks'])
+test_perf = sc.perf_eva(y_test, test_pred, title = "test", plot_type=['ks'])
+# train_perf = sc.perf_eva(y_train, train_pred, title = "train", plot_type=['roc'])
+test_perf = sc.perf_eva(y_test, test_pred, title = "test", plot_type=['roc'])
+# train_perf = sc.perf_eva(y_train, train_pred, title = "train", plot_type=['lift'])
+# test_perf = sc.perf_eva(y_test, test_pred, title = "test", plot_type=['lift'])
+# train_perf = sc.perf_eva(y_train, train_pred, title = "train", plot_type=['pr'])
+# test_perf = sc.perf_eva(y_test, test_pred, title = "test", plot_type=['pr'])
 
 class ModelDetails():
 
@@ -76,3 +95,17 @@ sc.perf_psi(
   score = {'train':train_score, 'test':test_score},
   label = {'train':y_train, 'test':y_test}
 )
+
+
+plt.figure()
+lw = 2
+plt.plot(tpr, fpr, color='green',
+         lw=lw, label='ROC curve (area = %0.2f)' % roc_auc)
+plt.plot([0, 1], [0, 1], color='red', lw=lw, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver operating characteristic')
+plt.legend(loc="lower right")
+plt.show()

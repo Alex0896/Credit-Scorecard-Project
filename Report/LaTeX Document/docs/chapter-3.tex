@@ -2,6 +2,81 @@
 
 \section{Logistic Regression}
 
+\section{Results}
+
+Data was split into train and test sets with proportions 0.7 and 0.3 respectively. Bad rate was maintained in each data set at 17\%. The woe values from tables  (\ref{woe_1}) \& (\ref{woe_2}) were applied. Once split the train data was passed through a glm model with logit link, for this the statsmodel package was used \cite{statsmodels}. Three models were run and compared  (\ref{glm_out}).  
+
+\begin{figure}
+\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}  &       BAD        & \textbf{  No. Observations:  } &     3522    \\
+\textbf{Model:}          &       GLM        & \textbf{  Df Residuals:      } &     3510    \\
+\textbf{Model Family:}   &     Binomial     & \textbf{  Df Model:          } &       11    \\
+\textbf{Link Function:}  &      logit       & \textbf{  Scale:             } &    1.0000   \\
+\textbf{Method:}         &       IRLS       & \textbf{  Log-Likelihood:    } &   -1236.8   \\
+\textbf{Date:}           & Sat, 15 Aug 2020 & \textbf{  Deviance:          } &    2473.6   \\
+\textbf{Time:}           &     13:16:04     & \textbf{  Pearson chi2:      } &  3.55e+03   \\
+\textbf{No. Iterations:} &        6         & \textbf{                     } &             \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lcccccc}
+                      & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+\midrule
+\textbf{const}        &      -1.6002  &        0.054     &   -29.683  &         0.000        &       -1.706    &       -1.495     \\
+\textbf{CLNO\_woe}    &       0.8862  &        0.154     &     5.755  &         0.000        &        0.584    &        1.188     \\
+\textbf{REASON\_woe}  &      -0.1580  &        0.455     &    -0.347  &         0.729        &       -1.051    &        0.735     \\
+\textbf{VALUE\_woe}   &       0.8818  &        0.159     &     5.558  &         0.000        &        0.571    &        1.193     \\
+\textbf{YOJ\_woe}     &       1.1226  &        0.214     &     5.238  &         0.000        &        0.703    &        1.543     \\
+\textbf{DELINQ\_woe}  &       1.0389  &        0.072     &    14.443  &         0.000        &        0.898    &        1.180     \\
+\textbf{LOAN\_woe}    &       0.7584  &        0.115     &     6.581  &         0.000        &        0.533    &        0.984     \\
+\textbf{DEROG\_woe}   &       0.8037  &        0.100     &     8.062  &         0.000        &        0.608    &        0.999     \\
+\textbf{CLAGE\_woe}   &       0.8006  &        0.102     &     7.861  &         0.000        &        0.601    &        1.000     \\
+\textbf{NINQ\_woe}    &       1.0246  &        0.139     &     7.397  &         0.000        &        0.753    &        1.296     \\
+\textbf{JOB\_woe}     &       0.7379  &        0.155     &     4.764  &         0.000        &        0.434    &        1.041     \\
+\textbf{MORTDUE\_woe} &       0.0044  &        0.234     &     0.019  &         0.985        &       -0.455    &        0.464     \\
+\bottomrule
+\end{tabular}
+\caption{Generalized Linear Model Regression Results \label{glm_out}}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lccc}
+\toprule
+Model & AIC & KS & GINI \\
+Model 1 (Default) & 2497.64 & 0.4616 & 0.5985 \\
+Model 2 (REASON and MORTDUE dropped) & 2493.76 & 0.4584 & 0.5985 \\
+Model 3 (Log transformations) & 2504.0873 & 0.4753 & 0.5993 \\
+\bottomrule
+\end{tabular}
+\caption{Performance Evaluation Results On Test \label{perf_eval}}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=0.90]{figs/ks_plot.png}
+	\caption{KS Plot \label{ks_plot}}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=0.90]{figs/roc_plot.png}
+	\caption{ROC Plot \label{roc_plot}}
+\end{figure}
+
+\begin{landscape}
+\begin{figure}[!ht]
+\begin{center}
+	\includegraphics[scale=0.75]{figs/scorecard_plot.png}
+	\caption{Scorecard Plot \label{scorecard_plot}}
+\end{center}
+\end{figure}
+\end{landscape}
+
 %\section{Ridge Regression}
 %The Ridge Regression method or also know as Tikhonov regularization originally began being developed by Andre Tikhonov in Russia and published in the book "Solutions of ill-posed problems". During around the same time as Andre. two American statiticians, Arthur Hoerl and Robert Kennardcan, released the paper "Ridge Regression: Biased Estimation for Nonorthogonal Problems" in 1970. Ridge regression can be useful to apply when there is a large number of predictors which all seem to have a small effect on the response variable of interest. Applying ridge regression to the data produces a shrinking effect on the predictors and some can effectively reach zero but the method cannot reduce the estimates to exactly zero. As the coefficients shrink this does produce bias but also reduces the variance of the estimates.\cite{hoerl1970ridge}\cite{marquardt1975ridge}\\
 %

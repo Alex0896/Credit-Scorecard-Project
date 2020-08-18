@@ -32,7 +32,7 @@ IV, the information value. Is a measure of the weight of evidence for categories
 	From 0.30 to less than 0.50	&Strong Predictor \\
 	Over 0.50				&Very Strong Predictor \\
 	\end{tabular}
-	\caption{Information Value Table \label{Table1}}\cite{bailey2004credit}
+	\caption{Information Value Table \label{IV}}\cite{bailey2004credit}
 \end{figure}
 
 \section{Performance Evaulation}
@@ -51,6 +51,12 @@ A more common representation of the AUC is the gini coefficient (\ref{GINI}). A 
 \begin{equation}\label{GINI}
 gini = (2 \cdot AUC) - 1
 \end{equation}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[scale=1.00]{figs/roc_example.png}
+	\caption{ROC Example \label{roc_example}}
+\end{figure}
 
 \subsection{K-S Statistic}
 
@@ -72,6 +78,8 @@ A scorecard in simple terms is just a method producing a score for each individu
 An alternative to this would be a two score cut-off. This would be done by having two scores like $ \textup{Rejected } < S_{1} < \textup{ Refer } < S_{2} < \textup{ Accepted}$. Any score above $S_{2}$ is automatically accepted and any below $S_{1}$ is rejected. Scores which the land in between and moved to a referral stage where a lender can further look into the applicants case by case to decide the outcome. This comes with added benefit of removing the issue of applicants close to the single cutoff. The idea is that with the lenders insight, more good applicants will be accepted and more bads rejected compared to the single cutoff, thus possibly reducing the bad rate of accepted applicants. \\
 
 The cut-off scores can be determined by varying factors which can change depending on the companies interest. Four of these are specified by Bailey \cite{bailey2004credit}. Acceptance rate, the percentage of all applicants accepted by the cut-off. Overall bad rate, the percentage of all accepted applicants that end up being bads. Marginal bad rate, the percentage of accepted applicancts that are bad close to the cut-off score. Profitability, the possible profit from goods minus the loss from bads. Depending on the situation of the business and its goals would determine the importance of each factor with overal bad rate being the usual priority.
+
+\section{Population Stability Index}
 
 
 

@@ -9,6 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
+from scipy import stats
 
 df = pd.read_csv("E:/GitHub/Credit-Scorecard-Project/Python/hmeq_clean.csv")
         
@@ -25,7 +26,7 @@ sns.set(style="whitegrid")
 fig, (ax_dist, ax_box_good, ax_box_bad) = plt.subplots(3,
                                                        sharex=True,
                                                        gridspec_kw={"height_ratios": (.80, .10, .10)}, 
-                                                       figsize=[15,9]
+                                                       figsize=[15,8]
                                                        )
 # Add a graph in each part
 loan_good = df.loc[df.BAD == 0, 'LOAN']
@@ -45,7 +46,7 @@ plt.savefig('figs/loan_dist.pdf')
 fig, (ax_dist, ax_box_good, ax_box_bad) = plt.subplots(3,
                                                        sharex=True,
                                                        gridspec_kw={"height_ratios": (.80, .10, .10)}, 
-                                                       figsize=[15,9]
+                                                       figsize=[15,8]
                                                        )
 # Add a graph in each part
 goods = df.loc[df.BAD == 0, 'MORTDUE']
@@ -65,7 +66,7 @@ plt.savefig('figs/mortdue_dist.pdf')
 fig, (ax_dist, ax_box_good, ax_box_bad) = plt.subplots(3,
                                                        sharex=True,
                                                        gridspec_kw={"height_ratios": (.80, .10, .10)}, 
-                                                       figsize=[15,9]
+                                                       figsize=[15,8]
                                                        )
 # Add a graph in each part
 goods = df.loc[df.BAD == 0, 'VALUE']
@@ -86,7 +87,7 @@ reason_perc = df.groupby('REASON')['BAD'].value_counts(normalize=True)
 reason_perc = reason_perc * 100
 reason_perc = reason_perc.rename('Perc').reset_index()
 
-fig, ax = plt.subplots(figsize=[13.5,9])
+fig, ax = plt.subplots(figsize=[13.5,5])
 sns.barplot(x='REASON', y='Perc', hue='BAD', data=reason_perc, palette=['green', 'red'], ax=ax)
 ax.set(ylim=(0,100))
 for p in ax.patches:
@@ -102,7 +103,7 @@ reason_perc = df.groupby('JOB')['BAD'].value_counts(normalize=True)
 reason_perc = reason_perc * 100
 reason_perc = reason_perc.rename('Perc').reset_index()
 
-fig, ax = plt.subplots(figsize=[15,6])
+fig, ax = plt.subplots(figsize=[15,5])
 sns.barplot(x='JOB', y='Perc', hue='BAD', data=reason_perc, palette=['green', 'red'], ax=ax)
 ax.set(ylim=(0,100))
 
@@ -118,7 +119,7 @@ plt.savefig('figs/job_cat.pdf')
 fig, (ax_dist, ax_box_good, ax_box_bad) = plt.subplots(3,
                                                        sharex=True,
                                                        gridspec_kw={"height_ratios": (.80, .10, .10)}, 
-                                                       figsize=[15,9]
+                                                       figsize=[15,8]
                                                        )
 # Add a graph in each part
 goods = df.loc[df.BAD == 0, 'YOJ']
@@ -135,7 +136,7 @@ ax_box_bad.set(xlabel='')
 plt.savefig('figs/yoj_dist.pdf')
 
 # YOJ plot
-fig, ax = plt.subplots(figsize=[13.5,9])
+fig, ax = plt.subplots(figsize=[13.5,8])
 sns.boxplot(x='BAD', y='YOJ', data=df, palette=['green', 'red'], ax=ax)
 plt.savefig('figs/yoj_box.pdf')
 
@@ -144,7 +145,7 @@ derog_perc = df.groupby('DEROG')['BAD'].value_counts(normalize=True)
 derog_perc = derog_perc * 100
 derog_perc = derog_perc.rename('Perc').reset_index()
 
-fig, ax = plt.subplots(figsize=[13.5,9])
+fig, ax = plt.subplots(figsize=[13.5,5])
 sns.barplot(x='DEROG', y='Perc', hue='BAD', data=derog_perc, palette=['green', 'red'], ax=ax)
 
 for p in ax.patches:
@@ -162,7 +163,7 @@ derog_perc = df.groupby('DELINQ')['BAD'].value_counts(normalize=True)
 derog_perc = derog_perc * 100
 derog_perc = derog_perc.rename('Perc').reset_index()
 
-fig, ax = plt.subplots(figsize=[13.5,9])
+fig, ax = plt.subplots(figsize=[13.5,5])
 sns.barplot(x='DELINQ', y='Perc', hue='BAD', data=derog_perc, palette=['green', 'red'], ax=ax)
 
 for p in ax.patches:
@@ -177,7 +178,7 @@ plt.savefig('figs/delinq_cat.pdf')
 fig, (ax_dist, ax_box_good, ax_box_bad) = plt.subplots(3,
                                                        sharex=True,
                                                        gridspec_kw={"height_ratios": (.80, .10, .10)}, 
-                                                       figsize=[15,9]
+                                                       figsize=[15,8]
                                                        )
 # Add a graph in each part
 goods = df.loc[df.BAD == 0, 'CLAGE']
@@ -198,7 +199,7 @@ ninq_perc = df.groupby('NINQ')['BAD'].value_counts(normalize=True)
 ninq_perc = ninq_perc * 100
 ninq_perc = ninq_perc.rename('Perc').reset_index()
 
-fig, ax = plt.subplots(figsize=[13.5,9])
+fig, ax = plt.subplots(figsize=[13.5,5])
 sns.barplot(x='NINQ', y='Perc', hue='BAD', data=ninq_perc, palette=['green', 'red'], ax=ax)
 
 for p in ax.patches:
@@ -213,7 +214,7 @@ plt.savefig('figs/ninq_cat.pdf')
 fig, (ax_dist, ax_box_good, ax_box_bad) = plt.subplots(3,
                                                        sharex=True,
                                                        gridspec_kw={"height_ratios": (.80, .10, .10)}, 
-                                                       figsize=[15,9]
+                                                       figsize=[15,8]
                                                        )
 # Add a graph in each part
 goods = df.loc[df.BAD == 0, 'CLNO']
@@ -229,31 +230,31 @@ ax_box_bad.set(xlabel='')
 
 plt.savefig('figs/clno_dist.pdf')
 
-## DEBTINC Plot
-fig, (ax_dist, ax_box_good, ax_box_bad) = plt.subplots(3,
-                                                       sharex=True,
-                                                       gridspec_kw={"height_ratios": (.80, .10, .10)}, 
-                                                       figsize=[15,9]
-                                                       )
-# Add a graph in each part
-goods = df.loc[df.BAD == 0, 'DEBTINC']
-bads = df.loc[df.BAD == 1, 'DEBTINC']
-sns.distplot(goods, hist=False, label='Good', color='green', ax=ax_dist).set_xlabel("X Label",fontsize=20)
-sns.distplot(bads, hist=False, label='Bad', color='red', ax=ax_dist).tick_params(labelsize=16)
-sns.boxplot(goods, ax=ax_box_good, color='green')
-sns.boxplot(bads, ax=ax_box_bad, color='red').tick_params(labelsize=16)
+# ## DEBTINC Plot
+# fig, (ax_dist, ax_box_good, ax_box_bad) = plt.subplots(3,
+#                                                         sharex=True,
+#                                                         gridspec_kw={"height_ratios": (.80, .10, .10)}, 
+#                                                         figsize=[15,8]
+#                                                         )
+# # Add a graph in each part
+# goods = df.loc[df.BAD == 0, 'DEBTINC']
+# bads = df.loc[df.BAD == 1, 'DEBTINC']
+# sns.distplot(goods, hist=False, label='Good', color='green', ax=ax_dist).set_xlabel("X Label",fontsize=20)
+# sns.distplot(bads, hist=False, label='Bad', color='red', ax=ax_dist).tick_params(labelsize=16)
+# sns.boxplot(goods, ax=ax_box_good, color='green')
+# sns.boxplot(bads, ax=ax_box_bad, color='red').tick_params(labelsize=16)
  
-# Remove x axis name for the boxplot
-ax_box_good.set(xlabel='')
-ax_box_bad.set(xlabel='')
+# # Remove x axis name for the boxplot
+# ax_box_good.set(xlabel='')
+# ax_box_bad.set(xlabel='')
 
-plt.savefig('figs/debtinc_dist.pdf')
+# plt.savefig('figs/debtinc_dist.pdf')
 
 ## Log LOAN Plot
 fig, (ax_dist, ax_box_good, ax_box_bad) = plt.subplots(3,
                                                        sharex=True,
                                                        gridspec_kw={"height_ratios": (.80, .10, .10)}, 
-                                                       figsize=[15,9]
+                                                       figsize=[15,8]
                                                        )
 # Add a graph in each part
 loan_good = np.log(df.loc[df.BAD == 0, 'LOAN'])
@@ -268,3 +269,16 @@ ax_box_good.set(xlabel='')
 ax_box_bad.set(xlabel='')
 
 plt.savefig('figs/log_loan_dist.pdf')
+
+
+# Other stuff
+
+df['Count'] = df['YOJ'].groupby(df['JOB']).transform('mean')
+df = df.sort_values('Count')
+
+fig, ax = plt.subplots(figsize=[13.5,5])
+plt_ = sns.barplot(x='JOB', y='YOJ', data=df, ax=ax)
+plt_.tick_params(labelsize=16)
+plt_.set_xlabel('JOB', fontsize=20)
+plt_.set_ylabel('YOJ', fontsize=20)
+plt.savefig('figs/job_yoj_cat.pdf')
