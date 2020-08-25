@@ -14,18 +14,18 @@ import statsmodels.api as sm
 
 df = pd.read_csv("E:\GitHub\Credit-Scorecard-Project\Python\hmeq_clean.csv")
 
-df.drop(['REASON', 'MORTDUE'], axis=1, inplace=True)
+# df.drop(['REASON', 'MORTDUE'], axis=1, inplace=True)
 
 df.LOAN = np.log(df.LOAN)
 # df.MORTDUE = np.log(df.MORTDUE)
-df.VALUE = np.log(df.VALUE)
-# df.YOJ = np.log(df.YOJ)
+# df.VALUE = np.log(df.VALUE)
+df.YOJ = np.log(df.YOJ + 1) # Variable contained zeros so added 1 year to every observation
 
-bins = sc.woebin(df, 'BAD')
+bins = sc.woebin(df, 'BAD', method='chimerge')
 
 # Fix JOB
 break_list = {'JOB': df.JOB.unique().tolist()}
-job_bins = sc.woebin(df, 'BAD', x=['JOB'], breaks_list=break_list)
+job_bins = sc.woebin(df, 'BAD', method='chimerge', x=['JOB'], breaks_list=break_list)
 
 bins['JOB'] = job_bins['JOB']
 
@@ -86,7 +86,7 @@ class ModelDetails():
         
 model = ModelDetails(fit.params[0], fit.params[1:])
 
-card = sc.scorecard(bins, model, X_train.columns[1:])
+card = sc.scorecard(bins, model, X_train.columns[1:], points0=800, pdo=75)
 
 train_score = sc.scorecard_ply(train, card, print_step=0)
 test_score = sc.scorecard_ply(test, card, print_step=0)
@@ -97,15 +97,30 @@ sc.perf_psi(
 )
 
 
-plt.figure()
-lw = 2
-plt.plot(tpr, fpr, color='green',
-         lw=lw, label='ROC curve (area = %0.2f)' % roc_auc)
-plt.plot([0, 1], [0, 1], color='red', lw=lw, linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('Receiver operating characteristic')
-plt.legend(loc="lower right")
-plt.show()
+# plt.figure()
+# lw = 2
+# plt.plot(tpr, fpr, color='green',
+#          lw=lw, label='ROC curve (area = %0.2f)' % roc_auc)
+# plt.plot([0, 1], [0, 1], color='red', lw=lw, linestyle='--')
+# plt.xlim([0.0, 1.0])
+# plt.ylim([0.0, 1.05])
+# plt.xlabel('False Positive Rate')
+# plt.ylabel('True Positive Rate')
+# plt.title('Receiver operating characteristic')
+# plt.legend(loc="lower right")
+# plt.show()
+
+# Evaluating 350 to 400 range
+
+train_score_breakdown = sc.scorecard_ply(train, card, only_total_score=False, print_step=1)
+test_score_breakdown = sc.scorecard_ply(test, card, only_total_score=False, print_step=1)
+
+t = test_score_breakdown.loc[test_score_breakdown.score.between(450, 500)].index
+t2 = train_score_breakdown.loc[train_score_breakdown.score.between(450, 500)].index
+
+X_test_btw = df.iloc[df.index.isin(t)]
+X_train_btw = df.iloc[df.index.isin(t2)]
+
+td = X_test_btw.describe()
+t2d = X_train_btw.describe()
+

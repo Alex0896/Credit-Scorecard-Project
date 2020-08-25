@@ -13,6 +13,7 @@
 \usepackage{url}
 
 \usepackage{caption}
+\usepackage{subcaption}
 
 \usepackage{hyperref}
 	\hypersetup{colorlinks=false,pdfborder=0 0 0}
@@ -21,8 +22,17 @@
 	\crefname{equation}{equation}{equations}
 	\crefname{figure}{figure}{figures}	
 	\crefname{table}{table}{tables}
+
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
 	
-\usepackage[backend=bibtex8]{biblatex}
+\usepackage[
+backend=biber,
+style=alphabetic,
+citestyle=authoryear 
+]{biblatex}
 
 \usepackage{listings}
 
@@ -31,6 +41,8 @@
 \usepackage{pdflscape}
 
 \usepackage{bm}
+
+\usepackage[toc,page]{appendix}
 
 \newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
 \theoremstyle{plain}
