@@ -12,30 +12,37 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
 
+# Read data
 df = pd.read_csv("E:\GitHub\Credit-Scorecard-Project\Python\hmeq_clean.csv")
 
-# df.drop(['REASON', 'MORTDUE'], axis=1, inplace=True)
+# df.drop(['VALUE'], axis=1, inplace=True)
 
+# Apply Transformations
 df.LOAN = np.log(df.LOAN)
 # df.MORTDUE = np.log(df.MORTDUE)
 # df.VALUE = np.log(df.VALUE)
-df.YOJ = np.log(df.YOJ + 1) # Variable contained zeros so added 1 year to every observation
+# Variable contained zeros so added 1 year to every observation
+df.YOJ = np.log(df.YOJ + 1)
 
+# Drop REASON and MORTDUE
+df.drop(['REASON', 'MORTDUE'], axis=1, inplace=True)
+
+# Create WOE bins
 bins = sc.woebin(df, 'BAD', method='chimerge')
 
-# Fix JOB
+# Job was not binning correctly, this fixed that
 break_list = {'JOB': df.JOB.unique().tolist()}
-job_bins = sc.woebin(df, 'BAD', method='chimerge', x=['JOB'], breaks_list=break_list)
-
+job_bins = sc.woebin(df, 'BAD', method='chimerge', x=['JOB'],
+                     breaks_list=break_list)
 bins['JOB'] = job_bins['JOB']
 
+# Plot WOE bins
 # fig, axs = plt.subplots(ncols=2)
-# sc.woebin_plot(bins)
+# sc.woebin_plot(bins, figsize=[8,5])
 
-
-for k, bin_ in bins.items():
-    print(k)
-    print(bin_[['woe', 'bin_iv','total_iv']])
+# Print results of binning
+# for k, bin_ in bins.items():
+#     print(bins[k].iloc[:,0:-2].round(2).to_latex(index=False))
     
 # split into train and test set
 train, test = sc.split_df(df, 'BAD').values()
@@ -44,6 +51,7 @@ train, test = sc.split_df(df, 'BAD').values()
 train_woe = sc.woebin_ply(train, bins)
 test_woe = sc.woebin_ply(test, bins)
 
+# Add constant
 train_woe = sm.add_constant(train_woe)
 test_woe = sm.add_constant(test_woe)
 
@@ -62,16 +70,9 @@ fit.summary()
 train_pred = fit.predict(X_train)
 test_pred = fit.predict(X_test)
 
-
 # Plot diagnositcs
-# train_perf = sc.perf_eva(y_train, train_pred, title = "train", plot_type=['ks'])
 test_perf = sc.perf_eva(y_test, test_pred, title = "test", plot_type=['ks'])
-# train_perf = sc.perf_eva(y_train, train_pred, title = "train", plot_type=['roc'])
 test_perf = sc.perf_eva(y_test, test_pred, title = "test", plot_type=['roc'])
-# train_perf = sc.perf_eva(y_train, train_pred, title = "train", plot_type=['lift'])
-# test_perf = sc.perf_eva(y_test, test_pred, title = "test", plot_type=['lift'])
-# train_perf = sc.perf_eva(y_train, train_pred, title = "train", plot_type=['pr'])
-# test_perf = sc.perf_eva(y_test, test_pred, title = "test", plot_type=['pr'])
 
 class ModelDetails():
 
@@ -86,41 +87,81 @@ class ModelDetails():
         
 model = ModelDetails(fit.params[0], fit.params[1:])
 
-card = sc.scorecard(bins, model, X_train.columns[1:], points0=800, pdo=75)
+# Create scorecard
+card = sc.scorecard(bins, model, X_train.columns[1:], points0=800, pdo=50)
 
+# Create scores
 train_score = sc.scorecard_ply(train, card, print_step=0)
 test_score = sc.scorecard_ply(test, card, print_step=0)
 
+# Plot scorecard
 sc.perf_psi(
   score = {'train':train_score, 'test':test_score},
   label = {'train':y_train, 'test':y_test}
 )
 
 
-# plt.figure()
-# lw = 2
-# plt.plot(tpr, fpr, color='green',
-#          lw=lw, label='ROC curve (area = %0.2f)' % roc_auc)
-# plt.plot([0, 1], [0, 1], color='red', lw=lw, linestyle='--')
-# plt.xlim([0.0, 1.0])
-# plt.ylim([0.0, 1.05])
-# plt.xlabel('False Positive Rate')
-# plt.ylabel('True Positive Rate')
-# plt.title('Receiver operating characteristic')
-# plt.legend(loc="lower right")
-# plt.show()
+df['SCORE'] = 0
+df.SCORE.update(train_score.score)
 
-# Evaluating 350 to 400 range
+## Score Train Plot
+fig, (ax_dist, ax_box_good, ax_box_bad) = (
+    plt.subplots(3,
+                sharex=True,
+                gridspec_kw={"height_ratios": (.80, .10, .10)}, 
+                figsize=[15,8])
+)
+# Add a graph in each part
+subset = df.loc[df.SCORE != 0]
+goods = subset.loc[subset.BAD == 0, 'SCORE']
+bads = subset.loc[subset.BAD == 1, 'SCORE']
+sns.distplot(
+    goods, hist=False, label='Good', color='green', ax=ax_dist)
+sns.distplot(
+    bads, hist=False, label='Bad', color='red', ax=ax_dist
+).tick_params(labelsize=16)
+sns.boxplot(goods, ax=ax_box_good, color='green')
+sns.boxplot(bads, ax=ax_box_bad, color='red').tick_params(labelsize=16)
+ax_dist.set_xlabel("SCORE: TRAIN",fontsize=20)
 
-train_score_breakdown = sc.scorecard_ply(train, card, only_total_score=False, print_step=1)
-test_score_breakdown = sc.scorecard_ply(test, card, only_total_score=False, print_step=1)
+# Remove x axis name for the boxplot
+ax_box_good.set(xlabel='')
+ax_box_bad.set(xlabel='')
 
-t = test_score_breakdown.loc[test_score_breakdown.score.between(450, 500)].index
-t2 = train_score_breakdown.loc[train_score_breakdown.score.between(450, 500)].index
+divergence_train = (
+    pow((goods.mean() - bads.mean()), 2) 
+    / (0.5 * (goods.var() + bads.var()))
+)
 
-X_test_btw = df.iloc[df.index.isin(t)]
-X_train_btw = df.iloc[df.index.isin(t2)]
+df['SCORE'] = 0
+df.SCORE.update(test_score.score)
 
-td = X_test_btw.describe()
-t2d = X_train_btw.describe()
+## Score Test Plot
+fig, (ax_dist, ax_box_good, ax_box_bad) = (
+    plt.subplots(3,
+                sharex=True,
+                gridspec_kw={"height_ratios": (.80, .10, .10)}, 
+                figsize=[15,8])
+)
+# Add a graph in each part
+subset = df.loc[df.SCORE != 0]
+goods = subset.loc[subset.BAD == 0, 'SCORE']
+bads = subset.loc[subset.BAD == 1, 'SCORE']
+sns.distplot(
+    goods, hist=False, label='Good', color='green', ax=ax_dist)
+sns.distplot(
+    bads, hist=False, label='Bad', color='red', ax=ax_dist
+).tick_params(labelsize=16)
+sns.boxplot(goods, ax=ax_box_good, color='green')
+sns.boxplot(bads, ax=ax_box_bad, color='red').tick_params(labelsize=16)
+ax_dist.set_xlabel("SCORE: TEST",fontsize=20)
+
+# Remove x axis name for the boxplot
+ax_box_good.set(xlabel='')
+ax_box_bad.set(xlabel='')
+
+divergence_test = (
+    pow((goods.mean() - bads.mean()), 2) 
+    / (0.5 * (goods.var() + bads.var()))
+)
 

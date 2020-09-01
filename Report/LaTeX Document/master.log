@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.7.11)  25 AUG 2020 15:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.7.11)  1 SEP 2020 12:42
 entering extended mode
 **"E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/master.tex"
 ("E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/master.tex"
@@ -553,7 +553,7 @@ Package biblatex Info: ... file 'blx-dm.def' found.
 File: blx-dm.def 2019/12/01 v3.14 biblatex localization (PK/MW)
 )
 Package biblatex Info: Trying to load biblatex style data model...
-Package biblatex Info: ... file 'alphabetic.dbx' not found.
+Package biblatex Info: ... file 'authoryear.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@afterword=\count345
@@ -645,6 +645,18 @@ Package biblatex Info: ... file 'blx-compat.def' found.
 .def
 File: blx-compat.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
 )
+Package biblatex Info: Trying to load BibTeX backend compatibility...
+Package biblatex Info: ... file 'blx-bibtex.def' found.
+
+(C:\Users\Alexander\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-bibtex
+.def
+File: blx-bibtex.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
+
+
+Package biblatex Warning: Using fall-back BibTeX(8) backend:
+(biblatex)                functionality may be reduced/unavailable.
+
+)
 Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
 
@@ -665,12 +677,12 @@ File: biblatex.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
 \biburllcskip=\muskip21
 \c@smartand=\count421
 )
-Package biblatex Info: Trying to load bibliography style 'alphabetic'...
-Package biblatex Info: ... file 'alphabetic.bbx' found.
+Package biblatex Info: Trying to load bibliography style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.bbx' found.
 
-(C:\Users\Alexander\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\alphab
-etic.bbx
-File: alphabetic.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
+(C:\Users\Alexander\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\author
+year.bbx
+File: authoryear.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
 Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
 
@@ -772,22 +784,22 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 No file master.aux.
 \openout1 = `master.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -866,7 +878,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box62
-Package hyperref Info: Link coloring OFF on input line 9.
+Package hyperref Info: Link coloring OFF on input line 7.
 
 (C:\Users\Alexander\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.st
 y
@@ -882,9 +894,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count446
 )
-LaTeX Info: Redefining \ref on input line 9.
-LaTeX Info: Redefining \pageref on input line 9.
-LaTeX Info: Redefining \nameref on input line 9.
+LaTeX Info: Redefining \ref on input line 7.
+LaTeX Info: Redefining \pageref on input line 7.
+LaTeX Info: Redefining \nameref on input line 7.
 \@outlinefile=\write4
 \openout4 = `master.out'.
 
@@ -898,20 +910,23 @@ File: english.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `master.bcf'.
+Package biblatex Info: Input encoding 'utf8' specified.
+Package biblatex Info: Data encoding 'utf8' specified.
+(biblatex)             No need to reencode data.
+\openout3 = `master-blx.bib'.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'master.bbl' not found.
 
 No file master.bbl.
-Package biblatex Info: Reference section=0 on input line 9.
-Package biblatex Info: Reference segment=0 on input line 9.
+Package biblatex Info: Reference section=0 on input line 7.
+Package biblatex Info: Reference segment=0 on input line 7.
 \c@lstlisting=\count447
-LaTeX Font Info:    Trying to load font information for U+msa on input line 9.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 7.
 (C:\Users\Alexander\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 7.
 
 (C:\Users\Alexander\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -955,7 +970,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.16 \end{abstract}
+l.14 \end{abstract}
                     [1
 
 ]
@@ -966,7 +981,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.21 \listoffigures
+l.19 \listoffigures
                     [1
 
 
@@ -985,9 +1000,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) [3
+
+LaTeX Warning: Citation 'canner1998recent' on page 3 undefined on input line 9.
+
+
+
+LaTeX Warning: Citation 'weicher1997home' on page 3 undefined on input line 9.
+
+
+LaTeX Warning: Citation 'corelogic2016home' on page 3 undefined on input line 9
+.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+
+ []
+
+[3
 
 ]
+
+LaTeX Warning: Citation 'corelogic2016home' on page 4 undefined on input line 1
+1.
+
+)
+Underfull \hbox (badness 10000) in paragraph at lines 14--22
+
+ []
+
 ("E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document\docs/chapter-2.tex"
 [4]
 Chapter 2.
@@ -1011,92 +1051,132 @@ LaTeX Warning: Reference `WOE' on page 5 undefined on input line 13.
 [5
 
 ]
-
-LaTeX Warning: Reference `IV' on page 6 undefined on input line 19.
-
-
-LaTeX Warning: Citation 'bailey2004credit' on page 6 undefined on input line 19
-.
-
-
-LaTeX Warning: Citation 'bailey2004credit' on page 6 undefined on input line 36
-.
-
-
-LaTeX Warning: Citation 'tape2000using' on page 6 undefined on input line 42.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 42--43
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
 
  []
 
 
-LaTeX Warning: Reference `AUC' on page 6 undefined on input line 44.
+LaTeX Warning: Reference `IV' on page 6 undefined on input line 21.
 
 
-LaTeX Warning: Reference `GINI' on page 6 undefined on input line 50.
+LaTeX Warning: Citation 'bailey2004credit' on page 6 undefined on input line 21
+.
+
+
+LaTeX Warning: Citation 'bailey2004credit' on page 6 undefined on input line 38
+.
+
+
+LaTeX Warning: Citation 'tape2000using' on page 6 undefined on input line 44.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
+
+ []
+
+
+LaTeX Warning: Reference `AUC' on page 6 undefined on input line 46.
+
+
+LaTeX Warning: Reference `GINI' on page 6 undefined on input line 52.
 
 [6]
-<figs/roc_example.png, id=61, 395.4775pt x 279.0425pt>
+<figs/roc_example.png, id=62, 395.4775pt x 279.0425pt>
 File: figs/roc_example.png Graphic file (type png)
 <use figs/roc_example.png>
-Package pdftex.def Info: figs/roc_example.png  used on input line 58.
+Package pdftex.def Info: figs/roc_example.png  used on input line 60.
 (pdftex.def)             Requested size: 395.47653pt x 279.04181pt.
 
 
-LaTeX Warning: Reference `KS' on page 7 undefined on input line 64.
+LaTeX Warning: Reference `KS' on page 7 undefined on input line 66.
+
+
+LaTeX Warning: Citation 'yurdakul2018statistical' on page 7 undefined on input 
+line 76.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--77
+
+ []
 
 [7 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/roc_example.p
 ng>]
-Underfull \hbox (badness 10000) in paragraph at lines 84--85
+
+LaTeX Warning: Citation 'bailey2004credit' on page 8 undefined on input line 78
+.
+
+
+LaTeX Warning: Reference `eq:psi' on page 8 undefined on input line 78.
+
+
+LaTeX Warning: Citation 'yurdakul2018statistical' on page 8 undefined on input 
+line 78.
+
+
+Overfull \hbox (17.14825pt too wide) in paragraph at lines 78--79
+\OT1/cmr/m/n/10 ated on more re-cent data. PSI can be cal-cu-lated us-ing the E
+qua-tion ([])([]). 
+ []
+
+
+LaTeX Warning: Citation 'buhi2008out' on page 8 undefined on input line 88.
+
+
+LaTeX Warning: Citation 'newman2014missing' on page 8 undefined on input line 8
+8.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
 
  []
 
 
 LaTeX Warning: Citation 'kerber1992chimerge' on page 8 undefined on input line 
-86.
+96.
 
 
-LaTeX Warning: Reference `CHI' on page 8 undefined on input line 86.
+LaTeX Warning: Reference `CHI' on page 8 undefined on input line 96.
 
+[8]
 
-LaTeX Warning: Reference `AFREQ' on page 8 undefined on input line 92.
+LaTeX Warning: Reference `AFREQ' on page 9 undefined on input line 102.
 
 ) ("E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document\docs/chapter-3.tex
-" [8]
+" [9]
 Chapter 3.
 
-LaTeX Warning: Citation 'baesens2016credit' on page 9 undefined on input line 3
-.
+LaTeX Warning: Citation 'baesens2016credit' on page 10 undefined on input line 
+3.
 
 
-LaTeX Warning: Reference `MetaData' on page 9 undefined on input line 3.
+LaTeX Warning: Reference `MetaData' on page 10 undefined on input line 3.
 
 
-LaTeX Warning: Citation 'baesens2016credit' on page 9 undefined on input line 2
-6.
+LaTeX Warning: Reference `SUM_BFR_TBL' on page 10 undefined on input line 31.
 
 
-LaTeX Warning: Citation 'baesens2016credit' on page 9 undefined on input line 2
-6.
-
-
-LaTeX Warning: Reference `SUM_BFR_TBL' on page 9 undefined on input line 31.
+LaTeX Warning: Citation 'nyitrai2019effects' on page 10 undefined on input line
+ 31.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 31--32
 
  []
 
-[9
+[10
 
 ]
 
-LaTeX Warning: Reference `MORTDUE_IMPUTE' on page 10 undefined on input line 33
+LaTeX Warning: Reference `MORTDUE_IMPUTE' on page 11 undefined on input line 33
 .
 
 
-LaTeX Warning: Reference `VALUE_IMPUTE' on page 10 undefined on input line 33.
+LaTeX Warning: Reference `VALUE_IMPUTE' on page 11 undefined on input line 33.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 63--64
@@ -1108,175 +1188,173 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--66
 
  []
 
-[10]
 
 LaTeX Warning: Reference `DataCleanSummary' on page 11 undefined on input line 
-97.
+67.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
+Underfull \hbox (badness 10000) in paragraph at lines 67--68
 
  []
 
+[11]
 
-LaTeX Warning: Reference `MORTDUE_IMPUTE' on page 11 undefined on input line 10
-8.
-
-
-LaTeX Warning: Reference `VALUE_IMPUTE' on page 11 undefined on input line 109.
+LaTeX Warning: Reference `MORTDUE_IMPUTE' on page 12 undefined on input line 78
+.
 
 
-
-LaTeX Warning: Reference `SUM_AFT_TBL' on page 11 undefined on input line 125.
-
-
-LaTeX Warning: Reference `loan_dist' on page 11 undefined on input line 129.
+LaTeX Warning: Reference `VALUE_IMPUTE' on page 12 undefined on input line 79.
 
 
-LaTeX Warning: Reference `CORR_TBL' on page 11 undefined on input line 129.
+LaTeX Warning: Reference `SUM_AFT_TBL' on page 12 undefined on input line 95.
 
-<figs/loan_dist.pdf, id=97, 1084.05pt x 578.16pt>
+
+LaTeX Warning: Reference `loan_dist' on page 12 undefined on input line 99.
+
+
+LaTeX Warning: Reference `CORR_TBL' on page 12 undefined on input line 99.
+
+<figs/loan_dist.pdf, id=104, 1084.05pt x 578.16pt>
 File: figs/loan_dist.pdf Graphic file (type pdf)
 <use figs/loan_dist.pdf>
-Package pdftex.def Info: figs/loan_dist.pdf  used on input line 133.
+Package pdftex.def Info: figs/loan_dist.pdf  used on input line 103.
 (pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
 
-Overfull \hbox (15.35864pt too wide) in paragraph at lines 133--134
+Overfull \hbox (15.35864pt too wide) in paragraph at lines 103--104
  [][] 
  []
 
+[12]
 
-LaTeX Warning: Reference `mortdue_dist' on page 11 undefined on input line 139.
+LaTeX Warning: Reference `mortdue_dist' on page 13 undefined on input line 109.
 
 
-[11] [12 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/loan_di
-st.pdf>]
 
-LaTeX Warning: Reference `value_dist' on page 13 undefined on input line 143.
+LaTeX Warning: Reference `value_dist' on page 13 undefined on input line 113.
 
-<figs/mortdue_dist.pdf, id=141, 1084.05pt x 578.16pt>
+<figs/mortdue_dist.pdf, id=112, 1084.05pt x 578.16pt>
 File: figs/mortdue_dist.pdf Graphic file (type pdf)
 <use figs/mortdue_dist.pdf>
-Package pdftex.def Info: figs/mortdue_dist.pdf  used on input line 147.
+Package pdftex.def Info: figs/mortdue_dist.pdf  used on input line 117.
 (pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
 
-Overfull \hbox (15.35864pt too wide) in paragraph at lines 147--148
+Overfull \hbox (15.35864pt too wide) in paragraph at lines 117--118
  [][] 
  []
 
-<figs/value_dist.pdf, id=142, 1084.05pt x 578.16pt>
+[13 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/loan_dist.pd
+f>]
+<figs/value_dist.pdf, id=146, 1084.05pt x 578.16pt>
 File: figs/value_dist.pdf Graphic file (type pdf)
 <use figs/value_dist.pdf>
-Package pdftex.def Info: figs/value_dist.pdf  used on input line 153.
+Package pdftex.def Info: figs/value_dist.pdf  used on input line 123.
 (pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
 
-Overfull \hbox (15.35864pt too wide) in paragraph at lines 153--154
+Overfull \hbox (15.35864pt too wide) in paragraph at lines 123--124
  [][] 
  []
 
 
-LaTeX Warning: Reference `reason_cat' on page 13 undefined on input line 159.
+LaTeX Warning: Reference `reason_cat' on page 14 undefined on input line 129.
 
 
-LaTeX Warning: Reference `reason_count_tbl' on page 13 undefined on input line 
-159.
+LaTeX Warning: Reference `reason_count_tbl' on page 14 undefined on input line 
+129.
 
 
-LaTeX Warning: Reference `reason_cat' on page 13 undefined on input line 159.
+LaTeX Warning: Reference `reason_cat' on page 14 undefined on input line 129.
 
-<figs/reason_cat.pdf, id=143, 975.645pt x 361.35pt>
-File: figs/reason_cat.pdf Graphic file (type pdf)
-<use figs/reason_cat.pdf>
-Package pdftex.def Info: figs/reason_cat.pdf  used on input line 177.
-(pdftex.def)             Requested size: 390.25108pt x 144.53743pt.
-
-LaTeX Warning: Reference `job_cat' on page 13 undefined on input line 183.
-
-
-LaTeX Warning: Reference `job_yoj_cat' on page 13 undefined on input line 183.
-
-
-LaTeX Warning: Reference `job_cat' on page 13 undefined on input line 183.
-
-[13 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/mortdue_dist
-.pdf>]
-Overfull \vbox (9.86702pt too high) has occurred while \output is active []
-
-
-[14 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/value_dist.p
-df> <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/reason_cat.p
-df
+[14 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/mortdue_dist
+.pdf> <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/value_dist
+.pdf
 
 pdfTeX warning: pdflatex (file E:/GitHub/Credit-Scorecard-Project/Report/LaTeX 
-Document/figs/reason_cat.pdf): PDF inclusion: multiple pdfs with page group inc
+Document/figs/value_dist.pdf): PDF inclusion: multiple pdfs with page group inc
 luded in a single page
 >]
-<figs/job_cat.pdf, id=256, 1084.05pt x 361.35pt>
+<figs/reason_cat.pdf, id=212, 975.645pt x 361.35pt>
+File: figs/reason_cat.pdf Graphic file (type pdf)
+<use figs/reason_cat.pdf>
+Package pdftex.def Info: figs/reason_cat.pdf  used on input line 147.
+(pdftex.def)             Requested size: 390.25108pt x 144.53743pt.
+
+
+LaTeX Warning: Reference `job_cat' on page 15 undefined on input line 153.
+
+
+LaTeX Warning: Reference `job_yoj_cat' on page 15 undefined on input line 153.
+
+
+LaTeX Warning: Reference `job_cat' on page 15 undefined on input line 153.
+
+[15 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/reason_cat.p
+df>]
+<figs/job_cat.pdf, id=259, 1084.05pt x 361.35pt>
 File: figs/job_cat.pdf Graphic file (type pdf)
 <use figs/job_cat.pdf>
-Package pdftex.def Info: figs/job_cat.pdf  used on input line 205.
+Package pdftex.def Info: figs/job_cat.pdf  used on input line 175.
 (pdftex.def)             Requested size: 433.61232pt x 144.53743pt.
 
-Overfull \hbox (15.35864pt too wide) in paragraph at lines 205--206
+Overfull \hbox (15.35864pt too wide) in paragraph at lines 175--176
  [][] 
  []
 
-<figs/job_yoj_cat.pdf, id=257, 975.645pt x 361.35pt>
+<figs/job_yoj_cat.pdf, id=260, 975.645pt x 361.35pt>
 File: figs/job_yoj_cat.pdf Graphic file (type pdf)
 <use figs/job_yoj_cat.pdf>
-Package pdftex.def Info: figs/job_yoj_cat.pdf  used on input line 211.
+Package pdftex.def Info: figs/job_yoj_cat.pdf  used on input line 181.
 (pdftex.def)             Requested size: 390.25108pt x 144.53743pt.
 
-LaTeX Warning: Reference `yoj_dist' on page 15 undefined on input line 217.
+LaTeX Warning: Reference `yoj_dist' on page 16 undefined on input line 187.
 
-<figs/yoj_dist.pdf, id=258, 1084.05pt x 578.16pt>
+[16 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/job_cat.pdf>
+ <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/job_yoj_cat.pdf
+
+
+pdfTeX warning: pdflatex (file E:/GitHub/Credit-Scorecard-Project/Report/LaTeX 
+Document/figs/job_yoj_cat.pdf): PDF inclusion: multiple pdfs with page group in
+cluded in a single page
+>]
+<figs/yoj_dist.pdf, id=339, 1084.05pt x 578.16pt>
 File: figs/yoj_dist.pdf Graphic file (type pdf)
 <use figs/yoj_dist.pdf>
-Package pdftex.def Info: figs/yoj_dist.pdf  used on input line 221.
+Package pdftex.def Info: figs/yoj_dist.pdf  used on input line 191.
+(pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
+
+Overfull \hbox (15.35864pt too wide) in paragraph at lines 191--192
+ [][] 
+ []
+
+
+LaTeX Warning: Reference `derog_cat' on page 17 undefined on input line 197.
+
+<figs/derog_cat.pdf, id=340, 975.645pt x 361.35pt>
+File: figs/derog_cat.pdf Graphic file (type pdf)
+<use figs/derog_cat.pdf>
+Package pdftex.def Info: figs/derog_cat.pdf  used on input line 201.
+(pdftex.def)             Requested size: 390.25108pt x 144.53743pt.
+[17 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/yoj_dist.pdf
+>]
+<figs/delinq_cat.pdf, id=375, 975.645pt x 361.35pt>
+File: figs/delinq_cat.pdf Graphic file (type pdf)
+<use figs/delinq_cat.pdf>
+Package pdftex.def Info: figs/delinq_cat.pdf  used on input line 211.
+(pdftex.def)             Requested size: 390.25108pt x 144.53743pt.
+
+
+LaTeX Warning: Reference `clage_dist' on page 18 undefined on input line 217.
+
+<figs/clage_dist.pdf, id=376, 1084.05pt x 578.16pt>
+File: figs/clage_dist.pdf Graphic file (type pdf)
+<use figs/clage_dist.pdf>
+Package pdftex.def Info: figs/clage_dist.pdf  used on input line 221.
 (pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
 
 Overfull \hbox (15.35864pt too wide) in paragraph at lines 221--222
  [][] 
  []
 
-
-LaTeX Warning: Reference `derog_cat' on page 15 undefined on input line 227.
-
-[15 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/job_cat.pdf>
-]
-<figs/derog_cat.pdf, id=306, 975.645pt x 361.35pt>
-File: figs/derog_cat.pdf Graphic file (type pdf)
-<use figs/derog_cat.pdf>
-Package pdftex.def Info: figs/derog_cat.pdf  used on input line 231.
-(pdftex.def)             Requested size: 390.25108pt x 144.53743pt.
- [16 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/job_yoj_cat
-.pdf> <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/yoj_dist.p
-df
-
-pdfTeX warning: pdflatex (file E:/GitHub/Credit-Scorecard-Project/Report/LaTeX 
-Document/figs/yoj_dist.pdf): PDF inclusion: multiple pdfs with page group inclu
-ded in a single page
->]
-<figs/delinq_cat.pdf, id=372, 975.645pt x 361.35pt>
-File: figs/delinq_cat.pdf Graphic file (type pdf)
-<use figs/delinq_cat.pdf>
-Package pdftex.def Info: figs/delinq_cat.pdf  used on input line 241.
-(pdftex.def)             Requested size: 390.25108pt x 144.53743pt.
-
-
-LaTeX Warning: Reference `clage_dist' on page 17 undefined on input line 247.
-
-<figs/clage_dist.pdf, id=373, 1084.05pt x 578.16pt>
-File: figs/clage_dist.pdf Graphic file (type pdf)
-<use figs/clage_dist.pdf>
-Package pdftex.def Info: figs/clage_dist.pdf  used on input line 251.
-(pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
-
-Overfull \hbox (15.35864pt too wide) in paragraph at lines 251--252
- [][] 
- []
-
-[17 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/derog_cat.pd
+[18 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/derog_cat.pd
 f> <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/delinq_cat.pd
 f
 
@@ -1284,16 +1362,18 @@ pdfTeX warning: pdflatex (file E:/GitHub/Credit-Scorecard-Project/Report/LaTeX
 Document/figs/delinq_cat.pdf): PDF inclusion: multiple pdfs with page group inc
 luded in a single page
 >]
-<figs/ninq_cat.pdf, id=441, 975.645pt x 361.35pt>
+
+LaTeX Warning: Reference `ninq_cat' on page 19 undefined on input line 227.
+
+<figs/ninq_cat.pdf, id=443, 975.645pt x 361.35pt>
 File: figs/ninq_cat.pdf Graphic file (type pdf)
 <use figs/ninq_cat.pdf>
-Package pdftex.def Info: figs/ninq_cat.pdf  used on input line 261.
+Package pdftex.def Info: figs/ninq_cat.pdf  used on input line 231.
 (pdftex.def)             Requested size: 390.25108pt x 144.53743pt.
 
+LaTeX Warning: Reference `clno_dist' on page 19 undefined on input line 237.
 
-LaTeX Warning: Reference `clno_dist' on page 18 undefined on input line 267.
-
-[18 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/clage_dist.p
+[19 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/clage_dist.p
 df> <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/ninq_cat.pdf
 
 
@@ -1301,156 +1381,356 @@ pdfTeX warning: pdflatex (file E:/GitHub/Credit-Scorecard-Project/Report/LaTeX
 Document/figs/ninq_cat.pdf): PDF inclusion: multiple pdfs with page group inclu
 ded in a single page
 >]
-<figs/clno_dist.pdf, id=500, 1084.05pt x 578.16pt>
+<figs/clno_dist.pdf, id=503, 1084.05pt x 578.16pt>
 File: figs/clno_dist.pdf Graphic file (type pdf)
 <use figs/clno_dist.pdf>
-Package pdftex.def Info: figs/clno_dist.pdf  used on input line 271.
+Package pdftex.def Info: figs/clno_dist.pdf  used on input line 241.
 (pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
 
-Overfull \hbox (15.35864pt too wide) in paragraph at lines 271--272
+Overfull \hbox (15.35864pt too wide) in paragraph at lines 241--242
  [][] 
  []
 
 
-LaTeX Warning: Citation 'scorecardpy' on page 19 undefined on input line 277.
+LaTeX Warning: Citation 'scorecardpy' on page 20 undefined on input line 247.
 
 
-LaTeX Warning: Reference `woe_1' on page 19 undefined on input line 277.
+LaTeX Warning: Reference `woe_1' on page 20 undefined on input line 247.
 
 
-LaTeX Warning: Reference `woe_2' on page 19 undefined on input line 277.
+LaTeX Warning: Reference `woe_2' on page 20 undefined on input line 247.
 
 
-LaTeX Warning: Reference `chimerge' on page 19 undefined on input line 277.
+LaTeX Warning: Reference `chimerge' on page 20 undefined on input line 247.
 
 
-LaTeX Warning: Reference `IV' on page 19 undefined on input line 277.
+LaTeX Warning: Reference `IV' on page 20 undefined on input line 247.
 
 
-LaTeX Warning: Citation 'bailey2004credit' on page 19 undefined on input line 2
-77.
+LaTeX Warning: Citation 'bailey2004credit' on page 20 undefined on input line 2
+47.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--278
+Underfull \hbox (badness 10000) in paragraph at lines 247--248
 
  []
 
 
-LaTeX Warning: Reference `fig:ClageWoe' on page 19 undefined on input line 279.
+LaTeX Warning: Reference `fig:ClageWoe' on page 20 undefined on input line 249.
 
 
-[19 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/clno_dist.pd
+
+LaTeX Warning: Reference `SUM_BFR_TBL' on page 20 undefined on input line 249.
+
+[20 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/clno_dist.pd
 f>]
-<figs/ninq_woe_plot.png, id=532, 424.58624pt x 264.99pt>
+<figs/ninq_woe_plot.png, id=535, 536.0025pt x 320.19624pt>
 File: figs/ninq_woe_plot.png Graphic file (type png)
 <use figs/ninq_woe_plot.png>
-Package pdftex.def Info: figs/ninq_woe_plot.png  used on input line 307.
-(pdftex.def)             Requested size: 376.42575pt x 234.94272pt.
-<figs/clage_woe_plot.png, id=533, 424.58624pt x 264.99pt>
+Package pdftex.def Info: figs/ninq_woe_plot.png  used on input line 277.
+(pdftex.def)             Requested size: 376.42575pt x 224.8687pt.
+<figs/clage_woe_plot.png, id=536, 536.0025pt x 320.19624pt>
 File: figs/clage_woe_plot.png Graphic file (type png)
 <use figs/clage_woe_plot.png>
-Package pdftex.def Info: figs/clage_woe_plot.png  used on input line 314.
-(pdftex.def)             Requested size: 376.42575pt x 234.94272pt.
- [20] [21 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/ninq_w
+Package pdftex.def Info: figs/clage_woe_plot.png  used on input line 284.
+(pdftex.def)             Requested size: 376.42575pt x 224.8687pt.
+ [21] [22 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/ninq_w
 oe_plot.png> <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/cla
-ge_woe_plot.png>] [22] [23])
+ge_woe_plot.png>] [23
+
+]
+
+LaTeX Warning: Text page 24 contains only floats.
+
+[24])
 ("E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document\docs/chapter-4.tex"
 Chapter 4.
 
-LaTeX Warning: Reference `woe_1' on page 24 undefined on input line 5.
+LaTeX Warning: Reference `woe_1' on page 25 undefined on input line 5.
 
 
-LaTeX Warning: Reference `woe_2' on page 24 undefined on input line 5.
+LaTeX Warning: Reference `woe_2' on page 25 undefined on input line 5.
 
 
-LaTeX Warning: Citation 'statsmodels' on page 24 undefined on input line 5.
+LaTeX Warning: Citation 'statsmodels' on page 25 undefined on input line 5.
 
-! Extra alignment tab has been changed to \cr.
-<recently read> \endtemplate 
-                             
-l.47 Model & AIC & KS & GINI &
-                               PSI \\
-? 
-<figs/ks_plot.png, id=558, 277.035pt x 279.0425pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+
+ []
+
+
+LaTeX Warning: Reference `perf_eval' on page 25 undefined on input line 7.
+
+
+LaTeX Warning: Reference `sec:perf_eval' on page 25 undefined on input line 7.
+
+
+LaTeX Warning: Reference `perf_eval' on page 25 undefined on input line 7.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+
+ []
+
+
+LaTeX Warning: Reference `scorecard_plot' on page 25 undefined on input line 9.
+
+
+<figs/ks_plot.png, id=561, 277.035pt x 279.0425pt>
 File: figs/ks_plot.png Graphic file (type png)
 <use figs/ks_plot.png>
-Package pdftex.def Info: figs/ks_plot.png  used on input line 59.
+Package pdftex.def Info: figs/ks_plot.png  used on input line 28.
 (pdftex.def)             Requested size: 249.3292pt x 251.13591pt.
-<figs/roc_plot.png, id=559, 277.035pt x 279.0425pt>
+<figs/roc_plot.png, id=562, 277.035pt x 279.0425pt>
 File: figs/roc_plot.png Graphic file (type png)
 <use figs/roc_plot.png>
-Package pdftex.def Info: figs/roc_plot.png  used on input line 65.
+Package pdftex.def Info: figs/roc_plot.png  used on input line 34.
 (pdftex.def)             Requested size: 249.3292pt x 251.13591pt.
-[24
+[25
 
 
-
-] [25]
-
-LaTeX Warning: Text page 26 contains only floats.
-
-[26 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/ks_plot.png>
- <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/roc_plot.png>]
-<figs/scorecard_plot.png, id=580, 878.28125pt x 581.17125pt>
+] [26 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/ks_plot.pn
+g>] [27 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/roc_plot
+.png>]
+<figs/scorecard_plot.png, id=582, 878.28125pt x 592.2125pt>
 File: figs/scorecard_plot.png Graphic file (type png)
 <use figs/scorecard_plot.png>
-Package pdftex.def Info: figs/scorecard_plot.png  used on input line 72.
-(pdftex.def)             Requested size: 614.7927pt x 406.8171pt.
+Package pdftex.def Info: figs/scorecard_plot.png  used on input line 41.
+(pdftex.def)             Requested size: 614.7927pt x 414.54591pt.
 
-Overfull \hbox (23.2625pt too wide) in paragraph at lines 72--73
+Overfull \hbox (23.2625pt too wide) in paragraph at lines 41--42
  [] 
  []
 
 
-LaTeX Warning: Float too large for page by 21.56342pt on input line 75.
+LaTeX Warning: Float too large for page by 29.29224pt on input line 44.
 
-[27 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/scorecard_pl
+[28 <E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document/figs/scorecard_pl
 ot.png>])
 ("E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document\docs/chapter-5.tex"
 Chapter 5.
+
+LaTeX Warning: Citation 'kraemer2020epidemiological' on page 29 undefined on in
+put line 3.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+
+ []
+
+
+LaTeX Warning: Reference `CovidData' on page 29 undefined on input line 7.
+
+
+LaTeX Warning: Reference `table:covid_data_sum' on page 29 undefined on input l
+ine 7.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+
+ []
+
+
+Overfull \hbox (13.02507pt too wide) in paragraph at lines 31--46
+[][] 
+ []
+
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 	\begin
+            {center}
+? H
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+? 
 ) ("E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document\docs/appendix.tex"
-[28
+[29
 
 
 
-] [29
+] [30] [31
 
 
 ]
 Appendix A.
-[30
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
+
+ []
+
+[32
 
 ]
 Appendix B.
-[31
-
-] [32
-
-] [33
-
+[33
 
 ] [34
+
+] [35
+
+
+] [36
 
 
 ]
 Appendix C.
-[35
-
-
-] [36]
-Appendix D.
-)
-
-LaTeX Warning: Empty bibliography on input line 36.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 38.
 [37
 
+
+] [38] [39] [40]
+Appendix D.
+
+(C:\Users\Alexander\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.s
+ty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 206.
+
+("E:/GitHub/Credit-Scorecard-Project/Report/LaTeX Document\code/cleaning_script
+.py"
+Overfull \hbox (1.7506pt too wide) in paragraph at lines 11--13
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 2
+2.
+(C:\Users\Alexander\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
+File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 22.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
+3.
+
+(C:\Users\Alexander\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 23.
+
+Overfull \hbox (61.7512pt too wide) in paragraph at lines 30--31
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (25.75084pt too wide) in paragraph at lines 31--32
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (55.75114pt too wide) in paragraph at lines 32--33
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (31.7509pt too wide) in paragraph at lines 34--36
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[41
+
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 38.
+Overfull \hbox (73.75133pt too wide) in paragraph at lines 40--42
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (55.75114pt too wide) in paragraph at lines 43--44
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (25.75084pt too wide) in paragraph at lines 44--45
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (61.7512pt too wide) in paragraph at lines 45--46
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (49.75108pt too wide) in paragraph at lines 47--49
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (67.75127pt too wide) in paragraph at lines 53--55
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (31.7509pt too wide) in paragraph at lines 67--68
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (1.7506pt too wide) in paragraph at lines 69--71
+[][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.75072pt too wide) in paragraph at lines 82--83
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[42]
+Overfull \hbox (1.7506pt too wide) in paragraph at lines 96--97
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+)
+Overfull \hbox (79.75139pt too wide) in paragraph at lines 113--206
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+)
+
+LaTeX Warning: Empty bibliography on input line 35.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 37.
+[43]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 37.
  (master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 38.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 38.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 37.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 37.
 
 
 Package rerunfilecheck Warning: File `master.out' has changed.
@@ -1459,7 +1739,7 @@ Package rerunfilecheck Warning: File `master.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `master.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  358A59EC94A2BAEBAD339E167CBBEFCD;1306.
+(rerunfilecheck)             After:  A7B7068D5474461EF0DC4F65AAA52748;1255.
 
 LaTeX Warning: There were undefined references.
 
@@ -1467,39 +1747,44 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 
-Package biblatex Warning: Please (re)run Biber on the file:
+Package biblatex Warning: Please (re)run BibTeX on the file(s):
 (biblatex)                master
 (biblatex)                and rerun LaTeX afterwards.
 
 Package logreq Info: Writing requests to 'master.run.xml'.
 \openout1 = `master.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 38.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 37.
  ) 
 Here is how much of TeX's memory you used:
- 21674 strings out of 480790
- 414167 string characters out of 2895425
- 1070709 words of memory out of 3000000
- 37239 multiletter control sequences out of 15000+200000
- 549145 words of font info for 87 fonts, out of 3000000 for 9000
+ 22385 strings out of 480790
+ 422749 string characters out of 2895425
+ 1039832 words of memory out of 3000000
+ 37809 multiletter control sequences out of 15000+200000
+ 550203 words of font info for 90 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,10n,59p,1259b,1716s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmbx10.pfb><C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmbx12.pfb><C:/Users/Alexander/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Alexander/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Alexander/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Ale
-xander/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmr12.pfb><C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmr17.pfb><C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Alexander/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Alexander/AppData/Loca
-l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on master.pdf (39 pages, 483000 bytes).
+ 41i,10n,48p,1355b,2481s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Alexander\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
+tcti1000.pk> <C:\Users\Alexander\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/
+ec/dpi600\tcrm1000.pk><C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Alexander/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Alexander/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Alexande
+r/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/U
+sers/Alexander/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmm
+i5.pfb><C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmmi7.pfb><C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmr10.pfb><C:/Users/Alexander/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Alexander/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Alexander/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Ale
+xander/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+<C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmsy7.pfb><C:/Users/Alexander/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmti10.pfb>
+Output written on master.pdf (45 pages, 555249 bytes).
 PDF statistics:
- 706 PDF objects out of 1000 (max. 8388607)
- 125 named destinations out of 1000 (max. 500000)
+ 888 PDF objects out of 1000 (max. 8388607)
+ 244 named destinations out of 1000 (max. 500000)
  91 words of extra memory for PDF output out of 10000 (max. 10000000)
 

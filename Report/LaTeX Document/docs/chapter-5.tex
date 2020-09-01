@@ -1,164 +1,211 @@
-\chapter{Alternative Uses: Covid-19} \label{cha:chapter-4}
-%
-%I ended up producing 3 sets of Ridge, LASSO and Elastic Net models. The produced estimates for each model can be seen in  (\ref{Table4.1}), Table (\ref{Table4.2}) and Table (\ref{Table4.3}) along with their chosen $\lambda$ from cross validation and the RMSE for each model. I chose to use lambda.1se over lambda.min as the selected lambda since the documentation recommends this choice. The R code I used to produce the Ridge models is below, the code is the same for all three with alpha changed. Due to these being penalized regression methods, I needed to standardize my variables before I could use the function cv.glmnet. Because of the presence of the categorical variable CHAS, I needed to standardize the data without this variable. In order to do this I used the function scale() which produces the same effect of taking away the mean and dividing by the standard deviance for each observation.\\
-%
-%glmnet and cv.glmnet do not produce the standard errors for each estimation but there are methods to produce them but I decided against listing them with the coefficients. I did this because of the methods being penalizing. Due to the penalization creating high bias in the estimates, the standard errors nessacerily don't provide meaningful information for interpretation.\cite{goeman2016l1}.\\
-%
-%LASSO and Elastic Net have appeared to produce very similar results with removing the same variables and producing similar coefficients each time. This is most likely due to that Elastic Net is more suited to data with significantly more variables than observations allowing it to remove highly correlated variables together. In our results, when a variables was removed elastic net was seen more often removing two or more variables at the same time.\\
-%
-%When looking at our coefficient plots in figures (\ref{COEF1}), (\ref{COEF2}) and (\ref{COEF3}) we can look at how the methods shrink our coefficients and for LASSO and elastic net, which coefficients they drop off and when they do. I decided to plot the graphs of the full data to see the trend of all our variable's coefficients. From the graphs we can see that LSTAS was chosen to be kept in the longest for all three graphs and AGE was the first coefficient to be removed then after that, very quickly after that, ZN was removed. One interesting point is in the full data set with TAX still in, you can see TAX and RAD following an almost identical curve until RAD is just removed before TAX. After that the coefficient of TAX begins to increase in size again and ends up being removed after some other variables have been removed. This is almost certainly due to the high collinearity between them both along with the fairly similar correlation with the response variable. From this it is possible that removing RAD, even though it had the smaller inflation, would result in TAX being left in in the second model unlike RAD has been.\\
-%
-%\begin{lstlisting}[language=R]
-%#Input Data
-%Data <- read.table("boston.housing.data",header = T)
-%x <- as.matrix(Data[,1:13])
-%y <- as.matrix(Data[,14])
-%#Remove CHAS and Standardize
-%x.cont <- x[,-4]
-%x.cont <- scale(x.cont)
-%#Add CHAS
-%x <- cbind(x.cont, x[,4])
-%
-%#Produce Glmnet Fit
-%library(glmnet)
-%set.seed(1) #Seed for reproduce ability
-%cv.ridge <- cv.glmnet(x, log(y), alpha=0, standardize=FALSE)
-%
-%# Results
-%plot(cv.ridge) #Plots mean square error
-%plot(cv.ridge$glmnet.fit, xvar="lambda", label=TRUE) #Plots coef graphs
-%cv.ridge$lambda.1se #Chosen lambda
-%coef(cv.ridge, s=cv.ridge$lambda.1se) #Coefficient table
-%cv.ridge$pred <- predict(cv.ridge, newx = x, s = "lambda.1se") #Predictions
-%cv.ridge$rmse <- mean((log(y) - cv.ridge$pred)^2) #Root mean squared error
-%cv.ridge$rmse 
-%\end{lstlisting}
-%
-%\begin{figure}[ht]
-%	\centering
-%	\begin{tabular}{l r r r}
-%	\multicolumn{4}{c}{Data Set 1}\\
-%	Variable	&Ridge			&LASSO			&Elastic Net\\
-%	\hline
-%	$\lambda$ 	&0.110071		&0.007241934	&0.01448387\\
-%	\hline
-%	$\beta_0$	&3.032622800	&3.03403124		&3.034002936\\
-%	CRIM     	&-0.064008179	&-0.06872488	&-0.067253625\\
-%	ZN       	&0.009548101	&.         		&.          \\
-%	INDUS    	&-0.013931833	&.         		&.          \\
-%	NOX       	&-0.036593124	&-0.04825837	&-0.045162977\\
-%	RM        	&0.086545058	&0.07600843		&0.078655535\\
-%	AGE       	&-0.011898769	&.         		&.          \\
-%	DIS       	&-0.047266508	&-0.05954217	&-0.054501993\\
-%	RAD       	&0.017608700	&0.01960632		&0.014619337\\
-%	TAX       	&-0.031845433	&-0.01698402	&-0.015810370\\
-%	PTRATIO   	&-0.062793060	&-0.07399842	&-0.072136644\\
-%	B         	&0.038056366	&0.03281628		&0.033099429\\
-%	LSTAS     	&-0.143779730	&-0.20547168	&-0.199092357\\
-%	CHAS      	&0.027325070	&0.00696304		&0.007372257\\
-%	\hline
-%	RMSE		&0.2013819		&0.1950815		&0.1959284\\	
-%	\end{tabular}
-%	\caption{Regression Estimates \label{Table4.1}}
-%\end{figure}
-%
-%\begin{figure}[ht]
-%	\centering
-%	\begin{tabular}{l r r r}
-%	\multicolumn{4}{c}{Data Set 2}\\
-%	Variable	&Ridge 			&LASSO 			&Elastic Net\\
-%	\hline
-%	$\lambda$	&0.1208027		&0.01388938		&0.02531097\\
-%	\hline
-%	$\beta_0$ 	&3.0326787065	&3.03451287		&3.03451287\\
-%	CRIM        &-0.0652516715	&-0.06246545	&-0.06313683\\
-%	ZN          &0.0069716016	&.				&.\\
-%	INDUS       &-0.0209047913	&.				&.\\
-%	NOX         &-0.0387233569	&-0.02233285	&-0.02740610\\
-%	RM          &0.0868841912	&0.07672957		&0.07999936\\
-%	AGE         &-0.0128134450	&.				&.\\
-%	DIS         &-0.0439698917	&-0.02848306	&-0.02898603\\
-%	RAD         &0.0008558714	&.				&.\\
-%	PTRATIO     &-0.0646415393	&-0.06629390	&-0.06694681\\
-%	B           &0.0393031501	&0.02975365		&0.03133882\\
-%	LSTAS       &-0.1413462017	&-0.20485916	&-0.19418048\\
-%	CHAS        &0.0265168282	&.				&.\\
-%	\hline
-%	RMSE		&0.2036189		&0.2007459		&0.2007921\\
-%	\end{tabular}
-%	\caption{Regression Estimates after TAX is deleted \label{Table4.2}}
-%\end{figure}
-%
-%\begin{figure}[ht]
-%	\centering
-%	\begin{tabular}{l r r r}
-%	\multicolumn{4}{c}{Data Set 3}\\
-%	Variable	&Ridge 			&LASSO 			&Elastic Net\\
-%	\hline
-%	$\lambda$	&0.1455073		&0.02923581		&0.05327716\\
-%	\hline
-%	$\beta_0$ 	&3.032739303	&3.03451287		&3.03451287\\
-%	CRIM   		&-0.065804762	&-0.05420436	&-0.05721313\\
-%	ZN      	&0.008897000	&.				&.\\
-%	INDUS    	&-0.029853791	&.				&.\\
-%	RM        	&0.088354647	&0.06957956		&0.07605300\\
-%	AGE        	&-0.020492166	&.				&.\\
-%	DIS    		&-0.035178628	&.				&.\\
-%	RAD     	&-0.006112453	&.				&.\\
-%	PTRATIO  	&-0.059708631	&-0.05531137	&-0.05661420\\
-%	B         	&0.041403531	&0.02088837		&0.02590545\\
-%	LSTAS      	&-0.144598353	&-0.20402847	&-0.18675554\\
-%	CHAS        &0.025640770	&.				&.\\
-%	\hline
-%	RMSE		&0.2087332		&0.2087313		&0.2092953\\
-%	\end{tabular}
-%	\caption{Regression Estimates after TAX and NOX are deleted \label{Table4.3}}
-%\end{figure}
-%
-%\begin{figure}[ht]
-%	\centering
-%	\includegraphics[scale=0.40]{figs/Plots1.pdf}
-%	\caption{Mean Squared Error for Ridge \label{MSE1}}
-%\end{figure}
-%
-%\begin{figure}[ht]
-%	\centering
-%	\includegraphics[scale=0.40]{figs/Plots2.pdf}
-%	\caption{Mean Squared Error for LASSO \label{MSE2}}
-%\end{figure}
-%
-%\begin{figure}[ht]
-%	\centering
-%	\includegraphics[scale=0.40]{figs/Plots3.pdf}
-%	\caption{Mean Squared Error for Elastic Net \label{MSE3}}
-%\end{figure}
-%
-%\begin{figure}[ht]
-%	\centering
-%	\includegraphics[scale=0.40]{figs/Plots4.pdf}
-%	\caption{Mean Squared Error's Compared \label{MSE4}}
-%\end{figure}
-%
-%\begin{landscape}
-%\begin{figure}[ht]
-%	\centering
-%	\includegraphics[scale=0.65]{figs/PlotsC1.pdf}
-%	\caption{Coefficient Plot for Ridge \label{COEF1}}
-%\end{figure}
-%\end{landscape}
-%
-%\begin{landscape}
-%\begin{figure}[ht]
-%	\centering
-%	\includegraphics[scale=0.65]{figs/PlotsC2.pdf}
-%	\caption{Coefficient Plot for LASSO \label{COEF2}}
-%\end{figure}
-%\end{landscape}
-%
-%\begin{landscape}
-%\begin{figure}[ht]
-%	\centering
-%	\includegraphics[scale=0.65]{figs/PlotsC3.pdf}
-%	\caption{Coefficient Plot for Elastic Net \label{COEF3}}
-%\end{figure}
-%\end{landscape}
+\chapter{Alternative Uses: Covid-19} \label{cha:chapter-5}
+
+Scorecard modelling techniques have proven to be effective methods in other areas of science such as medicine. One such present use is to develop a scorecard of the health risk of patients with Covid-19. Many such papers have been published on the potential risk of patients with various characteristics such as age, sex, race, underlying health conditions. Using an live open data set on Covid-19 patients \parencite{kraemer2020epidemiological}, I attempted to apply the credit scoring methods to develop a scorecard for a patients health risk. \\ 
+
+The data set at time of downloading contained 2,676,311 rows of patient data. The majority of the data set was limited containing only, an ID, country of patient and date of contracting, but some rows contained more information on the patients such as age, sex, symptoms, chronic diseases. I subsetted my data down to rows which contained, age, sex and symptoms and made the assumption that any of these rows which had a null value for chronic disease indicates no disease present. This left me with 215 rows. \\
+
+\begin{table}[H]
+	\centering
+	\renewcommand{\arraystretch}{1.25}
+	\begin{tabular}{l p{10cm}}
+	\hline
+	Variable & \multicolumn{1}{c}{Definition}\\ 
+	\hline
+	outcome & 1 = Died; 0 = Survived \\
+	age & Age of patient \\
+	sex & Sex of patient (1 = Male) (0 = Female) \\
+	cough & Wether the patient had a cough \\
+	fever & Wether the patient had a fever \\
+	pneumonia & Wether the patient had pneumonia \\
+	respiratory problems & Wether the patient was having repiratory problems, could range from acute symptoms to respiratory failure \\
+	hypertension & Wether the patient has a chronic disease of hypertension \\
+	\end{tabular}
+	\caption{Variables used in the Data Set \label{CovidData}}
+\end{table}
+
+\begin{table}[H]
+	\begin{tabular}{lrrrrrrrr}
+	\toprule
+	{} &  outcome &     age &     sex &   cough &   fever &  pneumonia &  respiratory &  hypertension \\
+	{} & {} & {} & {} & {} & {} & {} & problems & {} \\
+	\midrule
+	count &   202.00 &  202.00 &  202.00 &  202.00 &  202.00 &     202.00 &                202.00 &        202.00 \\
+	mean  &     0.68 &   59.95 &    0.68 &    0.33 &    0.44 &       0.34 &                  0.30 &          0.36 \\
+	std   &     0.47 &   18.38 &    0.47 &    0.47 &    0.50 &       0.47 &                  0.46 &          0.48 \\
+	min   &     0.00 &    0.25 &    0.00 &    0.00 &    0.00 &       0.00 &                  0.00 &          0.00 \\
+	25\%   &     0.00 &   46.00 &    0.00 &    0.00 &    0.00 &       0.00 &                  0.00 &          0.00 \\
+	50\%   &     1.00 &   63.50 &    1.00 &    0.00 &    0.00 &       0.00 &                  0.00 &          0.00 \\
+	75\%   &     1.00 &   73.75 &    1.00 &    1.00 &    1.00 &       1.00 &                  1.00 &          1.00 \\
+	max   &     1.00 &   89.00 &    1.00 &    1.00 &    1.00 &       1.00 &                  1.00 &          1.00 \\
+	\bottomrule
+	\end{tabular}
+	\caption{Data summary \label{table:covid_data_sum}}
+\end{table}
+
+Next I split symptoms and diseases into their own dummy variables and removed any with few observations $( < 20\% )$. The final dataset can be seen in Table (\ref{CovidData}). It should be noted that diabetes was included in the list of chronic diseases but because every patient with diabetes in the data died it was creating issues when using logistic regression so it was removed. From Table (\ref{table:covid_data_sum}) we can see the bad rate is 68\% most likely because the patients in this data set have already been admitted to hospital because of Covid-19. The details on other variables can also be found in this table.\\
+
+After cleaning the data I applied the same methods I used for the credit scoring data set, first woe binning the variables using the scorecardpy package and then applying a logisitic regression to the data. Results of these two can be found in Tables (\ref{table:covid_woe}) \& (\ref{table:covid_results}) respectively. You can see in Table (\ref{table:covid_woe}) that age is the variable with the highest IV at 2.93 and sex has an IV at 0.01. \\
+
+Cough and fever, although their IV's are high the reason for that appears to be reversed. Both of their bad probabilities are much higher when the symptom is not present, 0.74 and 0.81. My assumption would be that any symptom would increase the probability of death but in these cases it is the opposite. Since we cannot determine how the data was collected for these patients we can only assume possibilites for the reasons. One such reason could be that patients with more severe symptoms such as respiratory problems did not have the symptoms of cough and fever recorded as they were deemed insignificant symptoms compared the prior. This would create a case where patients who only ever developed minor symptoms would be the only ones to have those symptoms recorded. \\
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lllrrrrrrrr}
+		\toprule
+		variable & bin &  count &  count\_distr &  good &  bad &   badprob &       woe &    bin\_iv &  total\_iv \\
+		\midrule
+		         age &  [-inf,36.0) &     30 &         0.14 &    29 &    1 &     0.03 & -3.95 &    1.46 &      2.93 \\
+		      &  [36.0,54.0) &     48 &         0.22 &    30 &   18 &     0.38 & -1.09 &    0.28 &      2.93 \\
+		      &  [54.0,68.0) &     61 &         0.28 &    14 &   47 &     0.77 &  0.63 &    0.10 &      2.93 \\
+		      &   [68.0,inf) &     76 &         0.35 &     4 &   72 &     0.95 &  2.31 &    1.08 &      2.93 \\
+		\midrule
+		 sex &  [-inf,1.0) &     68 &         0.32 &    27 &   41 &     0.60 & -0.17 &    0.01 &      0.01 \\
+    		  &   [1.0,inf) &    147 &         0.68 &    50 &   97 &     0.66 &  0.08 &    0.00 &      0.01 \\
+		\midrule
+		  cough &  [-inf,1.0) &    149 &         0.69 &    38 &  111 &     0.74 &  0.49 &    0.15 &      0.45 \\
+  		  &   [1.0,inf) &     66 &         0.31 &    39 &   27 &     0.41 & -0.95 &    0.30 &      0.45 \\
+		\midrule
+		  fever &  [-inf,1.0) &    127 &         0.59 &    24 &  103 &     0.81 &  0.87 &    0.38 &      0.81 \\
+  		  &   [1.0,inf) &     88 &         0.41 &    53 &   35 &     0.40 & -1.00 &    0.43 &      0.81 \\
+		\midrule
+		 pneumonia &  [-inf,1.0) &    147 &         0.68 &    75 &   72 &     0.49 & -0.62 &    0.28 &       1.6 \\
+  		&   [1.0,inf) &     68 &         0.32 &     2 &   66 &     0.97 &  2.91 &    1.32 &       1.6 \\
+		\midrule
+		respiratory  &  [-inf,1.0) &    155 &         0.72 &    75 &   80 &     0.52 & -0.52 &     0.2 &       1.3 \\
+   		&   [1.0,inf) &     60 &         0.28 &     2 &   58 &     0.97 &  2.78 &     1.1 &       1.3 \\
+		\midrule
+		hypertension &  [-inf,1.0) &    142 &         0.66 &    75 &   67 &     0.47 & -0.70 &    0.34 &       1.8 \\
+  		&   [1.0,inf) &     73 &         0.34 &     2 &   71 &     0.97 &  2.99 &    1.46 &       1.8 \\
+		\bottomrule
+	\end{tabular}
+	\caption{WOE results table. \label{table:covid_woe}}
+\end{table}
+
+Now looking at the results of the Logistic Regression, Table (\ref{table:covid_results}). As expected from the p-values, age is our most siginificant variable with respiratory coming second. Sex, even though it is not significant, it still has the highest coefficient. When looking back to Table (\ref{table:covid_woe}), we see that the bad probability from sex is quite similar, the closest of any other variables, and as such I was not expecting the coefficient to be this large. That along with its insignificance, I chose to drop the variable and compare the resulting model which can be seen in Table (\ref{table:covid_results_2}). Both AIC and BIC are lower and the siginificance of the remaining variables stayed relatively the same. \\
+
+Going one step further I chose to also drop cough as its p-value was 0.8145, much higher than the other variables and then repeated this step until I could no longer improve the AIC. The resulting Table can be seen in (\ref{table:covid_results_3}) with cough and hypertension removed. The remaining variables have fairly low p-values with all being less than 0.1 and age remains our most significant variable. Fever remains in the model with the effect of lowering the probability if the symptom is observed, although it is significant for the data I would suspect this would not be reflected in other data sets. \\
+
+\begin{table}[H]
+	\renewcommand{\arraystretch}{1.25}
+	\begin{center}
+	\begin{tabular}{llll}
+	\hline
+	Model:              & GLM              & AIC:            & 111.0205   \\
+	Link Function:      & logit            & BIC:            & -622.4505  \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\begin{center}
+	\begin{tabular}{lrrrrrr}
+	\hline
+	                          & Coef.  & Std.Err. &   z    & P$> |$z$|$ &  [0.025 & 0.975]  \\
+	\hline
+	\hline
+	const                     & 0.6338 &   0.2858 & 2.2178 &      0.0266 &  0.0737 & 1.1939  \\
+	cough\_woe                & 0.1159 &   0.3897 & 0.2975 &      0.7661 & -0.6478 & 0.8797  \\
+	age\_woe                  & 0.7974 &   0.1712 & 4.6578 &      0.0000 &  0.4618 & 1.1329  \\
+	fever\_woe                & 0.5048 &   0.3153 & 1.6009 &      0.1094 & -0.1132 & 1.1228  \\
+	hypertension\_woe         & 0.3149 &   0.2422 & 1.3002 &      0.1935 & -0.1598 & 0.7896  \\
+	respiratory problems\_woe & 0.5425 &   0.2983 & 1.8185 &      0.0690 & -0.0422 & 1.1272  \\
+	sex\_woe                  & 1.8598 &   2.3989 & 0.7752 &      0.4382 & -2.8420 & 6.5616  \\
+	pneumonia\_woe            & 0.3237 &   0.2760 & 1.1729 &      0.2408 & -0.2172 & 0.8647  \\
+	\hline
+	\end{tabular}	
+	\end{center}
+	\caption{Results: Generalized linear model \label{table:covid_results}}
+\end{table}
+
+\begin{table}[H]
+	\renewcommand{\arraystretch}{1.25}
+	\begin{center}
+	\begin{tabular}{llll}
+	\hline
+	Model:              & GLM              & AIC:            & 109.6265   \\
+	Link Function:      & logit            & BIC:            & -626.8618  \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\begin{center}
+	\begin{tabular}{lrrrrrr}
+	\hline
+	                          & Coef.  & Std.Err. &   z    & P$> |$z$|$ &  [0.025 & 0.975]  \\
+	\hline
+	\hline
+	const                     & 0.6516 &   0.2856 & 2.2819 &      0.0225 &  0.0919 & 1.2113  \\
+	cough\_woe                & 0.0907 &   0.3867 & 0.2346 &      0.8145 & -0.6673 & 0.8487  \\
+	age\_woe                  & 0.7839 &   0.1666 & 4.7060 &      0.0000 &  0.4574 & 1.1104  \\
+	fever\_woe                & 0.4863 &   0.3110 & 1.5638 &      0.1179 & -0.1232 & 1.0959  \\
+	hypertension\_woe         & 0.3043 &   0.2395 & 1.2709 &      0.2038 & -0.1650 & 0.7737  \\
+	respiratory problems\_woe & 0.5505 &   0.2988 & 1.8422 &      0.0655 & -0.0352 & 1.1362  \\
+	pneumonia\_woe            & 0.3547 &   0.2733 & 1.2976 &      0.1944 & -0.1810 & 0.8904  \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\caption{Results: Generalized linear model (sex dropped) \label{table:covid_results_2}}
+\end{table}
+
+\begin{table}[H]
+	\renewcommand{\arraystretch}{1.25}
+	\begin{center}
+	\begin{tabular}{llll}
+	\hline
+	Model:              & GLM              & AIC:            & 107.4870   \\
+	Link Function:      & logit            & BIC:            & -635.0358  \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\begin{center}
+	\begin{tabular}{lrrrrrr}
+	\hline
+	                          & Coef.  & Std.Err. &   z    & P$> |$z$|$ &  [0.025 & 0.975]  \\
+	\hline
+	\hline
+	const                     & 0.6144 &   0.2736 & 2.2455 &      0.0247 &  0.0781 & 1.1507  \\
+	pneumonia\_woe            & 0.4567 &   0.2482 & 1.8400 &      0.0658 & -0.0298 & 0.9433  \\
+	respiratory problems\_woe & 0.5246 &   0.2942 & 1.7836 &      0.0745 & -0.0519 & 1.1012  \\
+	age\_woe                  & 0.8393 &   0.1634 & 5.1360 &      0.0000 &  0.5190 & 1.1596  \\
+	fever\_woe                & 0.5815 &   0.3037 & 1.9146 &      0.0555 & -0.0138 & 1.1768  \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\caption{Results: Generalized linear model (cough \& hypertension dropped) \label{table:covid_results_3}}
+\end{table}
+
+Seen below is the confusion matrices for each model. From these it can be seen that Model 2 (sex dropped) appears to be categorizing the test data the best with only 4.69\% incorrect where as Model 3 (cough and hypertension dropped) is performing the worst with 14.06\% categorized incorrectly. Considering that the AIC is similar in all cases and the type of data this is, the choice of model I would go with would be based on accuracy and as such would go with Model 2.
+
+\begin{table}[H]
+    \begin{minipage}{.33\linewidth}
+      \centering
+        \begin{tabular}{lrrr}
+	  &  & \multicolumn{2}{c}{True} \\
+	& & 0 & 1 \\
+           \multirow{ 2}{*}{Pred} & 0 & 32.81 & 3.12 \\
+	 & 1 & 4.69 & 59.38 \\
+	&&&\\
+	 \multicolumn{4}{c}{Model 1}
+        \end{tabular}
+    \end{minipage}
+    \begin{minipage}{.33\linewidth}
+      \centering
+        \begin{tabular}{lrrr}
+	  & & \multicolumn{2}{c}{True} \\
+	& & 0 & 1 \\
+           \multirow{ 2}{*}{Pred} & 0 & 35.94 & 0 \\
+	 & 1 & 4.69 & 59.38 \\
+	&&&\\
+	 \multicolumn{4}{c}{Model 2}
+        \end{tabular}
+    \end{minipage}
+    \begin{minipage}{.33\linewidth}
+      \centering
+        \begin{tabular}{lrrr}
+	  &  & \multicolumn{2}{c}{True} \\
+	& & 0 & 1 \\
+           \multirow{ 2}{*}{Pred} & 0 & 28.12 & 7.81 \\
+	  & 1& 6.25 & 57.81 \\
+	&&&\\
+	 \multicolumn{4}{c}{Model 3}
+        \end{tabular}
+    \end{minipage}
+    \caption{Confusion Matrices (Percentages) \label{table:conf_mat}}
+\end{table}

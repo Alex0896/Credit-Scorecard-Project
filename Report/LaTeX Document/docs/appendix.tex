@@ -1,17 +1,17 @@
 \begin{appendices}
 \chapter{Definintions}
 
-\begin{defn}
-\textbf{Goods.} The term to define a good client, most often meaning a client which does not default on a loan
-\end{defn}
+\textbf{Origination.} The period from when an client applies for a loan to its distribution of funds from the loan.\\
 
-\begin{defn}
-\textbf{Bads.} The term to define a bad client, most often meaning a client which ends up defaulting on a loan
-\end{defn}
+\textbf{Piggyback Lending.} An additional loan taken out on a property on top of the first mortgage.\\
 
-\begin{defn}
-\textbf{Bad Rate.} The percentage of clients that have defaulted.
-\end{defn}
+\textbf{Subprime Loan.} A loan with higher interest rates, often given to clients with low credit score unable to qualify for normal rates. \\
+
+\textbf{Goods.} The term to define a good client, most often meaning a client which does not default on a loan.\\
+
+\textbf{Bads.} The term to define a bad client, most often meaning a client which ends up defaulting on a loan.\\
+
+\textbf{Bad Rate.} The percentage of clients that have defaulted.\\
 
 \chapter{Tables}
 
@@ -45,13 +45,13 @@
 	\toprule
 	{} &      BAD &      LOAN &    MORTDUE &      VALUE &      YOJ &    DEROG &   DELINQ &    CLAGE &     NINQ &     CLNO \\
 	\midrule
-	mean  &     0.17 &  17944.69 &   68427.20 &   98341.35 &     8.60 &     0.15 &     0.32 &   174.81 &     1.04 &    20.65 \\
-	std   &     0.38 &   9547.25 &   36656.24 &   45860.89 &     6.95 &     0.49 &     0.77 &    76.09 &     1.35 &     9.08  \\
-	min   &     0.00 &   1100.00 &    2063.00 &    8000.00 &     0.00 &     0.00 &     0.00 &     0.51 &     0.00 &     0.00  \\
-	25\%   &     0.00 &  11100.00 &   44317.25 &   66343.75 &     3.00 &     0.00 &     0.00 &   114.59 &     0.00 &    14.00  \\
-	50\%   &     0.00 &  16200.00 &   62562.50 &   89033.00 &     7.00 &     0.00 &     0.00 &   170.72 &     1.00 &    20.00  \\
-	75\%   &     0.00 &  22725.00 &   87368.50 &  117696.75 &    12.00 &     0.00 &     0.00 &   225.11 &     2.00 &    26.00  \\
-	max   &     1.00 &  62700.00 &  207687.00 &  271738.00 &    29.00 &     3.00 &     4.00 &   398.40 &     7.00 &    48.00  \\
+	mean  &     0.18 &  17895.67 &   67997.48 &   97757.46 &     8.54 &     0.15 &     0.31 &   174.71 &     1.05 &    20.67 \\
+	std   &     0.38 &   9543.89 &   36628.32 &   45795.23 &     6.89 &     0.48 &     0.76 &    75.72 &     1.34 &     9.00 \\
+	min   &     0.00 &   1100.00 &    2063.00 &    8000.00 &     0.00 &     0.00 &     0.00 &     0.51 &     0.00 &     0.00 \\
+	25\%   &     0.00 &  11000.00 &   43416.50 &   65783.00 &     3.00 &     0.00 &     0.00 &   115.08 &     0.00 &    14.00 \\
+	50\%   &     0.00 &  16100.00 &   62344.00 &   88710.50 &     7.00 &     0.00 &     0.00 &   170.65 &     1.00 &    20.00 \\
+	75\%   &     0.00 &  22800.00 &   86782.50 &  117303.00 &    12.00 &     0.00 &     0.00 &   224.57 &     2.00 &    26.00 \\
+	max   &     1.00 &  60500.00 &  207687.00 &  270794.00 &    29.00 &     3.00 &     4.00 &   397.87 &     7.00 &    48.00 \\
 	\bottomrule
 	\end{tabular}
 	\caption{Summary After Cleaning \label{SUM_AFT_TBL}}
@@ -81,21 +81,14 @@
 \end{figure}
 \end{landscape}
 
-\chapter{Logistic Regression Results}
-
-\begin{table}
+\begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
 \begin{center}
 \begin{tabular}{llll}
 \hline
-Model:              & GLM              & AIC:            & 2491.7333    \\
-Link Function:      & logit            & BIC:            & -26197.6795  \\
-Dependent Variable: & BAD              & Log-Likelihood: & -1233.9      \\
-Date:               & 2020-08-25 15:28 & LL-Null:        & -1607.6      \\
-No. Observations:   & 3522             & Deviance:       & 2467.7       \\
-Df Model:           & 11               & Pearson chi2:   & 3.62e+03     \\
-Df Residuals:       & 3510             & Scale:          & 1.0000       \\
-Method:             & IRLS             &                 &              \\
+Model:              & GLM              & AIC:            & 2543.2467    \\
+Link Function:      & logit            & BIC:            & -25758.5600  \\
+Dependent Variable: & BAD              & Log-Likelihood: & -1260.6      \\
 \hline
 \end{tabular}
 \end{center}
@@ -105,37 +98,31 @@ Method:             & IRLS             &                 &              \\
              &  Coef.  & Std.Err. &    z     & P$> |$z$|$ &  [0.025 &  0.975]  \\
 \hline
 \hline
-const        & -1.5952 &   0.0539 & -29.5904 &      0.0000 & -1.7009 & -1.4896  \\
-DELINQ\_woe  &  1.0533 &   0.0724 &  14.5417 &      0.0000 &  0.9114 &  1.1953  \\
-CLAGE\_woe   &  0.7701 &   0.0988 &   7.7933 &      0.0000 &  0.5764 &  0.9638  \\
-CLNO\_woe    &  0.9026 &   0.1435 &   6.2917 &      0.0000 &  0.6214 &  1.1838  \\
-REASON\_woe  & -0.1519 &   0.4517 &  -0.3364 &      0.7366 & -1.0373 &  0.7334  \\
-MORTDUE\_woe &  0.0866 &   0.2208 &   0.3922 &      0.6949 & -0.3462 &  0.5194  \\
-DEROG\_woe   &  0.7937 &   0.1000 &   7.9387 &      0.0000 &  0.5978 &  0.9897  \\
-JOB\_woe     &  0.6984 &   0.1539 &   4.5390 &      0.0000 &  0.3968 &  1.0000  \\
-NINQ\_woe    &  1.0464 &   0.1420 &   7.3674 &      0.0000 &  0.7680 &  1.3247  \\
-VALUE\_woe   &  0.7590 &   0.1518 &   4.9991 &      0.0000 &  0.4614 &  1.0565  \\
-LOAN\_woe    &  0.7126 &   0.1104 &   6.4559 &      0.0000 &  0.4963 &  0.9289  \\
-YOJ\_woe     &  1.0608 &   0.2156 &   4.9212 &      0.0000 &  0.6383 &  1.4833  \\
+const        & -1.5661 &   0.0533 & -29.4073 &      0.0000 & -1.6705 & -1.4617  \\
+CLNO\_woe    &  0.8257 &   0.1332 &   6.1991 &      0.0000 &  0.5646 &  1.0867  \\
+YOJ\_woe     &  0.8134 &   0.1973 &   4.1221 &      0.0000 &  0.4267 &  1.2002  \\
+REASON\_woe  & -0.4355 &   0.3941 &  -1.1049 &      0.2692 & -1.2080 &  0.3370  \\
+LOAN\_woe    &  0.8959 &   0.1003 &   8.9325 &      0.0000 &  0.6994 &  1.0925  \\
+JOB\_woe     &  0.8907 &   0.1612 &   5.5243 &      0.0000 &  0.5747 &  1.2067  \\
+DELINQ\_woe  &  1.0305 &   0.0786 &  13.1048 &      0.0000 &  0.8764 &  1.1846  \\
+DEROG\_woe   &  0.7534 &   0.1047 &   7.1983 &      0.0000 &  0.5482 &  0.9585  \\
+MORTDUE\_woe &  0.6597 &   0.1889 &   3.4922 &      0.0005 &  0.2894 &  1.0299  \\
+NINQ\_woe    &  1.0383 &   0.1520 &   6.8321 &      0.0000 &  0.7404 &  1.3362  \\
+CLAGE\_woe   &  0.9666 &   0.1002 &   9.6503 &      0.0000 &  0.7703 &  1.1629  \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Results: Model 1}
+\caption{Results: Model with VALUE dropped \label{table:results_val_dropped}}
 \end{table}
 
-\begin{table}
+\begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
 \begin{center}
 \begin{tabular}{llll}
 \hline
-Model:              & GLM              & AIC:            & 2460.7691    \\
-Link Function:      & logit            & BIC:            & -26228.6438  \\
-Dependent Variable: & BAD              & Log-Likelihood: & -1218.4      \\
-Date:               & 2020-08-25 15:33 & LL-Null:        & -1607.6      \\
-No. Observations:   & 3522             & Deviance:       & 2436.8       \\
-Df Model:           & 11               & Pearson chi2:   & 3.62e+03     \\
-Df Residuals:       & 3510             & Scale:          & 1.0000       \\
-Method:             & IRLS             &                 &              \\
+Model:              & GLM              & AIC:            & 2495.4175    \\
+Link Function:      & logit            & BIC:            & -25800.2346  \\
+Dependent Variable: & BAD              & Log-Likelihood: & -1235.7      \\
 \hline
 \end{tabular}
 \end{center}
@@ -145,62 +132,33 @@ Method:             & IRLS             &                 &              \\
              &  Coef.  & Std.Err. &    z     & P$> |$z$|$ &  [0.025 &  0.975]  \\
 \hline
 \hline
-const        & -1.5975 &   0.0544 & -29.3812 &      0.0000 & -1.7041 & -1.4909  \\
-DELINQ\_woe  &  1.0724 &   0.0733 &  14.6302 &      0.0000 &  0.9287 &  1.2160  \\
-CLAGE\_woe   &  0.7804 &   0.0996 &   7.8389 &      0.0000 &  0.5853 &  0.9755  \\
-CLNO\_woe    &  0.9590 &   0.1443 &   6.6452 &      0.0000 &  0.6761 &  1.2418  \\
-REASON\_woe  & -0.3821 &   0.4607 &  -0.8295 &      0.4068 & -1.2850 &  0.5208  \\
-MORTDUE\_woe &  0.0538 &   0.2224 &   0.2417 &      0.8090 & -0.3821 &  0.4896  \\
-DEROG\_woe   &  0.8055 &   0.1009 &   7.9863 &      0.0000 &  0.6078 &  1.0032  \\
-JOB\_woe     &  0.7069 &   0.1547 &   4.5689 &      0.0000 &  0.4036 &  1.0101  \\
-NINQ\_woe    &  0.9993 &   0.1421 &   7.0337 &      0.0000 &  0.7208 &  1.2777  \\
-VALUE\_woe   &  0.7692 &   0.1530 &   5.0288 &      0.0000 &  0.4694 &  1.0691  \\
-LOAN\_woe    &  0.7547 &   0.1082 &   6.9759 &      0.0000 &  0.5427 &  0.9668  \\
-YOJ\_woe     &  1.1681 &   0.1790 &   6.5241 &      0.0000 &  0.8171 &  1.5190  \\
+const        & -1.5802 &   0.0542 & -29.1318 &      0.0000 & -1.6865 & -1.4738  \\
+DELINQ\_woe  &  1.0393 &   0.0793 &  13.1121 &      0.0000 &  0.8839 &  1.1946  \\
+CLAGE\_woe   &  0.9408 &   0.1010 &   9.3183 &      0.0000 &  0.7429 &  1.1387  \\
+NINQ\_woe    &  0.9875 &   0.1533 &   6.4408 &      0.0000 &  0.6870 &  1.2880  \\
+MORTDUE\_woe & -0.1417 &   0.2347 &  -0.6037 &      0.5461 & -0.6016 &  0.3183  \\
+CLNO\_woe    &  0.8104 &   0.1347 &   6.0148 &      0.0000 &  0.5463 &  1.0744  \\
+LOAN\_woe    &  0.8631 &   0.1002 &   8.6108 &      0.0000 &  0.6667 &  1.0596  \\
+REASON\_woe  & -0.6331 &   0.4029 &  -1.5714 &      0.1161 & -1.4229 &  0.1566  \\
+JOB\_woe     &  0.8575 &   0.1634 &   5.2485 &      0.0000 &  0.5373 &  1.1778  \\
+VALUE\_woe   &  0.8590 &   0.1537 &   5.5879 &      0.0000 &  0.5577 &  1.1603  \\
+DEROG\_woe   &  0.7875 &   0.1050 &   7.4994 &      0.0000 &  0.5817 &  0.9933  \\
+YOJ\_woe     &  0.8890 &   0.1665 &   5.3401 &      0.0000 &  0.5627 &  1.2152  \\
 \hline
 \end{tabular}
 \end{center}
-\caption{Results: Model 2}
+\caption{Results: Model 2 \label{table:results_2}}
 \end{table}
 
-\begin{table}
-\renewcommand{\arraystretch}{1.25}
-\begin{center}
-\begin{tabular}{llll}
-\hline
-Model:              & GLM              & AIC:            & 2457.5109    \\
-Link Function:      & logit            & BIC:            & -26244.2355  \\
-Dependent Variable: & BAD              & Log-Likelihood: & -1218.8      \\
-Date:               & 2020-08-25 15:36 & LL-Null:        & -1607.6      \\
-No. Observations:   & 3522             & Deviance:       & 2437.5       \\
-Df Model:           & 9                & Pearson chi2:   & 3.63e+03     \\
-Df Residuals:       & 3512             & Scale:          & 1.0000       \\
-Method:             & IRLS             &                 &              \\
-\hline
-\end{tabular}
-\end{center}
-\begin{center}
-\begin{tabular}{lrrrrrr}
-\hline
-            &  Coef.  & Std.Err. &    z     & P$> |$z$|$ &  [0.025 &  0.975]  \\
-\hline
-\hline
-const       & -1.5969 &   0.0543 & -29.4100 &      0.0000 & -1.7033 & -1.4905  \\
-DELINQ\_woe &  1.0703 &   0.0732 &  14.6192 &      0.0000 &  0.9268 &  1.2138  \\
-CLAGE\_woe  &  0.7837 &   0.0992 &   7.9029 &      0.0000 &  0.5893 &  0.9780  \\
-CLNO\_woe   &  0.9558 &   0.1423 &   6.7157 &      0.0000 &  0.6769 &  1.2348  \\
-JOB\_woe    &  0.7140 &   0.1546 &   4.6197 &      0.0000 &  0.4111 &  1.0169  \\
-NINQ\_woe   &  1.0089 &   0.1414 &   7.1329 &      0.0000 &  0.7317 &  1.2862  \\
-VALUE\_woe  &  0.7878 &   0.1188 &   6.6292 &      0.0000 &  0.5549 &  1.0208  \\
-LOAN\_woe   &  0.7237 &   0.1008 &   7.1777 &      0.0000 &  0.5261 &  0.9213  \\
-DEROG\_woe  &  0.8076 &   0.1004 &   8.0444 &      0.0000 &  0.6109 &  1.0044  \\
-YOJ\_woe    &  1.1716 &   0.1787 &   6.5550 &      0.0000 &  0.8213 &  1.5220  \\
-\hline
-\end{tabular}
-\end{center}
-\caption{Results: Model 3}
-\end{table}
 
 \chapter{Python Code}
+
+\lstinputlisting[language=Python]{code/cleaning_script.py}
+
+\lstinputlisting[language=Python]{code/exploratory_script.py}
+
+\lstinputlisting[language=Python]{code/modelling_script.py}
+
+\lstinputlisting[language=Python]{code/covid_19_script.py}
 
 \end{appendices}

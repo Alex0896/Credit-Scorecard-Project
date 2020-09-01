@@ -1,8 +1,8 @@
 \chapter{Data} \label{cha:chapter-2}
 
-The data I am using for this project is a collection of observations of 5, 960 home equity loans which is provided by Baesens,  Bart,  Roesch,  Daniel and Scheule,  Harald \cite{baesens2016credit}. Home equity loans are when an applicant borrows agains the value or 'equity' of their home. You can find a full description of each variable in Table (\ref{MetaData}).
+The data I am using for this project is a collection of observations of 5,960 home equity loans which is provided by \parencite{baesens2016credit}. Home equity loans are when an applicant borrows agains the value or 'equity' of their home. You can find a full description of each variable in Table (\ref{MetaData}).
 
-\begin{figure}[ht]\label{Table2}
+\begin{table}[ht]\label{Table2}
 	\centering
 	\renewcommand{\arraystretch}{1.5}
 	\begin{tabular}{l p{10cm}}
@@ -23,20 +23,20 @@ The data I am using for this project is a collection of observations of 5, 960 h
 	CLNO & Number of credit lines \\
 	DEBTINC & Debt-to-income ratio \\
 	\end{tabular}
-	\caption{Variables used in the Data Set \cite{baesens2016credit} \label{MetaData}}
-\end{figure}
+	\caption{Variables used in the Data Set \label{MetaData}}
+\end{table}
 
 \section{Data Cleaning}
 
-The data provided needed some initial cleaning. 2596 observations were missing atleast one value with some missing several variables. The biggest culprit of this would be DEBTINC with 1, 267 missing values. I decided to handle these missing values on a case by case basis applying different methods. First I decided to exclude observations missing more than a third of their variables,  339 fit this criteria. Next before I went forward with any imputing I considered any possible outliers within my numerical data,  using the summary table \ref{SUM_BFR_TBL}. You can see for the quantile ranges that there will most likely be some outliers occuring in the majority of the numerical variables. To solve this I removed the 99th percentile for every numerical variable excluding BAD,  this ended up removing 589 rows. \\
+The data provided needed some initial cleaning. 2,596 observations were missing atleast one value with some missing several variables. The biggest culprit of this would be DEBTINC with 1,267 missing values. I decided to handle these missing values on a case by case basis applying different methods. Before I went forward with any imputing I considered any possible outliers within my numerical data, using the summary Table \ref{SUM_BFR_TBL}. You can see for the quantile ranges that there will most likely be some outliers occuring in the majority of the numerical variables. The gerneral consesus is that there is a necessity to handle outliers but a lack of definitive way to handle them \parencite{nyitrai2019effects}. For this project I chose to removed the 99th percentile for every numerical variable excluding BAD, this ended up removing 613 rows. \\
 
-Moving onto imputing variable,  for MORTDUE and VALUE I imputed their values using a simple linear regression of the other. This was going on the assumption that the mortgage due on a house has a strong relationship with the value of property. The assumption is further backed up with the correlation between the two being 0.8748 before imputing,  far higher than any of the other correlations in the data.  So for MORTDUE I used Equation (\ref{MORTDUE_IMPUTE}) and for VALUE I used Equation (\ref{VALUE_IMPUTE}). This was applied to any missing value where the other was present and for the remaining I took the mean of each variable from the original data before the imputations.
+Moving onto imputing variable, for MORTDUE and VALUE I imputed their values using a simple linear regression of the other. This was going on the assumption that the mortgage due on a house had a strong relationship with the value of property. The assumption is further backed up with the correlation between the two being 0.8748 before imputing, far higher than any of the other correlations in the data. So for MORTDUE I used Equation (\ref{MORTDUE_IMPUTE}) and for VALUE I used Equation (\ref{VALUE_IMPUTE}). This was applied to any missing value where the other was present and for the remaining I took the mean of each variable from the original data before the imputations.
 
 \begin{equation}\label{MORTDUE_IMPUTE}
 \text{MORTDUE} = \beta_{0} + \beta_{1}\text{VALUE}
 \end{equation}
 
-\begin{figure}[ht]\label{MORTDUE_IMPUTE_COEFS}
+\begin{table}[ht]\label{MORTDUE_IMPUTE_COEFS}
 	\centering
 	\begin{tabular}{lr}
 	\hline
@@ -44,13 +44,13 @@ Moving onto imputing variable,  for MORTDUE and VALUE I imputed their values usi
 	$\beta_{1}$ & 0.7177 \\
 	\hline
 	\end{tabular}
-\end{figure}
+\end{table}
 
 \begin{equation}\label{VALUE_IMPUTE}
 \text{VALUE} = \beta_{0} + \beta_{1}\text{MORTDUE}
 \end{equation}
 
-\begin{figure}[ht]\label{VALUE_IMPUTE_COEFS}
+\begin{table}[ht]\label{VALUE_IMPUTE_COEFS}
 	\centering
 	\begin{tabular}{lr}
 	\hline
@@ -58,45 +58,15 @@ Moving onto imputing variable,  for MORTDUE and VALUE I imputed their values usi
 	$\beta_{1}$ & 1.1253 \\
 	\hline
 	\end{tabular}
-\end{figure}
+\end{table}
 
-For the remaining numerical variables excluding DEBTINC I chose to take the median of the values as there were only a small amount missing from each with no highly correlated variables to take a regression from. There is an argument that because DEBTINC is missing 991 (19.7 \%) that some other method from using the median value should be used. After some further analysis the decsion to drop the variable was made,  imputing did not appear to be an option as of the 857 bad applicants,  585 (68.2\%) of them were missing DEBTINC compared to 4175 and 405 (9.7\%) for good applicants. Dropping every row with DEBTINC did not appear to be practical either as it would result in the loss of almost 70\% of the bad applicants and their data whilst also taking the bad rate down to 6\%. Dropping DEBTINC would be the lower loss of information agains the alternative of dropping missing rows (5032 values lost vs 11892). \\
+For the remaining numerical variables excluding DEBTINC I chose to take the median of the values as there were only a small amount missing from each but still a significant amount $( > 4\% )$ missing. There is an argument that because DEBTINC is missing 1,081 (20.2 \%) that some other method from using the median value should be used. After some further analysis the decsion to drop the variable was made, imputing did not appear to be an option as of the 915 bad applicants,  634 (69.3\%) of them were missing DEBTINC compared to 4432 and 447 (10.1\%) for good applicants. Dropping every row with DEBTINC did not appear to be practical either as it would result in the loss of almost 70\% of the bad applicants and their data whilst also taking the bad rate down to 6\%. Dropping DEBTINC would be the lower loss of information against the alternative of dropping missing rows (5,347 values lost versus 12,972). \\
 
-Last was the two categorical variables REASON ( DebtCon,  HomeImp ) and JOB ( Other,  Office,  Sales,  Mgr,  ProfExe,  Self ). REASON's categories were specified in the data dictionary but JOB's categories were not,  for simplicity I am going to assume that the missing values are of the categories just specified. Their missing values were 138 and 127 respectively and I decided to impute these values using a weighted random sample with the weights being the counts of the respective category. Below is two table summarizing the imputes,  I applied a seed to reproduce the sampling to remian consistent. \\
+Last was the two categorical variables REASON ( DebtCon,  HomeImp ) and JOB ( Other,  Office,  Sales,  Mgr,  ProfExe,  Self ). REASON's categories were specified in the data dictionary but JOB's categories were not. The decision was made to use listwise deletion on these as they were the only variables remaining with missing data. This resulted in the removal of 377 rows. \\
 
-\begin{figure}[ht]\label{REASON_IMPUTES}
-	\centering
-	\renewcommand{\arraystretch}{1.25}
-	\begin{tabular}{lrrrr}
-	\multicolumn{5}{c}{REASON}\\
-	\hline
-	Category & \multicolumn{1}{c}{Original} & \multicolumn{1}{c}{Weight For Sampling} & \multicolumn{1}{c}{New} & \multicolumn{1}{c}{Count Imputed} \\ 
-	\hline
-	DebtCon & 3448 & 0.7005 & 3528 & 80\\
-	HomeImp & 1474 & 0.2995 & 1504  & 30\\
-	\end{tabular}
-\end{figure}
+With these two completed I had no more missing values and no other noticeable issues which needed to be corrected before I could further look into the variables. A summary of actions taken on missing values can be found in Table (\ref{DataCleanSummary}). \\
 
-\begin{figure}[ht]\label{JOB_IMPUTES}
-	\centering
-	\renewcommand{\arraystretch}{1.25}
-	\begin{tabular}{lrrrr}
-	\multicolumn{5}{c}{JOB}\\
-	\hline
-	Category & \multicolumn{1}{c}{Original} & \multicolumn{1}{c}{Weight For Sampling} & \multicolumn{1}{c}{New} & \multicolumn{1}{c}{Count Imputed} \\ 
-	\hline
-	Other & 2056 & 0.4175 & 2100 & 44 \\
-	ProfExe & 1123 & 0.2281 & 1150 & 27 \\
-	Office & 862 & 0.1751 & 877 & 15 \\
-	Mgr & 646 & 0.1312 & 657  & 11 \\
-	Self & 144 & 0.0292 & 151  & 7 \\
-	Sales & 93 & 0.0189 & 97 & 4 \\
-	\end{tabular}
-\end{figure}
-
-With these two completed I had no more missing values an no other noticeable issues which needed to be corrected before I could further look into the variables. A summary of actions taken on missing values can be found in table (\ref{DataCleanSummary}) \\
-
-\begin{figure}[ht]\label{data_clean}
+\begin{table}[ht]
 	\centering
 	\renewcommand{\arraystretch}{1.25}
 	\begin{tabular}{l r p{9cm}}
@@ -105,30 +75,30 @@ With these two completed I had no more missing values an no other noticeable iss
 	\hline
 	BAD & 0 & N/A\\
 	LOAN & 0 & N/A \\
-	MORTDUE & 316 & Imputed from a linear regression (\ref{MORTDUE_IMPUTE}). Mean taken when VALUE was unavailable \\
-	VALUE & 59 & Imputed from a linear regression (\ref{VALUE_IMPUTE}). Mean taken when MORTDUE was unavailable \\
-	REASON & 110 & Random weighted sample taken \\
-	JOB & 108 & Random weighted sample taken \\
-	YOJ & 311 & Median taken\\
-	DEROG & 362 & Median taken \\
-	DELINQ & 246 & Median taken\\
-	CLAGE & 67 & Median taken \\
-	NINQ & 178 & Median taken\\
-	CLNO & 0 & N/A \\
-	DEBTINC & 991 & Variable dropped as too much information missing\\
+	MORTDUE & 477 & Imputed from a linear regression (\ref{MORTDUE_IMPUTE}). Mean taken when VALUE was unavailable \\
+	VALUE & 86 & Imputed from a linear regression (\ref{VALUE_IMPUTE}). Mean taken when MORTDUE was unavailable \\
+	REASON & 222 & Listwise deletion \\
+	JOB & 258 & Listwise deletion \\
+	YOJ & 486 & Median taken\\
+	DEROG & 655 & Median taken \\
+	DELINQ & 548 & Median taken\\
+	CLAGE & 303 & Median taken \\
+	NINQ & 476 & Median taken\\
+	CLNO & 222 & Median taken \\
+	DEBTINC & 1081 & Variable dropped as too much information missing\\
 	\end{tabular}
 	\caption{Missing Variables Breakdown \label{DataCleanSummary}}
-\end{figure}
+\end{table}
 
-\section{Variables}
+\section{Variables}\label{sec:variables}
 
-With data cleaned the remaining observations was 5032 of 12 independ variables with no missing values. A summary of the numerical values can be found in Table (\ref{SUM_AFT_TBL}). There you can see the remaining data has a bad rate of 17\% which equates to 857 defaulted applicants.
+With data cleaned the remaining observations was 4970 of 12 independ variables with no missing values. A summary of the numerical values can be found in Table (\ref{SUM_AFT_TBL}). There you can see the remaining data has a bad rate of 18\% which equates to 876 defaulted applicants.
 
 \subsection*{LOAN}
 
-LOAN,  the amount requested for the home equity loan by the applicant can be seen in Figure (\ref{loan_dist}). The initial assumption was that higher loan values would have a higher bad rate due to the larger amount to pay back,  increasing the length and difficulty for the applicant to pay back the loan. Looking at the figure this does not appear to be the case,  although small,  larger loans tend to be payed off more often. The reasons for this are unclear,  a couple suggested could be that since we do not know exactly how this data was gathered the case could be that for larger loans the bank/company offering these loans had higher cutoffs on their applicant scoring to prevent higher risks in higher potential loss causing a shift down in the bad rate. Another could be the arguement that larger requested loans are coming from owners of higher valued properties,  which could be the case when looking at the correlation table \ref{CORR_TBL}. A higher property value indicates a better economic status and less likely to default on a loan. It would be reasonable to expect this variable to have a significant effect on the credit score.
+LOAN,  the amount requested for the home equity loan by the applicant can be seen in Figure (\ref{loan_dist}). The initial assumption was that higher loan values would have a higher bad rate due to the larger amount to pay back,  increasing the length and difficulty for the applicant to pay back the loan. Looking at the figure this does not appear to be the case,  although small,  larger loans tend to be payed off more often. The reasons for this are unclear,  a couple suggested could be that since we do not know exactly how this data was gathered the case could be that for larger loans the bank/company offering these loans had higher cutoffs on their applicant scoring to prevent higher risks in higher potential loss causing a shift down in the bad rate. Another could be the arguement that larger requested loans are coming from owners of higher valued properties,  which could be the case when looking at the correlation Table (\ref{CORR_TBL}). A higher property value indicates a better economic status and less likely to default on a loan. It would be reasonable to expect this variable to have a significant effect on the credit score.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/loan_dist.pdf}
 	\caption{Distribution of LOAN by BAD. \label{loan_dist}}
@@ -136,19 +106,19 @@ LOAN,  the amount requested for the home equity loan by the applicant can be see
 
 \subsection*{MORTDUE}
 
-MORTDUE,  the outstanding balance on the applicants existing mortgage. Assumption here would be similar to LOAN,  a higher outstanding balance on their mortgage mean a large amount of debt and an increased risk of defaulting due to the larger payments. Looking at figure (\ref{mortdue_dist}) you can see it does not follow this assumption,  again a small but clear difference in the distribution shows that applicants with a higher outstanding balance on their mortgage are less likely to default. Whatever the reason behind this is would most likely be the same as the reason behind LOAN.
+MORTDUE,  the outstanding balance on the applicants existing mortgage. Assumption here would be similar to LOAN,  a higher outstanding balance on their mortgage mean a large amount of debt and an increased risk of defaulting due to the larger payments. Looking at Figure (\ref{mortdue_dist}) you can see it does not follow this assumption,  again a small but clear difference in the distribution shows that applicants with a higher outstanding balance on their mortgage are less likely to default. Whatever the reason behind this is would most likely be the same as the reason behind LOAN.
 
 \subsection*{VALUE}
 
-VALUE,  the property of the applicants and the equity the loan is being put against. The same initial assumption being made with MORTDUE is also here,  a value of an applicants property is an indication of their economic status. An owner of a higher valued property should be able to payback a larger loan and less likely to default on smaller ones. From figure (\ref{value_dist}) there is a small visible effect of loan on their probability of defaulting.
+VALUE,  the property of the applicants and the equity the loan is being put against. The same initial assumption being made with MORTDUE is also here,  a value of an applicants property is an indication of their economic status. An owner of a higher valued property should be able to payback a larger loan and less likely to default on smaller ones. From Figure (\ref{value_dist}) there is a small visible effect of loan on their probability of defaulting.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/mortdue_dist.pdf}
 	\caption{Distribution of MORTDUE by BAD. \label{mortdue_dist}}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/value_dist.pdf}
 	\caption{Distribution of VALUE by BAD. \label{value_dist}}
@@ -156,23 +126,23 @@ VALUE,  the property of the applicants and the equity the loan is being put agai
 
 \subsection*{REASON}
 
-REASON,  the reason for the applicant's request. There are only two categories as seen in \ref{reason_cat},  DebtCon,  the loan would be used for a debt consolidation. HomeImp,  the loan is being used for a home improvement. A breakdown of their splits between good and bad can be found in table (\ref{reason_count_tbl}). The two categories continue to have similar splits when they do not default but when they do default,  HomeImp's split increases by 5\%. Looking at this further in figure (\ref{reason_cat}) the bad rate for DebtCon is 15.87\% and HomeImp 19.75\%. Although there does appear to be a difference,  it is small and compared to other variables in the group I would expect this to be on the lower end of signifiance.
+REASON,  the reason for the applicant's request. There are only two categories as seen in \ref{reason_cat},  DebtCon,  the loan would be used for a debt consolidation. HomeImp,  the loan is being used for a home improvement. A breakdown of their splits between good and bad can be found in Table (\ref{reason_count_tbl}). The two categories continue to have similar splits when they do not default but when they do default,  HomeImp's split increases by 7\%. Looking at this further in Figure (\ref{reason_cat}) the bad rate for DebtCon is 16.24\% and HomeImp 20.75\%. Although there does appear to be a difference,  it is small and compared to other variables in the group I would expect this to be on the lower end of signifiance.
 
-\begin{figure}[ht]
+\begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{2}
 	\begin{tabular}{lrrr}
 		\toprule
-		Category & \% of Total (N = 5032) & \% of Good (N = 4175) & \% of Bad (N = 857) \\
+		Category & \% of Total (N = 4970) & \% of Good (N = 4094) & \% of Bad (N = 876) \\
 		\midrule
-		DebtCon &  70.0\% (3528) & 71.1\% (2968) & 65.3\% (560)  \\
-		HomeImp & 30.0\% (1504) & 28.9\% (1207) &  34.7\% (297)  \\
+		DebtCon &  69.3\% (3442) & 70.4\% (2883) & 63.8\% (559)  \\
+		HomeImp & 30.7\% (1528) & 29.6\% (1211) &  36.2\% (317)  \\
 		\bottomrule
 	\end{tabular}
 	\caption{REASON breakdown \label{reason_count_tbl}}
-\end{figure}
+\end{table}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/reason_cat.pdf}
 	\caption{Category plot of REASON by BAD. \label{reason_cat}}
@@ -180,33 +150,33 @@ REASON,  the reason for the applicant's request. There are only two categories a
 
 \subsection*{JOB}
 
-JOB,  categorical job occupation. Categories can be seen in \ref{job_cat}. Occupation could be used as an indicator for the applicants economic status e.g. a ProfExe,  proffesional executive is more likely to have a higher income than office staff or someone who is self employed. It could also be used to see how volatile their employement status is,  someone who is self employed can be seen as a possible risk due to their income being potentially unstable. Although we do not have a way of looking at their job security,  we do have YOJ,  years at present job,  as an indicator of Job security. Comparing figure (\ref{job_yoj_cat}) and figure (\ref{job_cat}),  Sales,  the job with the lowest average YOJ has the highest bad rate at 30.93\% followed by Self at 22.52\%. 
+JOB, categorical job occupation. Categories can be seen in \ref{job_cat}. Occupation could be used as an indicator for the applicants economic status e.g. a ProfExe, proffesional executive is more likely to have a higher income than office staff or someone who is self employed. It could also be used to see how volatile their employement status is, someone who is self employed can be seen as a possible risk due to their income being potentially unstable. Although we do not have a way of looking at their job security,  we do have YOJ,  years at present job, as an indicator of Job security. Comparing Figure (\ref{job_yoj_cat}) and Figure (\ref{job_cat}), Sales, the job with the lowest average YOJ has the highest bad rate at 31.52\% followed by Self at 24.14\%. 
 
-\begin{figure}[ht]
+\begin{table}[H]
 	\centering
 	\renewcommand{\arraystretch}{2}
 	\begin{tabular}{lrrr}
 		\toprule
-		Category & \% of Total (N = 5032) & \% of Good (N = 4175) & \% of Bad (N = 857) \\
+		Category & \% of Total (N = 4970) & \% of Good (N = 4094) & \% of Bad (N = 876) \\
 		\midrule
-		Other & 41.7\% (2100) & 40.0\% (1672) &  49.9\% (428)  \\
-		ProfExe & 22.9\% (1150) & 24.0\% (1004) &  17.0\% (146)  \\
-		Office & 17.4\% (877) & 18.9\% (787) &  10.5\% (90)  \\
-		Mgr &  13.1\% (657) & 12.6\% (528) & 15.1\% (129)  \\
-		Self & 3.0\% (151) & 2.8\% (117) &  4.0\% (34)  \\
-		Sales & 1.9\% (97) & 1.6\% (67) &  3.5\% (30)  \\
+		Other & 42.5\% (2110) & 40.7\% (1666) &  50.7\% (444)  \\
+		ProfExe & 22.5\% (1119) & 23.9\% (977) &  16.2\% (142)  \\
+		Office & 17.0\% (844) & 18.2\% (746) &  11.2\% (98)  \\
+		Mgr &  13.3\% (660) & 13.0\% (532) & 14.6\% (128)  \\
+		Self & 2.9\% (145) & 2.7\% (110) &  4.0\% (35)  \\
+		Sales & 1.9\% (92) & 1.5\% (63) &  3.3\% (29)  \\
 		\bottomrule
 	\end{tabular}
 	\caption{JOB breakdown \label{job_count_tbl}}
-\end{figure}
+\end{table}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/job_cat.pdf}
 	\caption{Category plot of JOB by BAD. \label{job_cat}}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/job_yoj_cat.pdf}
 	\caption{Category plot of JOB by mean of YOJ. \label{job_yoj_cat}}
@@ -214,9 +184,9 @@ JOB,  categorical job occupation. Categories can be seen in \ref{job_cat}. Occup
 
 \subsection*{YOJ}
 
-YOJ,  number of years the applicant has been at present job. Can be an indicator of job security,  an applicant losing their job can be a high risk of defaulting on their loan. Figure (\ref{yoj_dist} shows that the majority of applicants are between 3 to 14 years at their current job with the mean for bads and goods being relatively the same. The difference between them starts to become noticable at higher values where an applicant who has been at their present job for more than 20 years starts to become less likely to default.
+YOJ, number of years the applicant has been at present job. Can be an indicator of job security,  an applicant losing their job can be a high risk of defaulting on their loan. Figure (\ref{yoj_dist} shows that the majority of applicants are between 3 to 14 years at their current job with the mean for bads and goods being relatively the same. The difference between them starts to become noticable at higher values where an applicant who has been at their present job for more than 20 years starts to become less likely to default.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/yoj_dist.pdf}
 	\caption{Distribution of YOJ by BAD. \label{yoj_dist}}
@@ -224,9 +194,9 @@ YOJ,  number of years the applicant has been at present job. Can be an indicator
 
 \subsection*{DEROG}
 
-DEROG,  number of dergoatory marks on aginast the applicant. A derogatory mark can have a large impact on your chances of being accepted for a loan. In this dataset,  only 12.3\% of applicants have 1 or more dergoatory mark. An applicant can recieve a derogatory mark for various reasons such as,  missing payments,  bankruptcy,  repossession,  etc. The severity of the reason for the derogatory mark is often used in credit scoring but for this dataset we only have the numbers of marks against the applicant. Figure (\ref{derog_cat}) shows the impact having a derogatory mark can have on your chance of defaulting with 0 having a bad rate of 14.3\% and 3 having a bad rate of 65.91\%.
+DEROG,  number of dergoatory marks on aginast the applicant. A derogatory mark can have a large impact on your chances of being accepted for a loan. In this dataset,  only 12.3\% of applicants have 1 or more dergoatory mark. An applicant can recieve a derogatory mark for various reasons such as,  missing payments,  bankruptcy,  repossession,  etc. The severity of the reason for the derogatory mark is often used in credit scoring but for this dataset we only have the numbers of marks against the applicant. Figure (\ref{derog_cat}) shows the impact having a derogatory mark can have on your chance of defaulting with 0 having a bad rate of 15.04\% and 3 having a bad rate of 65.12\%.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/derog_cat.pdf}
 	\caption{Category plot of DEROG by BAD. \label{derog_cat}}
@@ -236,7 +206,7 @@ DEROG,  number of dergoatory marks on aginast the applicant. A derogatory mark c
 
 DELINQ,  Number of delinquent credit lines. Delinquency is used to describe when a borrower has missed a payment,  the borrower is referred to as delinquent. Delinquency preceeds defaulting,  once a borrower has been deqlinquent for a time it comes apparent that the borrower is unable to pay back the loan. The data we are provided is the number of deqlinquent credit lines,  which is the number of credit lines the borrower has missed payments on. 
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/delinq_cat.pdf}
 	\caption{Category plot of DELINQ by BAD. \label{delinq_cat}}
@@ -246,7 +216,7 @@ DELINQ,  Number of delinquent credit lines. Delinquency is used to describe when
 
 CLAGE,  Age of oldest credit line in months. Assumption here is the longer an applicant has held credit lines the more experienced they are in repaying payments. A applicant who has experience in credit repayments for 20 years is going to have a better time in avoiding delinqency and defaulting that someone who is new to credit. Figure (\ref{clage_dist}) reinforces this assumption,  there is a clear difference in the distributions of goods and bads. Applicants between 100 and 150 months on thier oldest credit line have a bad rate of 21.8\% and applicants between 200 and 300 have a bad rate of 9.5\%. Expecting this value to have a strong signifance for the credit score.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/clage_dist.pdf}
 	\caption{Distribution of CLAGE by BAD. \label{clage_dist}}
@@ -254,9 +224,9 @@ CLAGE,  Age of oldest credit line in months. Assumption here is the longer an ap
 
 \subsection*{NINQ}
 
-NINQ,  number of recent credit inquiries. Figure (\label{ninq_cat}) indicates that the more recent credit equiries an applicant makes the more likely they are to default,  this trend is followed until the higher values are reached but this deviation could be due to the low sample size at larger values. 73.8\% of applicants have made no more than 1 recent credit equiry where as only 3\% of applicants made 5 or more. This could create an issue depending on how the WOE method bins the values.
+NINQ,  number of recent credit inquiries. Figure (\ref{ninq_cat}) indicates that the more recent credit equiries an applicant makes the more likely they are to default,  this trend is followed until the higher values are reached but this deviation could be due to the low sample size at larger values. 73.8\% of applicants have made no more than 1 recent credit equiry where as only 3\% of applicants made 5 or more. This could create an issue depending on how the WOE method bins the values.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/ninq_cat.pdf}
 	\caption{Category plot of NINQ by BAD. \label{ninq_cat}}
@@ -266,7 +236,7 @@ NINQ,  number of recent credit inquiries. Figure (\label{ninq_cat}) indicates th
 
 CLNO,  number of credit lines. A credit line can be any method in which someone can recieve credit such as an overdraft,  credit card,  etc. Figure (\ref{clno_dist}) suggests that applicants with low or high values for credit lines have a higher bad rate that ones in the centre. A reason behind this could be that a applicant with a low number of credit lines could be inexperience with debt management or don't have access to other credit to ensure payment on loans is on time. On the other end it could be that applicants with a large number of credit lines become incapable of managing the potential debt from the numerous sources. Where as the centre is seen to be where applicants have a good control over their credit lines. Applicants with a CLNO value between 20 and 30 have a bad rate of 15.1\% where applicants outside of this group have a bad rate of 23.1\%. A differnce of 8\%.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.40]{figs/clno_dist.pdf}
 	\caption{Distribution of CLNO by BAD. \label{clno_dist}}
@@ -274,9 +244,9 @@ CLNO,  number of credit lines. A credit line can be any method in which someone 
 
 \section{WOE and IV}
 
-WOE binning and calculation was done using the scorecardpy package provided by ShichenXie \cite{scorecardpy},  results can be found in the two tables (\ref{woe_1}) \& (\ref{woe_2}). I allowed the function to determine optimal bins itself using the chimerge method described in Section \ref{chimerge}. In the table we have a breakdown for each bin providing their woe value and individual information values. We can also see the total information value of each variable in the last column (total\_iv). Based on IV,  our strongest predictor by a large margin is DELINQ with a IV value of 0.47 and our weakest is Reason with an IV of 0.02. Referring back to Bailey's guideline (\ref{IV})\cite{bailey2004credit}, we can categorise each variable on their strength from the IV.\\
+WOE binning and calculation was done using the scorecardpy package provided by ShichenXie \parencite{scorecardpy},  results can be found in the two Tables (\ref{woe_1}) \& (\ref{woe_2}). I allowed the function to determine optimal bins itself using the chimerge method described in Section \ref{chimerge}. In the table we have a breakdown for each bin providing their woe value and individual information values. We can also see the total information value of each variable in the last column (total\_iv). Based on IV,  our strongest predictor by a large margin is DELINQ with a IV value of 0.40 and our weakest is Reason with an IV of 0.02. Referring back to Bailey's guideline (\ref{IV})\parencite{bailey2004credit}, we can categorise each variable on their strength from the IV.\\
 
-Looking back on our data exploration we can see that our assumption about some of the variables appear to be reflecting in the WOE bins. Reason, a variable I expected to be rather insignifcant due to the bad rate being similar in both categories has the lowest IV. NINQ appears to have been binned appropriately with the upper bin being [4.0, inf) meaning the drop in bad rate at 7.0, assumed to be from a small sample, should not have a siginicant effect on the woe value of the group. The assumption on CLAGE, the variable with the second highest IV, is also reflected in the WOE values with a clear trend appearing in the bad probabilities of each bin seen in figure (\ref{fig:ClageWoe}).
+Looking back on our data exploration we can see that our assumption about some of the variables appear to be reflecting in the WOE bins. Reason, a variable I expected to be rather insignifcant due to the bad rate being similar in both categories has the lowest IV. NINQ appears to have been binned appropriately with the upper bin being [4.0, inf) meaning the drop in bad rate at 7.0, assumed to be from a small sample, should not have a siginicant effect on the woe value of the group. The assumption on CLAGE, the variable with the second highest IV, is also reflected in the WOE values with a clear trend appearing in the bad probabilities of each bin seen in Figure (\ref{fig:ClageWoe}). The increase in bad probability in bin [170.0, 180.0) is most likely an error created by the single imputation used in the data cleaning, referring to the summary table before cleaning, Table (\ref{SUM_BFR_TBL}), you can see the median is 173.63 which is within the bin not following the trend.
 
 \begin{figure}[ht]\label{Table2}
 	\centering
@@ -286,17 +256,17 @@ Looking back on our data exploration we can see that our assumption about some o
 	\hline
 	Variable & \multicolumn{1}{c}{Strength} & IV\\ 
 	\hline
-	LOAN & Average & 0.25\\
-	MORTDUE & Average & 0.10\\
-	VALUE & Average & 0.20\\
+	LOAN & Average & 0.28\\
+	MORTDUE & Weak & 0.08\\
+	VALUE & Average & 0.18\\
 	REASON & Poor & 0.02\\
-	JOB & Average & 0.12\\
-	YOJ & Weak & 0.07\\
-	DEROG & Average & 0.23\\
-	DELINQ & Strong & 0.47\\
-	CLAGE & Average & 0.28\\
-	NINQ & Average & 0.12\\
-	CLNO & Average & 0.12\\
+	JOB & Average & 0.11\\
+	YOJ & Weak & 0.08\\
+	DEROG & Average & 0.21\\
+	DELINQ & Strong & 0.40\\
+	CLAGE & Average & 0.29\\
+	NINQ & Average & 0.10\\
+	CLNO & Average & 0.15\\
 	\bottomrule
 	\end{tabular}
 \end{figure}
@@ -323,39 +293,36 @@ Looking back on our data exploration we can see that our assumption about some o
 			\toprule
 			variable & bin &  count &  count\_distr &  good &  bad &   badprob &       woe &    bin\_iv &  total\_iv \\
 			\midrule
-			    LOAN &      [-inf, 6000.0) &    254 &         0.05 &   136 &  118 &     0.46 &  1.44 &    0.15 &      0.25 \\
-			     &    [6000.0, 8000.0) &    270 &         0.05 &   204 &   66 &     0.24 &  0.45 &    0.01 &      0.25 \\
-			     &   [8000.0, 11000.0) &    678 &         0.13 &   546 &  132 &     0.19 &  0.16 &    0.00 &      0.25 \\
-			     &  [11000.0, 15000.0) &    936 &         0.19 &   790 &  146 &     0.16 & -0.10 &    0.00 &      0.25 \\
-			     &  [15000.0, 16000.0) &    312 &         0.06 &   245 &   67 &     0.21 &  0.29 &    0.01 &      0.25 \\
-			     &  [16000.0, 21000.0) &   1006 &         0.20 &   879 &  127 &     0.13 & -0.35 &    0.02 &      0.25 \\
-			     &  [21000.0, 25000.0) &    597 &         0.12 &   541 &   56 &     0.09 & -0.68 &    0.04 &      0.25 \\
-			     &      [25000.0, inf) &    979 &         0.19 &   834 &  145 &     0.15 & -0.17 &    0.01 &      0.25 \\
+			    LOAN &      [-inf, 6000.0) &    250 &         0.05 &   125 &  125 &     0.50 &  1.54 &    0.17 &      0.28 \\
+     &    [6000.0, 8000.0) &    276 &         0.06 &   202 &   74 &     0.27 &  0.54 &    0.02 &      0.28 \\
+     &   [8000.0, 10000.0) &    428 &         0.09 &   352 &   76 &     0.18 &  0.01 &    0.00 &      0.28 \\
+     &  [10000.0, 11000.0) &    259 &         0.05 &   199 &   60 &     0.23 &  0.34 &    0.01 &      0.28 \\
+     &  [11000.0, 15000.0) &    927 &         0.19 &   778 &  149 &     0.16 & -0.11 &    0.00 &      0.28 \\
+     &  [15000.0, 16000.0) &    296 &         0.06 &   226 &   70 &     0.24 &  0.37 &    0.01 &      0.28 \\
+     &      [16000.0, inf) &   2534 &         0.51 &  2212 &  322 &     0.13 & -0.39 &    0.07 &      0.28 \\
 			\midrule
-			  MORTDUE &       [-inf, 35000.0) &    835 &         0.17 &   621 &  214 &     0.26 &  0.52 &    0.05 &       0.1 \\
-			  &    [35000.0, 55000.0) &   1172 &         0.23 &   960 &  212 &     0.18 &  0.07 &    0.00 &       0.1 \\
-			  &    [55000.0, 60000.0) &    355 &         0.07 &   309 &   46 &     0.13 & -0.32 &    0.01 &       0.1 \\
-			  &    [60000.0, 75000.0) &    892 &         0.18 &   742 &  150 &     0.17 & -0.02 &    0.00 &       0.1 \\
-			  &   [75000.0, 105000.0) &   1048 &         0.21 &   917 &  131 &     0.12 & -0.36 &    0.02 &       0.1 \\
-			  &  [105000.0, 130000.0) &    348 &         0.07 &   289 &   59 &     0.17 & -0.01 &    0.00 &       0.1 \\
-			  &       [130000.0, inf) &    382 &         0.08 &   337 &   45 &     0.12 & -0.43 &    0.01 &       0.1 \\
+			 MORTDUE &     [-inf, 35000.0) &    874 &         0.18 &   653 &  221 &     0.25 &  0.46 &    0.04 &      0.08 \\
+  &  [35000.0, 55000.0) &   1139 &         0.23 &   928 &  211 &     0.19 &  0.06 &    0.00 &      0.08 \\
+  &  [55000.0, 60000.0) &    341 &         0.07 &   293 &   48 &     0.14 & -0.27 &    0.00 &      0.08 \\
+  &  [60000.0, 75000.0) &    854 &         0.17 &   697 &  157 &     0.18 &  0.05 &    0.00 &      0.08 \\
+  &      [75000.0, inf) &   1762 &         0.35 &  1523 &  239 &     0.14 & -0.31 &    0.03 &      0.08 \\
 			\midrule
-			    VALUE &       [-inf, 50000.0) &    488 &         0.10 &   318 &  170 &     0.35 &  0.96 &    0.12 &       0.2 \\
-			    &    [50000.0, 70000.0) &    998 &         0.20 &   835 &  163 &     0.16 & -0.05 &    0.00 &       0.2 \\
-			    &    [70000.0, 80000.0) &    529 &         0.11 &   422 &  107 &     0.20 &  0.21 &    0.01 &       0.2 \\
-			    &   [80000.0, 125000.0) &   1952 &         0.39 &  1694 &  258 &     0.13 & -0.30 &    0.03 &       0.2 \\
-			    &  [125000.0, 175000.0) &    619 &         0.12 &   499 &  120 &     0.19 &  0.16 &    0.00 &       0.2 \\
-			    &       [175000.0, inf) &    446 &         0.09 &   407 &   39 &     0.09 & -0.76 &    0.04 &       0.2 \\
+			   VALUE &       [-inf, 50000.0) &    521 &         0.10 &   347 &  174 &     0.33 &  0.85 &    0.10 &      0.18 \\
+    &    [50000.0, 70000.0) &    982 &         0.20 &   815 &  167 &     0.17 & -0.04 &    0.00 &      0.18 \\
+    &    [70000.0, 80000.0) &    508 &         0.10 &   401 &  107 &     0.21 &  0.22 &    0.01 &      0.18 \\
+    &   [80000.0, 125000.0) &   1922 &         0.39 &  1657 &  265 &     0.14 & -0.29 &    0.03 &      0.18 \\
+    &  [125000.0, 175000.0) &    608 &         0.12 &   484 &  124 &     0.20 &  0.18 &    0.00 &      0.18 \\
+    &       [175000.0, inf) &    429 &         0.09 &   390 &   39 &     0.09 & -0.76 &    0.04 &      0.18 \\
 			\midrule
-			    REASON &  DebtCon &   3528 &          0.7 &  2968 &  560 &     0.16 & -0.08 &    0.00 &      0.02 \\
- 				  &  HomeImp &   1504 &          0.3 &  1207 &  297 &     0.20 &  0.18 &    0.01 &      0.02 \\
+			  REASON &  DebtCon &   3442 &         0.69 &  2883 &  559 &     0.16 & -0.1 &    0.01 &      0.02 \\
+   &  HomeImp &   1528 &         0.31 &  1211 &  317 &     0.21 &  0.2 &    0.01 &      0.02 \\
 			\midrule
-			       JOB &    Other &   2100 &         0.42 &  1672 &  428 &     0.20 &  0.22 &    0.02 &      0.12 \\
-			      &   Office &    877 &         0.17 &   787 &   90 &     0.10 & -0.58 &    0.05 &      0.12 \\
-			      &    Sales &     97 &         0.02 &    67 &   30 &     0.31 &  0.78 &    0.01 &      0.12 \\
-			      &      Mgr &    657 &         0.13 &   528 &  129 &     0.20 &  0.17 &    0.00 &      0.12 \\
-			      &  ProfExe &   1150 &         0.23 &  1004 &  146 &     0.13 & -0.34 &    0.02 &      0.12 \\
-			      &     Self &    151 &         0.03 &   117 &   34 &     0.23 &  0.35 &    0.00 &      0.12 \\
+			      JOB &    Other &   2110 &         0.42 &  1666 &  444 &     0.21 &  0.22 &    0.02 &      0.11 \\
+      &   Office &    844 &         0.17 &   746 &   98 &     0.12 & -0.49 &    0.03 &      0.11 \\
+      &    Sales &     92 &         0.02 &    63 &   29 &     0.32 &  0.77 &    0.01 &      0.11 \\
+      &  ProfExe &   1119 &         0.23 &   977 &  142 &     0.13 & -0.39 &    0.03 &      0.11 \\
+      &      Mgr &    660 &         0.13 &   532 &  128 &     0.19 &  0.12 &    0.00 &      0.11 \\
+      &     Self &    145 &         0.03 &   110 &   35 &     0.24 &  0.40 &    0.01 &      0.11 \\
 			
 			\bottomrule
 		\end{tabular}
@@ -368,33 +335,37 @@ Looking back on our data exploration we can see that our assumption about some o
 			\toprule
 			variable & bin &  count &  count\_distr &  good &  bad &   badprob &       woe &    bin\_iv &  total\_iv \\
 			\midrule
-			     YOJ &   [-inf, 2.0) &    750 &         0.15 &   615 &  135 &     0.18 &  0.07 &    0.00 &      0.07 \\
-			      &    [2.0, 6.0) &   1190 &         0.24 &   935 &  255 &     0.21 &  0.28 &    0.02 &      0.07 \\
-			      &   [6.0, 12.0) &   1729 &         0.34 &  1467 &  262 &     0.15 & -0.14 &    0.01 &      0.07 \\
-			      &  [12.0, 21.0) &    918 &         0.18 &   750 &  168 &     0.18 &  0.09 &    0.00 &      0.07 \\
-			      &   [21.0, inf) &    445 &         0.09 &   408 &   37 &     0.08 & -0.82 &    0.04 &      0.07 \\
+			      YOJ &   [-inf, 2.0) &    751 &         0.15 &   616 &  135 &     0.18 &  0.02 &    0.00 &      0.08 \\
+      &    [2.0, 6.0) &   1139 &         0.23 &   880 &  259 &     0.23 &  0.32 &    0.03 &      0.08 \\
+      &   [6.0, 10.0) &   1356 &         0.27 &  1155 &  201 &     0.15 & -0.21 &    0.01 &      0.08 \\
+      &  [10.0, 23.0) &   1421 &         0.29 &  1162 &  259 &     0.18 &  0.04 &    0.00 &      0.08 \\
+      &   [23.0, inf) &    303 &         0.06 &   281 &   22 &     0.07 & -1.01 &    0.04 &      0.08 \\
 			\midrule
-			 DEROG &  [-inf, 1.0) &   4482 &         0.89 &  3841 &  641 &     0.14 & -0.21 &    0.04 &      0.23 \\
-  			  &   [1.0, inf) &    550 &         0.11 &   334 &  216 &     0.39 &  1.15 &    0.20 &      0.23 \\
+			   DEROG &  [-inf, 1.0) &   4442 &         0.89 &  3774 &  668 &     0.15 & -0.19 &    0.03 &      0.21 \\
+    &   [1.0, inf) &    528 &         0.11 &   320 &  208 &     0.39 &  1.11 &    0.18 &      0.21 \\
 			\midrule
-			  DELINQ &  [-inf, 1.0) &   4086 &         0.81 &  3595 &  491 &     0.12 & -0.41 &    0.12 &      0.47 \\
-			   &   [1.0, 2.0) &    553 &         0.11 &   372 &  181 &     0.33 &  0.86 &    0.11 &      0.47 \\
-			   &   [2.0, inf) &    393 &         0.08 &   208 &  185 &     0.47 &  1.47 &    0.24 &      0.47 \\
+			  DELINQ &  [-inf, 1.0) &   4050 &         0.81 &  3524 &  526 &     0.13 & -0.36 &    0.09 &       0.4 \\
+	   &   [1.0, 2.0) &    537 &         0.11 &   367 &  170 &     0.32 &  0.77 &    0.08 &       0.4 \\
+	   &   [2.0, inf) &    383 &         0.08 &   203 &  180 &     0.47 &  1.42 &    0.22 &       0.4 \\
 			\midrule
-			   CLAGE &    [-inf, 70.0) &    266 &         0.05 &   169 &   97 &     0.36 &  1.03 &    0.07 &      0.28 \\
-			    &   [70.0, 150.0) &   1858 &         0.37 &  1435 &  423 &     0.23 &  0.36 &    0.05 &      0.28 \\
-			    &  [150.0, 180.0) &    691 &         0.14 &   573 &  118 &     0.17 &  0.00 &    0.00 &      0.28 \\
-			    &  [180.0, 240.0) &   1183 &         0.24 &  1047 &  136 &     0.11 & -0.46 &    0.04 &      0.28 \\
-			    &    [240.0, inf) &   1034 &         0.21 &   951 &   83 &     0.08 & -0.86 &    0.11 &      0.28 \\
+			   CLAGE &    [-inf, 70.0) &    255 &         0.05 &   161 &   94 &     0.37 &  1.00 &    0.07 &      0.29 \\
+	    &   [70.0, 150.0) &   1812 &         0.36 &  1404 &  408 &     0.23 &  0.31 &    0.04 &      0.29 \\
+	    &  [150.0, 170.0) &    335 &         0.07 &   277 &   58 &     0.17 & -0.02 &    0.00 &      0.29 \\
+	    &  [170.0, 180.0) &    421 &         0.08 &   318 &  103 &     0.24 &  0.41 &    0.02 &      0.29 \\
+	    &  [180.0, 240.0) &   1132 &         0.23 &   998 &  134 &     0.12 & -0.47 &    0.04 &      0.29 \\
+	    &    [240.0, inf) &   1015 &         0.20 &   936 &   79 &     0.08 & -0.93 &    0.13 &      0.29 \\
 			\midrule
-			    NINQ &  [-inf, 2.0) &   3714 &         0.74 &  3178 &  536 &     0.14 & -0.20 &    0.03 &      0.12 \\
-			     &   [2.0, 4.0) &   1034 &         0.21 &   815 &  219 &     0.21 &  0.27 &    0.02 &      0.12 \\
-			     &   [4.0, inf) &    284 &         0.06 &   182 &  102 &     0.36 &  1.00 &    0.08 &      0.12 \\
+			     NINQ &  [-inf, 1.0) &   2192 &         0.44 &  1881 &  311 &     0.14 & -0.26 &    0.03 &       0.1 \\
+	     &   [1.0, 3.0) &   2172 &         0.44 &  1785 &  387 &     0.18 &  0.01 &    0.00 &       0.1 \\
+	     &   [3.0, 4.0) &    334 &         0.07 &   253 &   81 &     0.24 &  0.40 &    0.01 &       0.1 \\
+	     &   [4.0, inf) &    272 &         0.05 &   175 &   97 &     0.36 &  0.95 &    0.06 &       0.1 \\
 			\midrule
-			    CLNO &  [-inf, 10.0) &    496 &         0.10 &   339 &  157 &     0.32 &  0.81 &    0.08 &      0.12 \\
-			     &  [10.0, 24.0) &   2763 &         0.55 &  2332 &  431 &     0.16 & -0.10 &    0.01 &      0.12 \\
-			     &  [24.0, 27.0) &    600 &         0.12 &   537 &   63 &     0.10 & -0.56 &    0.03 &      0.12 \\
-			     &   [27.0, inf) &   1173 &         0.23 &   967 &  206 &     0.18 &  0.04 &    0.00 &      0.12 \\
+			     CLNO &  [-inf, 10.0) &    479 &         0.10 &   323 &  156 &     0.33 &  0.81 &    0.08 &      0.15 \\
+     &  [10.0, 20.0) &   1882 &         0.38 &  1589 &  293 &     0.16 & -0.15 &    0.01 &      0.15 \\
+     &  [20.0, 21.0) &    297 &         0.06 &   221 &   76 &     0.26 &  0.47 &    0.02 &      0.15 \\
+     &  [21.0, 24.0) &    600 &         0.12 &   505 &   95 &     0.16 & -0.13 &    0.00 &      0.15 \\
+     &  [24.0, 26.0) &    403 &         0.08 &   369 &   34 &     0.08 & -0.84 &    0.04 &      0.15 \\
+     &   [26.0, inf) &   1309 &         0.26 &  1087 &  222 &     0.17 & -0.05 &    0.00 &      0.15 \\
 			\bottomrule
 		\end{tabular}
 		\caption{WOE results table. \label{woe_2}}
