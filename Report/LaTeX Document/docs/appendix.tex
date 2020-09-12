@@ -1,22 +1,29 @@
 \begin{appendices}
-\chapter{Definintions}
-
-\textbf{Origination.} The period from when an client applies for a loan to its distribution of funds from the loan.\\
-
-\textbf{Piggyback Lending.} An additional loan taken out on a property on top of the first mortgage.\\
-
-\textbf{Subprime Loan.} A loan with higher interest rates, often given to clients with low credit score unable to qualify for normal rates. \\
-
-\textbf{Goods.} The term to define a good client, most often meaning a client which does not default on a loan.\\
+\chapter{Glossary of Terms}\label{sec:glossary}
 
 \textbf{Bads.} The term to define a bad client, most often meaning a client which ends up defaulting on a loan.\\
 
-\textbf{Bad Rate.} The percentage of clients that have defaulted.\\
+\noindent \textbf{Bad Rate.} The percentage of clients that have defaulted.\\
+
+\noindent \textbf{Default.} After an extend period of time in delinqency the loan is considered defaulted.\\
+
+\noindent \textbf{Delinqency.} When a client is currently behind on payments of a loan.\\
+
+\noindent \textbf{Goods.} The term to define a good client, most often meaning a client which does not default on a loan.\\
+
+\noindent \textbf{Odds.} The ratio between goods and bads.\\
+
+\noindent \textbf{Origination.} The period from when an client applies for a loan to its distribution of funds from the loan.\\
+
+\noindent \textbf{Piggyback Lending.} An additional loan taken out on a property on top of the first mortgage.\\
+
+\noindent \textbf{Subprime Loan.} A loan with higher interest rates, often given to clients with low credit score unable to qualify for normal rates. \\
+
 
 \chapter{Tables}
 
 \begin{landscape}
-\begin{figure}[ht]
+\begin{table}[ht]
 	\centering
 	\renewcommand{\arraystretch}{2}
 	\begin{tabular}{lrrrrrrrrrrr}
@@ -34,11 +41,11 @@
 	\bottomrule
 	\end{tabular}
 	\caption{Summary Before Outliers Removed \label{SUM_BFR_TBL}}
-\end{figure}
+\end{table}
 \end{landscape}
 
 \begin{landscape}
-\begin{figure}[ht]
+\begin{table}[ht]
 	\centering
 	\renewcommand{\arraystretch}{2}
 	\begin{tabular}{lrrrrrrrrrrr}
@@ -55,11 +62,11 @@
 	\bottomrule
 	\end{tabular}
 	\caption{Summary After Cleaning \label{SUM_AFT_TBL}}
-\end{figure}
+\end{table}
 \end{landscape}
 
 \begin{landscape}
-\begin{figure}[ht]
+\begin{table}[ht]
 	\centering
 	\renewcommand{\arraystretch}{2}
 	\begin{tabular}{lrrrrrrrrr}
@@ -78,7 +85,7 @@
 		\bottomrule
 	\end{tabular}
 	\caption{Correlation Table \label{CORR_TBL}}
-\end{figure}
+\end{table}
 \end{landscape}
 
 \begin{table}[H]
@@ -150,6 +157,72 @@ YOJ\_woe     &  0.8890 &   0.1665 &   5.3401 &      0.0000 &  0.5627 &  1.2152  
 \caption{Results: Model 2 \label{table:results_2}}
 \end{table}
 
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{llr}
+\toprule
+   Variable &  Bin &  Score \\
+\midrule
+ Basepoint &  N/A &   701.0 \\
+\midrule
+     YOJ &                [-inf,0.1) &    33.0 \\
+      &  [0.1,1.9) &   -22.0 \\
+      &  [1.9,2.2) &    14.0 \\
+      &                 [2.2,3.1) &    -2.0 \\
+      &                 [3.1,inf) &    59.0 \\
+\midrule
+   DEROG &  [-inf,1.0) &    11.0 \\
+    &   [1.0,inf) &   -63.0 \\
+\midrule
+   VALUE &       [-inf,50000.0) &   -49.0 \\
+    &    [50000.0,70000.0) &     2.0 \\
+    &    [70000.0,80000.0) &   -13.0 \\
+    &   [80000.0,125000.0) &    17.0 \\
+    &  [125000.0,175000.0) &   -10.0 \\
+    &       [175000.0,inf) &    44.0 \\
+\midrule
+    LOAN &               [-inf,8.69) &   -89.0 \\
+     &  [8.696,8.99) &   -28.0 \\
+     &  [8.99,9.49) &    -3.0 \\
+     &   [9.49,9.59) &    20.0 \\
+     &   [9.59,9.69) &   -12.0 \\
+     &  [9.69,10.49) &    27.0 \\
+     &                [10.49,inf) &    -3.0 \\
+\midrule
+     JOB &    Other &   -13.0 \\
+      &   Office &    30.0 \\
+      &    Sales &   -47.0 \\
+      &  ProfExe &    24.0 \\
+      &      Mgr &    -7.0 \\
+      &     Self &   -24.0 \\
+\midrule
+    NINQ &  [-inf,1.0) &    19.0 \\
+     &   [1.0,3.0) &    -1.0 \\
+     &   [3.0,4.0) &   -29.0 \\
+     &   [4.0,inf) &   -69.0 \\
+\midrule
+   CLAGE &    [-inf,70.0) &   -69.0 \\
+    &   [70.0,150.0) &   -21.0 \\
+    &  [150.0,170.0) &     1.0 \\
+    &  [170.0,180.0) &   -28.0 \\
+    &  [180.0,240.0) &    32.0 \\
+    &    [240.0,inf) &    64.0 \\
+\midrule
+    CLNO &  [-inf,10.0) &   -46.0 \\
+     &  [10.0,20.0) &     8.0 \\
+     &  [20.0,21.0) &   -27.0 \\
+     &  [21.0,24.0) &     7.0 \\
+     &  [24.0,26.0) &    48.0 \\
+     &   [26.0,inf) &     3.0 \\
+\midrule
+  DELINQ &  [-inf,1.0) &    27.0 \\
+   &   [1.0,2.0) &   -58.0 \\
+   &   [2.0,inf) &  -106.0 \\
+\bottomrule
+\end{tabular}
+\caption{Scorecard Points \label{table:scorecard_points}}
+\end{center}
+\end{table}
 
 \chapter{Python Code}
 

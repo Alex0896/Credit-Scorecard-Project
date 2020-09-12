@@ -1,12 +1,14 @@
-\chapter{Modelling} \label{cha:chapter-3}
+\chapter{Modelling} \label{chapter:4}
 
-\section{Results}
+\section{Logistic Regression Results}
 
-For the modelling, the data was split into train and test sets with proportions 0.7 and 0.3 respectively. The bad rate was maintained in each data at 17\% to ensure fairness and the variables were converted to their woe values for their respective bin from tables  (\ref{woe_1}) \& (\ref{woe_2}). Once split the train data was passed through a glm model with logit link, for this the python package statsmodels was used \cite{statsmodels}. Three models were created, first, seen in Table (\ref{table:results_1}), was the base model with every variable included with no changes. Looking at the results table we can see that the majority of variables are highly significant with p-values less than 0.001. Mortdue is deemed the most insignificant, most likely due to its high correlation with VALUE and as such the variance it explains is already captured by VALUE. This is confirmed if we run the model again with VALUE dropped, seen in Table (\ref{table:results_val_dropped}). The p-value for MORTDUE is now 0.0005. \\
+For the modelling, the data was split into train and test sets with proportions 0.7 and 0.3 respectively. The bad rate was maintained in each data at 17\% to ensure fairness and the variables were converted to their woe values for their respective bin from tables  (\ref{woe_1}) \& (\ref{woe_2}). Once split, the train data was passed through a glm model with logit link, for this the python package statsmodels was used \parencite{statsmodels}. Three models were created, first, seen in Table (\ref{table:results_1}), was the base model with every variable included with no changes. Looking at the results table we can see that the majority of variables are highly significant with p-values less than 0.001. Mortdue is deemed the most insignificant, most likely due to its high correlation with VALUE and as such the variance it explains is already captured by VALUE. This is confirmed if we run the model again with VALUE dropped, seen in Table (\ref{table:results_val_dropped}). The p-value for MORTDUE is now 0.0005. \\
 
-For the second model I looked at applying log transformations to the variables which had a heavy right skew, LOAN, MORTDUE, VALUE and YOJ to try to improve their p-values. These values were then passed through the woe binning and the values converted. The IV of LOAN and YOJ improved by 0.01 and 0.03 respectively whilst MORTDUE and VALUE's IV decreased, based on this only the log transformations of LOAN and YOJ were kept and used for the second model. The results for the second model can be seen in Table (\ref{table:results_2}). \\
+For the second model we looked at applying log transformations to the variables which had a heavy right skew, LOAN, MORTDUE, VALUE and YOJ to try to improve their p-values. These values were then passed through the woe binning and the values converted. The IV of LOAN and YOJ improved by 0.01 and 0.03 respectively whilst MORTDUE and VALUE's IV decreased, based on this, only the log transformations of LOAN and YOJ were kept and used for the second model. The results for the second model can be seen in Table (\ref{table:results_2}). \\
 
-\begin{table}
+Finally, a third model was made from dropping variables with high p-values, these were MORTDUE and REASON. The results are displayed in Table (\ref{table:results_3}). All the remaining variables have a p-value of less than 0.0001. Every coefficient is positive, implying that an increase in all variables increase in the probability of BAD, which from initial observation shouldn't be right. Looking back on Section (\ref{sec:variables}) we have some assumptions of large values decreasing the probability of BAD such as CLAGE and YOJ. The reason for this is a result of the WOE methods, changing the values of our binned variables to their respective WOE value seen in Tables (\ref{woe_1}) \& (\ref{woe_2}). Higher values of CLAGE have negative values, for example values of CLAGE between 180 and 240 have a woe value of -0.47. So in reality, a CLAGE value in this range would have the effect of decreasing the probability of BAD. \\
+
+\begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
 \begin{center}
 \begin{tabular}{llll}
@@ -41,9 +43,7 @@ YOJ\_woe     &  0.8313 &   0.1992 &   4.1740 &      0.0000 &  0.4410 &  1.2217  
 \caption{Results: Model 1 \label{table:results_1}}
 \end{table}
 
-Finally, a third model was made from dropping variables with high p-values, these were MORTDUE and REASON. The results are displayed in Table (\ref{table:results_3}). All the remaining variables have a p-value of less than 0.0001. Every coefficient is positive, implying that an increase in all variables increase in the probability of BAD, which from initial observation shouldn't be right. Looking back on Section (\ref{sec:variables}) we have some assumptions of large values decreasing the probability of BAD such as CLAGE and YOJ. The reason for this is a result of the WOE methods, changing the values of our binned variables to their respective WOE value seen in Tables (\ref{woe_1}) \& (\ref{woe_2}). Higher values of CLAGE have negative values, for example values of CLAGE between 180 and 240 have a woe value of -0.47. So in reality, a CLAGE value in this range would have the effect of decreasing the probability of BAD. \\
-
-\begin{table}
+\begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
 \begin{center}
 \begin{tabular}{llll}
@@ -76,11 +76,9 @@ YOJ\_woe    &  0.8988 &   0.1660 &   5.4148 &      0.0000 &  0.5735 &  1.2241  \
 \caption{Results: Model 3 \label{table:results_3}}
 \end{table}
 
-The performance of each model is shown and compared in Table (\ref{perf_eval}). It can be seen from this table that based on the performance evaulation mentioned in Section \ref{sec:perf_eval}. Model 2 and 3 appear to out perform Model 1 but when comparing the two the difference between performance indicators becomes smaller. In the case of Model 3 the AIC is lower but the GINI coefficient is also lower than Model 2. Based on Table (\ref{perf_eval}) either Model 2 or 3 would be an appropriate choice but I decided to go with Model 3. This is because the difference in AIC is only 1.08 and when looking at the Log-Likelihood for each model the difference is 1.5. This is implying that the performance based on AIC is only better because of the removal of two variables making it a smaller and less complicated model. Where as the GINI coefficient doesn't consider the complication of the model. \\
+The performance of each model is shown and compared in Table (\ref{perf_eval}). It can be seen from this table that based on the performance evaulation mentioned in Section (\ref{sec:perf_eval}). Model 2 and 3 appear to out perform Model 1. But, when comparing the Model 2 to 3, the difference between performance indicators becomes smaller. Model 3 improves on every performance indicator but only by a small margin when compared to the change from Model 1 to Model 2. Based on Table (\ref{perf_eval}) either Model 2 or 3 would be an appropriate choice but we will go with Model 3. Even though the AIC of model 3 is smaller, this is still only a difference of 1.08. Where as the log-likelihood has a difference of 1.5 with model 2 performing better. This implies that Model 3 is only considered better when evaluting the AIC because of the removal of two variables and being a smaller model. Despite this, Model 3 still out performs Model 2 in the other 3, it has a higher K-S Statisitc, meaning it's best point of seperation is stronger than Model 2, a higher GINI coefficient implies it has a higher discriminatory power and the higher divergence value tells us that the scorecard has a stronger seperation of the distribution of goods and bads. \\
 
-In Figure (\ref{scorecard_plot}) the results from the logisitc regression have been used and converted into a scorecard. The figure displays the distribution and bad probability for the test and train data sets. You can see the distributions appear to follow the same trend but on the lower end seem to vary slightly, this is most likely due to the smaller sample size of clients that have been scored in this range. The PSI value is 1.1\% indicating the two samples don't have a shift in population. In Figures (\ref{fig:sc_dist_train}) \& (\ref{fig:sc_dist_test}) we can see a clear seperation of goods and bads within the scorecard with bads clearly on the lower end of the scorecard and goods on the upper. 
-
-\begin{table}
+\begin{table}[H]
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
 \begin{tabular}{lcccc}
@@ -94,6 +92,46 @@ Model 3 (REASON and MORTDUE dropped) & 2494.34 & 0.4822 & 0.6116 & 1.4568 \\
 \caption{Performance Evaluation Results On Test \label{perf_eval}}
 \end{center}
 \end{table}
+
+\section{Scorecard Building}
+
+With the model selected we then needed to turn the logistic regression results into a readable scorecard. To do this, we again used the scorcard package in python \parencite{statsmodels} and used the function \textit{scorecard(bins, model, xcolumns, point0, odds0, pdo)}. The function takes the woe bins in Tables (\ref{woe_1}) \& (\ref{woe_2}) and the logistic coefficients from Table (\ref{table:results_3}) and develops a points system for each variable and their bins. The function uses Equation (\ref{eq:scorecard}) to calculate each bin's point value.\\
+
+\begin{equation}\label{eq:scorecard}
+Score_{i,j} = -\dfrac{pdo}{\ln(2)} \cdot WOE_{j} \cdot \beta_{i}
+\end{equation}
+
+where i is the ith variable, j is the jth bin of the ith variable and pdo is the points to double odds which for this project is assigned to 50. \\
+
+The full table of scores for each bin can be found in the Appendix in Table (\ref{table:scorecard_points}). The total score of an applicant would then be the sum of these points for the respective bin the applicant falls into for each variable. This is demonstrated by the example of two applicants in Table (\ref{table:app_example}). We can see applicant 1 an ideal candidate, is requesting a large loan against a large equity. Their job is within the office category which has the lowest bad rate and no dergoatory marks or delinquencies against them. The scorecard assigns a score of 872 for this applicant. Applicant 2 on the other hand does not appear from inital obsevation, appealing to a lender. A relatively low loan against an average equity results in a lower potential profit against a weaker collateral. The applicant is self employeed, one of the riskier job categories and they also have a delinquent credit line. The scorecard assigned a score of 610 to this applicant. \\ 
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+& \multicolumn{2}{c}{Applicant 1} & \multicolumn{2}{c}{Applicant 2} \\
+Variable & Observation & Score & Observation & Score \\
+\midrule
+BASE & & 701 & & 701 \\ 
+LOAN & 9.93 & 27.0 & 8.51 & -89.0 \\
+VALUE & 220886 & 44.0 & 82575 & 17.0 \\
+JOB & Office & 30.0 & Self & -24.0 \\
+YOJ & 2.639 & -2.0 & 2.08 & 14.0 \\
+DEROG & 0 & 11.0 & 0 & 11.0 \\
+DELINQ & 0 & 27.0 & 1 & -58.0 \\
+CLAGE & 213.91 & 32.0 & 335.03 & 64.0\\
+NINQ & 1 & -1.0 & 3 & -29.0 \\
+CLNO & 32 & 3.0 & 42 & 3.0 \\
+\midrule
+Score &  & 872 &  & 610
+\end{tabular}
+\end{center}
+\caption{Scorecard Applicant Example \label{table:app_example}}
+\end{table}
+
+In Figure (\ref{scorecard_plot}) the score of every applicant in the train and test data is plotted. The figure displays the distribution and bad probability for each set. You can see the distributions appear to follow the same trend but on the lower end seem to vary slightly, this is most likely due to the smaller sample size of clients that have been scored in this range. Going back to our two applicants we can take a look at what area they fall in. Applicant 1 is placed in the highest band and has a bad probability of less than 0.01, there would be no reason this applicant would not be approved for the loan based on our scorecard. Applicant 2 is placed into one of the lower bands with a bad rate around 0.35, wether this applicant would be accepted or reject would depend on where a lender choses their cut-off score to be. It could be possible that this applicant would land in their soft-cut off area and reviewed and accepted but what we do know is that based off this scorecard, applicant 2's chance of acceptance is relatively low. \\
+
+The PSI value of our scorecard is 1.1\% indicating the two samples don't have a shift in population. In Figures (\ref{fig:sc_dist_train}) \& (\ref{fig:sc_dist_test}) we can also see a clear seperation of goods and bads within our scorecard with bads clearly on the lower end of the scorecard and goods on the upper. 
 
 %\begin{figure}[!ht]
 %	\centering

@@ -1,10 +1,10 @@
-\chapter{Data} \label{cha:chapter-2}
+\chapter{Data} \label{chapter:3}
 
-The data I am using for this project is a collection of observations of 5,960 home equity loans which is provided by \parencite{baesens2016credit}. Home equity loans are when an applicant borrows agains the value or 'equity' of their home. You can find a full description of each variable in Table (\ref{MetaData}).
+The data we are using for this project is a collection of observations of 5,960 home equity loans which is provided by \parencite{baesens2016credit}. You can find a full description of each variable in Table (\ref{MetaData}).
 
 \begin{table}[ht]\label{Table2}
 	\centering
-	\renewcommand{\arraystretch}{1.5}
+	\renewcommand{\arraystretch}{1.52}
 	\begin{tabular}{l p{10cm}}
 	\hline
 	Variable & \multicolumn{1}{c}{Definition}\\ 
@@ -28,9 +28,9 @@ The data I am using for this project is a collection of observations of 5,960 ho
 
 \section{Data Cleaning}
 
-The data provided needed some initial cleaning. 2,596 observations were missing atleast one value with some missing several variables. The biggest culprit of this would be DEBTINC with 1,267 missing values. I decided to handle these missing values on a case by case basis applying different methods. Before I went forward with any imputing I considered any possible outliers within my numerical data, using the summary Table \ref{SUM_BFR_TBL}. You can see for the quantile ranges that there will most likely be some outliers occuring in the majority of the numerical variables. The gerneral consesus is that there is a necessity to handle outliers but a lack of definitive way to handle them \parencite{nyitrai2019effects}. For this project I chose to removed the 99th percentile for every numerical variable excluding BAD, this ended up removing 613 rows. \\
+The data provided needed some initial cleaning. 2,596 observations were missing atleast one value with some missing several variables and even a few missing everything except the outcome. The biggest culprit of this would be DEBTINC with 1,267 missing values. We decided to handle these missing values on a case by case basis applying different methods. Before we went forward with any imputing we considered any possible outliers within my numerical data, using the summary Table (\ref{SUM_BFR_TBL}). You can see from the quantile ranges that there will most likely be some outliers occuring in the majority of the numerical variables. The gerneral consesus is that there is a necessity to handle outliers but a lack of definitive way to handle them \parencite{nyitrai2019effects}. For this project we chose to removed the 99th percentile for every numerical variable excluding BAD, this ended up removing 613 rows. \\
 
-Moving onto imputing variable, for MORTDUE and VALUE I imputed their values using a simple linear regression of the other. This was going on the assumption that the mortgage due on a house had a strong relationship with the value of property. The assumption is further backed up with the correlation between the two being 0.8748 before imputing, far higher than any of the other correlations in the data. So for MORTDUE I used Equation (\ref{MORTDUE_IMPUTE}) and for VALUE I used Equation (\ref{VALUE_IMPUTE}). This was applied to any missing value where the other was present and for the remaining I took the mean of each variable from the original data before the imputations.
+Moving onto imputing variable, for MORTDUE and VALUE, we imputed their values using a simple linear regression of the other. This was going on the assumption that the mortgage due on a house had a strong relationship with the value of property. The assumption is further backed up with the correlation between the two being 0.8748 before imputing, far higher than any of the other correlations in the data. So for MORTDUE we used Equation (\ref{MORTDUE_IMPUTE}) and for VALUE we used Equation (\ref{VALUE_IMPUTE}). This was applied to any missing value where the other was present and for the remaining we took the mean of each variable from the original data before the imputations were added.
 
 \begin{equation}\label{MORTDUE_IMPUTE}
 \text{MORTDUE} = \beta_{0} + \beta_{1}\text{VALUE}
@@ -60,11 +60,11 @@ Moving onto imputing variable, for MORTDUE and VALUE I imputed their values usin
 	\end{tabular}
 \end{table}
 
-For the remaining numerical variables excluding DEBTINC I chose to take the median of the values as there were only a small amount missing from each but still a significant amount $( > 4\% )$ missing. There is an argument that because DEBTINC is missing 1,081 (20.2 \%) that some other method from using the median value should be used. After some further analysis the decsion to drop the variable was made, imputing did not appear to be an option as of the 915 bad applicants,  634 (69.3\%) of them were missing DEBTINC compared to 4432 and 447 (10.1\%) for good applicants. Dropping every row with DEBTINC did not appear to be practical either as it would result in the loss of almost 70\% of the bad applicants and their data whilst also taking the bad rate down to 6\%. Dropping DEBTINC would be the lower loss of information against the alternative of dropping missing rows (5,347 values lost versus 12,972). \\
+For the remaining numerical variables excluding DEBTINC we chose to take the median of the values as there were only a small amount missing from each but still a significant amount $( > 4\% )$ missing. There is an argument that because DEBTINC is missing 1,081 (20.2 \%), that some other method from using the median value should be used. After some further analysis the decsion to drop the variable was made, imputing did not appear to be an option as of the 915 bad applicants, 634 (69.3\%) of them were missing DEBTINC compared to 4432 and 447 (10.1\%) for good applicants. Dropping every row with DEBTINC did not appear to be practical either as it would result in the loss of almost 70\% of the bad applicants and their data whilst also taking the bad rate down to 6\%. Dropping DEBTINC would be the lower loss of information against the alternative of dropping missing rows (5,347 values lost versus 12,972). Due to the majority of DEBTINC being missing from BAD applicants. It is possible this a case of MNAR, mentioned in Section (\ref{sec:data_cleaning}). The applicant might be chosing to not disclose their debt to income ratio due to their knowledge of it being high and resulting in potential denial of their applicantion. \\
 
-Last was the two categorical variables REASON ( DebtCon,  HomeImp ) and JOB ( Other,  Office,  Sales,  Mgr,  ProfExe,  Self ). REASON's categories were specified in the data dictionary but JOB's categories were not. The decision was made to use listwise deletion on these as they were the only variables remaining with missing data. This resulted in the removal of 377 rows. \\
+Last was to handle the two categorical variables REASON ( DebtCon,  HomeImp ) and JOB ( Other,  Office,  Sales,  Mgr,  ProfExe,  Self ). The decision was made to use listwise deletion on these as they were the only variables remaining with missing data. This resulted in the removal of 377 rows. \\
 
-With these two completed I had no more missing values and no other noticeable issues which needed to be corrected before I could further look into the variables. A summary of actions taken on missing values can be found in Table (\ref{DataCleanSummary}). \\
+With these two completed we had no more missing values and no other noticeable issues which needed to be corrected before we could further look into the variables. A summary of actions taken on missing values can be found in Table (\ref{DataCleanSummary}). \\
 
 \begin{table}[ht]
 	\centering
@@ -92,11 +92,11 @@ With these two completed I had no more missing values and no other noticeable is
 
 \section{Variables}\label{sec:variables}
 
-With data cleaned the remaining observations was 4970 of 12 independ variables with no missing values. A summary of the numerical values can be found in Table (\ref{SUM_AFT_TBL}). There you can see the remaining data has a bad rate of 18\% which equates to 876 defaulted applicants.
+With data cleaned the remaining observations was 4094 of 11 independent variables with no missing values. A summary of the numerical values can be found in Table (\ref{SUM_AFT_TBL}). There you can see the remaining data has a bad rate of 18\% which equates to 876 defaulted applicants.
 
 \subsection*{LOAN}
 
-LOAN,  the amount requested for the home equity loan by the applicant can be seen in Figure (\ref{loan_dist}). The initial assumption was that higher loan values would have a higher bad rate due to the larger amount to pay back,  increasing the length and difficulty for the applicant to pay back the loan. Looking at the figure this does not appear to be the case,  although small,  larger loans tend to be payed off more often. The reasons for this are unclear,  a couple suggested could be that since we do not know exactly how this data was gathered the case could be that for larger loans the bank/company offering these loans had higher cutoffs on their applicant scoring to prevent higher risks in higher potential loss causing a shift down in the bad rate. Another could be the arguement that larger requested loans are coming from owners of higher valued properties,  which could be the case when looking at the correlation Table (\ref{CORR_TBL}). A higher property value indicates a better economic status and less likely to default on a loan. It would be reasonable to expect this variable to have a significant effect on the credit score.
+LOAN,  the amount requested for the home equity loan by the applicant can be seen in Figure (\ref{loan_dist}). The initial assumption was that higher loan values would have a higher bad rate due to the larger amount to pay back,  increasing the length and difficulty for the applicant to pay back the loan. Looking at the figure this does not appear to be the case. Although the effect is smalll, the larger loans tend to be payed off more often. The reasons for this are unclear, since we do not know exactly how this data was gathered. A couple suggestions could be that for larger loans the bank/company offering these loans had higher cut-offs on their applicant scoring to prevent higher risks in higher potential loss causing a shift down in the bad rate. Another could be the argument that larger requested loans are coming from owners of higher valued properties, which could be the case when looking at the correlation Table (\ref{CORR_TBL}). A higher property value indicates a better economic status and less likely to default on a loan. It would be reasonable to expect this variable to have a significant effect on the credit score.
 
 \begin{figure}[H]
 	\centering
@@ -106,11 +106,11 @@ LOAN,  the amount requested for the home equity loan by the applicant can be see
 
 \subsection*{MORTDUE}
 
-MORTDUE,  the outstanding balance on the applicants existing mortgage. Assumption here would be similar to LOAN,  a higher outstanding balance on their mortgage mean a large amount of debt and an increased risk of defaulting due to the larger payments. Looking at Figure (\ref{mortdue_dist}) you can see it does not follow this assumption,  again a small but clear difference in the distribution shows that applicants with a higher outstanding balance on their mortgage are less likely to default. Whatever the reason behind this is would most likely be the same as the reason behind LOAN.
+MORTDUE, the outstanding balance on the applicants existing mortgage. Assumption here would be similar to LOAN, a higher outstanding balance on their mortgage would mean a large amount of debt and an increased risk of defaulting due to the larger payments. Looking at Figure (\ref{mortdue_dist}) you can see it does not follow this assumption,  again a small but clear difference in the distribution shows that applicants with a higher outstanding balance on their mortgage are less likely to default. Whatever the reason behind this is would most likely be the same as the reason behind LOAN. 
 
 \subsection*{VALUE}
 
-VALUE,  the property of the applicants and the equity the loan is being put against. The same initial assumption being made with MORTDUE is also here,  a value of an applicants property is an indication of their economic status. An owner of a higher valued property should be able to payback a larger loan and less likely to default on smaller ones. From Figure (\ref{value_dist}) there is a small visible effect of loan on their probability of defaulting.
+VALUE,  the property of the applicants and the equity the loan is being put against. The same initial assumption being made with MORTDUE is also here, the value of an applicants property is an indication of their economic status. An owner of a higher valued property should be able to payback a larger loan and less likely to default on smaller ones. From Figure (\ref{value_dist}) there is a small visible effect of loan on their probability of defaulting.
 
 \begin{figure}[H]
 	\centering
@@ -126,7 +126,7 @@ VALUE,  the property of the applicants and the equity the loan is being put agai
 
 \subsection*{REASON}
 
-REASON,  the reason for the applicant's request. There are only two categories as seen in \ref{reason_cat},  DebtCon,  the loan would be used for a debt consolidation. HomeImp,  the loan is being used for a home improvement. A breakdown of their splits between good and bad can be found in Table (\ref{reason_count_tbl}). The two categories continue to have similar splits when they do not default but when they do default,  HomeImp's split increases by 7\%. Looking at this further in Figure (\ref{reason_cat}) the bad rate for DebtCon is 16.24\% and HomeImp 20.75\%. Although there does appear to be a difference,  it is small and compared to other variables in the group I would expect this to be on the lower end of signifiance.
+REASON, the reason for the applicant's request. There are only two categories as seen in Figure (\ref{reason_cat}),  DebtCon, the loan would be used for a debt consolidation. HomeImp, the loan is being used for a home improvement. A breakdown of their splits between good and bad can be found in Table (\ref{reason_count_tbl}). The two categories continue to have similar splits when they do not default but when they do default,  HomeImp's split increases by 7\%. Looking at this further in Figure (\ref{reason_cat}) the bad rate for DebtCon is 16.24\% and HomeImp 20.75\%. Although there does appear to be a difference and from initial observation it appears small compared to other variables in the group. When Table (\ref{reason_count_tbl}) is passed through a 2 sample hypothesis test shown below we see there appears to be significant difference at a level of $p < 0.01$. We would still expect this to be on the lower end of signifiance when comparing to the others.
 
 \begin{table}[H]
 	\centering
@@ -148,9 +148,24 @@ REASON,  the reason for the applicant's request. There are only two categories a
 	\caption{Category plot of REASON by BAD. \label{reason_cat}}
 \end{figure}
 
+\begin{equation}\label{Hypo}
+H_{0}: p_{Debt} = p_{Home} \textup{ vs } H_{A}: p_{Debt} \neq p_{Home}
+\end{equation}
+
+\begin{equation}\label{TTest}
+\begin{aligned}
+\\
+p_{Debt} =& \dfrac{559}{3442} = 0.1624\\
+p_{Home} =& \dfrac{317}{1528} = 0.2075\\
+z =& \dfrac{0.1624 - 0.2075}{\sqrt{\dfrac{0.1624 * (1 - 0.1624)}{3442} + \dfrac{0.2075 * (1 - 0.2075)}{1528}}} \\ 
+z =& - 3.7181 \\
+P(Z \geq 3.7181) =& 0.00012
+\end{aligned}
+\end{equation}
+
 \subsection*{JOB}
 
-JOB, categorical job occupation. Categories can be seen in \ref{job_cat}. Occupation could be used as an indicator for the applicants economic status e.g. a ProfExe, proffesional executive is more likely to have a higher income than office staff or someone who is self employed. It could also be used to see how volatile their employement status is, someone who is self employed can be seen as a possible risk due to their income being potentially unstable. Although we do not have a way of looking at their job security,  we do have YOJ,  years at present job, as an indicator of Job security. Comparing Figure (\ref{job_yoj_cat}) and Figure (\ref{job_cat}), Sales, the job with the lowest average YOJ has the highest bad rate at 31.52\% followed by Self at 24.14\%. 
+JOB, categorical job occupation. Categories can be seen in \ref{job_cat}. Occupation could be used as an indicator for the applicants economic status e.g. a ProfExe, professional executive is more likely to have a higher income than office staff or someone who is self employed. It could also be used to see how volatile their employement status is, someone who is self employed can be seen as a possible risk due to their income being potentially unstable. Although we do not have a way of looking at their job security, we do have YOJ, years at present job, as an indicator of Job security. Comparing Figure (\ref{job_yoj_cat}) and Figure (\ref{job_cat}), Sales, the job with the lowest average YOJ has the highest bad rate at 31.52\% followed by Self at 24.14\%. 
 
 \begin{table}[H]
 	\centering
@@ -184,7 +199,7 @@ JOB, categorical job occupation. Categories can be seen in \ref{job_cat}. Occupa
 
 \subsection*{YOJ}
 
-YOJ, number of years the applicant has been at present job. Can be an indicator of job security,  an applicant losing their job can be a high risk of defaulting on their loan. Figure (\ref{yoj_dist} shows that the majority of applicants are between 3 to 14 years at their current job with the mean for bads and goods being relatively the same. The difference between them starts to become noticable at higher values where an applicant who has been at their present job for more than 20 years starts to become less likely to default.
+YOJ, number of years the applicant has been at present job. Can be an indicator of job security, an applicant losing their job can be a high risk of defaulting on their loan. Figure (\ref{yoj_dist} shows that the majority of applicants are between 3 to 14 years at their current job with the mean for bads and goods being relatively the same. The difference between them starts to become noticable at higher values where an applicant who has been at their present job for more than 20 years starts to become less likely to default.
 
 \begin{figure}[H]
 	\centering
@@ -194,7 +209,7 @@ YOJ, number of years the applicant has been at present job. Can be an indicator 
 
 \subsection*{DEROG}
 
-DEROG,  number of dergoatory marks on aginast the applicant. A derogatory mark can have a large impact on your chances of being accepted for a loan. In this dataset,  only 12.3\% of applicants have 1 or more dergoatory mark. An applicant can recieve a derogatory mark for various reasons such as,  missing payments,  bankruptcy,  repossession,  etc. The severity of the reason for the derogatory mark is often used in credit scoring but for this dataset we only have the numbers of marks against the applicant. Figure (\ref{derog_cat}) shows the impact having a derogatory mark can have on your chance of defaulting with 0 having a bad rate of 15.04\% and 3 having a bad rate of 65.12\%.
+DEROG,  number of dergoatory marks against the applicant. A derogatory mark can have a large impact on your chances of being accepted for a loan. In this dataset,  only 12.3\% of applicants have 1 or more dergoatory mark. An applicant can recieve a derogatory mark for various reasons such as,  missing payments, bankruptcy, repossession, etc. The severity of the reason for the derogatory mark is often used in credit scoring but for this dataset we only have the numbers of marks against the applicant. Figure (\ref{derog_cat}) shows the impact having a derogatory mark can have on your chance of defaulting with 0 having a bad rate of 15.04\% and 3 having a bad rate of 65.12\%.
 
 \begin{figure}[H]
 	\centering
@@ -204,7 +219,7 @@ DEROG,  number of dergoatory marks on aginast the applicant. A derogatory mark c
 
 \subsection*{DELINQ}
 
-DELINQ,  Number of delinquent credit lines. Delinquency is used to describe when a borrower has missed a payment,  the borrower is referred to as delinquent. Delinquency preceeds defaulting,  once a borrower has been deqlinquent for a time it comes apparent that the borrower is unable to pay back the loan. The data we are provided is the number of deqlinquent credit lines,  which is the number of credit lines the borrower has missed payments on. 
+DELINQ,  Number of delinquent credit lines. Assumption here would be that an applicant who has missed payments on other credit lines is more likely to miss payments on other credit lines. Looking at Figure (\ref{delinq_cat}), this does appear to be the case. There is a clear increase in the bad rate with every new credit line with a missed payment. We would expect this to have a significant effect in our scorecard. 
 
 \begin{figure}[H]
 	\centering
@@ -214,7 +229,7 @@ DELINQ,  Number of delinquent credit lines. Delinquency is used to describe when
 
 \subsection*{CLAGE}
 
-CLAGE,  Age of oldest credit line in months. Assumption here is the longer an applicant has held credit lines the more experienced they are in repaying payments. A applicant who has experience in credit repayments for 20 years is going to have a better time in avoiding delinqency and defaulting that someone who is new to credit. Figure (\ref{clage_dist}) reinforces this assumption,  there is a clear difference in the distributions of goods and bads. Applicants between 100 and 150 months on thier oldest credit line have a bad rate of 21.8\% and applicants between 200 and 300 have a bad rate of 9.5\%. Expecting this value to have a strong signifance for the credit score.
+CLAGE, Age of oldest credit line in months. Assumption here is the longer an applicant has held credit lines the more experienced they are in repaying payments. A applicant who has experience in credit repayments for 20 years is going to have a better time in avoiding delinqency and defaulting than someone who is new to credit. Figure (\ref{clage_dist}) reinforces this assumption,  there is a clear difference in the distributions of goods and bads. Applicants between 100 and 150 months on thier oldest credit line have a bad rate of 21.8\% and applicants between 200 and 300 have a bad rate of 9.5\%. Expecting this value to have a strong signifance for the credit score.
 
 \begin{figure}[H]
 	\centering
@@ -224,7 +239,7 @@ CLAGE,  Age of oldest credit line in months. Assumption here is the longer an ap
 
 \subsection*{NINQ}
 
-NINQ,  number of recent credit inquiries. Figure (\ref{ninq_cat}) indicates that the more recent credit equiries an applicant makes the more likely they are to default,  this trend is followed until the higher values are reached but this deviation could be due to the low sample size at larger values. 73.8\% of applicants have made no more than 1 recent credit equiry where as only 3\% of applicants made 5 or more. This could create an issue depending on how the WOE method bins the values.
+NINQ,  number of recent credit enquiries. Figure (\ref{ninq_cat}) indicates that the more enquiries an applicant makes, the more likely they are to default, this trend is followed until the higher values are reached but this deviation could be due to the low sample size at larger values. 73.8\% of applicants have made no more than 1 recent credit equiry where as only 3\% of applicants made 5 or more. This could create an issue depending on how the WOE method bins the values.
 
 \begin{figure}[H]
 	\centering
@@ -234,7 +249,7 @@ NINQ,  number of recent credit inquiries. Figure (\ref{ninq_cat}) indicates that
 
 \subsection*{CLNO}
 
-CLNO,  number of credit lines. A credit line can be any method in which someone can recieve credit such as an overdraft,  credit card,  etc. Figure (\ref{clno_dist}) suggests that applicants with low or high values for credit lines have a higher bad rate that ones in the centre. A reason behind this could be that a applicant with a low number of credit lines could be inexperience with debt management or don't have access to other credit to ensure payment on loans is on time. On the other end it could be that applicants with a large number of credit lines become incapable of managing the potential debt from the numerous sources. Where as the centre is seen to be where applicants have a good control over their credit lines. Applicants with a CLNO value between 20 and 30 have a bad rate of 15.1\% where applicants outside of this group have a bad rate of 23.1\%. A differnce of 8\%.
+CLNO, number of credit lines. A credit line can be any method in which someone can receive credit such as an overdraft, credit card, etc. Figure (\ref{clno_dist}) suggests that applicants with low or high values for credit lines have a higher bad rate than the applicants in the centre. A reason behind this could be that an applicant with a low number of credit lines could be inexperience with debt management or don't have access to other credit to ensure payments on loans are on time. On the other end it could be that applicants with a large number of credit lines become incapable of managing the potential debt from the numerous sources. Where as the centre is seen to be where applicants have a good control over their credit lines. Applicants with a CLNO value between 20 and 30 have a bad rate of 15.1\% where applicants outside of this group have a bad rate of 23.1\%. A difference of 8\%.
 
 \begin{figure}[H]
 	\centering
@@ -244,9 +259,9 @@ CLNO,  number of credit lines. A credit line can be any method in which someone 
 
 \section{WOE and IV}
 
-WOE binning and calculation was done using the scorecardpy package provided by ShichenXie \parencite{scorecardpy},  results can be found in the two Tables (\ref{woe_1}) \& (\ref{woe_2}). I allowed the function to determine optimal bins itself using the chimerge method described in Section \ref{chimerge}. In the table we have a breakdown for each bin providing their woe value and individual information values. We can also see the total information value of each variable in the last column (total\_iv). Based on IV,  our strongest predictor by a large margin is DELINQ with a IV value of 0.40 and our weakest is Reason with an IV of 0.02. Referring back to Bailey's guideline (\ref{IV})\parencite{bailey2004credit}, we can categorise each variable on their strength from the IV.\\
+WOE binning and calculation was done using the scorecardpy package provided by ShichenXie \parencite{scorecardpy},  results can be found in the two Tables (\ref{woe_1}) \& (\ref{woe_2}). We allowed the function to determine optimal bins itself using the chimerge method described in Section \ref{chimerge}. In the table there is a breakdown for each bin providing their woe value and individual information values. We can also see the total information value of each variable in the last column (total\_iv). Based on IV, our strongest predictor by a large margin is DELINQ with a IV value of 0.40 and our weakest is Reason with an IV of 0.02. Referring back to Bailey's guideline (\ref{IV})\parencite{bailey2004credit}, we can categorise each variable on their strength from the IV.\\
 
-Looking back on our data exploration we can see that our assumption about some of the variables appear to be reflecting in the WOE bins. Reason, a variable I expected to be rather insignifcant due to the bad rate being similar in both categories has the lowest IV. NINQ appears to have been binned appropriately with the upper bin being [4.0, inf) meaning the drop in bad rate at 7.0, assumed to be from a small sample, should not have a siginicant effect on the woe value of the group. The assumption on CLAGE, the variable with the second highest IV, is also reflected in the WOE values with a clear trend appearing in the bad probabilities of each bin seen in Figure (\ref{fig:ClageWoe}). The increase in bad probability in bin [170.0, 180.0) is most likely an error created by the single imputation used in the data cleaning, referring to the summary table before cleaning, Table (\ref{SUM_BFR_TBL}), you can see the median is 173.63 which is within the bin not following the trend.
+Looking back on our data exploration we can see that our assumption about some of the variables appear to be reflecting in the WOE bins. Reason, a variable we expected to be rather insignifcant due to the bad rate being similar in both categories has the lowest IV. NINQ appears to have been binned appropriately with the upper bin being [4.0, inf) meaning the drop in bad rate at 7.0, assumed to be from a small sample, should not have a siginicant effect on the woe value of the group. The assumption on CLAGE, the variable with the second highest IV, is also reflected in the WOE values with a clear trend appearing in the bad probabilities of each bin seen in Figure (\ref{fig:ClageWoe}). The increase in bad probability in bin [170.0, 180.0) is most likely an error created by the single imputation used in the data cleaning, referring to the summary table before cleaning, Table (\ref{SUM_BFR_TBL}), you can see the median is 173.63 which is within the bin not following the trend.
 
 \begin{figure}[ht]\label{Table2}
 	\centering
@@ -287,7 +302,7 @@ Looking back on our data exploration we can see that our assumption about some o
 \end{figure}
 
 \begin{landscape}
-	\begin{figure}[!ht]
+	\begin{table}[!ht]
 		\centering
 		\begin{tabular}{lllrrrrrrrr}
 			\toprule
@@ -327,9 +342,9 @@ Looking back on our data exploration we can see that our assumption about some o
 			\bottomrule
 		\end{tabular}
 		\caption{WOE results table. \label{woe_1}}
-	\end{figure}
+	\end{table}
 	
-	\begin{figure}[!ht]
+	\begin{table}[!ht]
 		\centering
 		\begin{tabular}{lllrrrrrrrr}
 			\toprule
@@ -369,5 +384,5 @@ Looking back on our data exploration we can see that our assumption about some o
 			\bottomrule
 		\end{tabular}
 		\caption{WOE results table. \label{woe_2}}
-	\end{figure}
+	\end{table}
 \end{landscape}

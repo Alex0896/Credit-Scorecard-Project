@@ -1,8 +1,8 @@
-\chapter{Alternative Uses: Covid-19} \label{cha:chapter-5}
+\chapter{Alternative Uses: Covid-19} \label{chapter:5}
 
-Scorecard modelling techniques have proven to be effective methods in other areas of science such as medicine. One such present use is to develop a scorecard of the health risk of patients with Covid-19. Many such papers have been published on the potential risk of patients with various characteristics such as age, sex, race, underlying health conditions. Using an live open data set on Covid-19 patients \parencite{kraemer2020epidemiological}, I attempted to apply the credit scoring methods to develop a scorecard for a patients health risk. \\ 
+Scorecard modelling techniques have proven to be effective methods in other areas of science such as medicine. One such present use is to develop a scorecard of the health risk of patients with Covid-19. Many papers have been published on the potential risk of patients with various characteristics such as age, sex, race, underlying health conditions \parencite{du2020predictors}. Using an live open data set on Covid-19 patients \parencite{kraemer2020epidemiological}, we attempted to apply the credit scoring methods to develop a scorecard for a patients health risk. \\ 
 
-The data set at time of downloading contained 2,676,311 rows of patient data. The majority of the data set was limited containing only, an ID, country of patient and date of contracting, but some rows contained more information on the patients such as age, sex, symptoms, chronic diseases. I subsetted my data down to rows which contained, age, sex and symptoms and made the assumption that any of these rows which had a null value for chronic disease indicates no disease present. This left me with 215 rows. \\
+The data set at time of downloading contained 2,676,311 rows of patient data. The majority of the data set was limited containing only, an ID, country of patient and date of contracting, but some rows contained more information on the patients such as age, sex, symptoms, chronic diseases. We subsetted the data down to rows which contained, age, sex and symptoms and made the assumption that any of these rows which had a null value for chronic disease indicates no disease present. This left us with 215 rows. \\
 
 \begin{table}[H]
 	\centering
@@ -14,11 +14,11 @@ The data set at time of downloading contained 2,676,311 rows of patient data. Th
 	outcome & 1 = Died; 0 = Survived \\
 	age & Age of patient \\
 	sex & Sex of patient (1 = Male) (0 = Female) \\
-	cough & Wether the patient had a cough \\
-	fever & Wether the patient had a fever \\
-	pneumonia & Wether the patient had pneumonia \\
-	respiratory problems & Wether the patient was having repiratory problems, could range from acute symptoms to respiratory failure \\
-	hypertension & Wether the patient has a chronic disease of hypertension \\
+	cough & Whether the patient had a cough \\
+	fever & Whether the patient had a fever \\
+	pneumonia & Whether the patient had pneumonia \\
+	respiratory problems & Whether the patient was having repiratory problems, could range from acute symptoms to respiratory failure \\
+	hypertension & Whether the patient has a chronic disease of hypertension \\
 	\end{tabular}
 	\caption{Variables used in the Data Set \label{CovidData}}
 \end{table}
@@ -42,11 +42,11 @@ The data set at time of downloading contained 2,676,311 rows of patient data. Th
 	\caption{Data summary \label{table:covid_data_sum}}
 \end{table}
 
-Next I split symptoms and diseases into their own dummy variables and removed any with few observations $( < 20\% )$. The final dataset can be seen in Table (\ref{CovidData}). It should be noted that diabetes was included in the list of chronic diseases but because every patient with diabetes in the data died it was creating issues when using logistic regression so it was removed. From Table (\ref{table:covid_data_sum}) we can see the bad rate is 68\% most likely because the patients in this data set have already been admitted to hospital because of Covid-19. The details on other variables can also be found in this table.\\
+Next we split symptoms and diseases into their own dummy variables and removed any with few observations $( < 20\% )$. The final dataset can be seen in Table (\ref{CovidData}). It should be noted that diabetes was included in the list of chronic diseases but because every patient with diabetes in the data died it was creating issues when using logistic regression so it was removed. From Table (\ref{table:covid_data_sum}) we can see the bad rate is 68\% most likely because the patients in this data set have already been admitted to hospital because of Covid-19. The details on other variables can also be found in this table.\\
 
-After cleaning the data I applied the same methods I used for the credit scoring data set, first woe binning the variables using the scorecardpy package and then applying a logisitic regression to the data. Results of these two can be found in Tables (\ref{table:covid_woe}) \& (\ref{table:covid_results}) respectively. You can see in Table (\ref{table:covid_woe}) that age is the variable with the highest IV at 2.93 and sex has an IV at 0.01. \\
+After cleaning the data we applied the same methods we used for the credit scoring data set, first woe binning the variables using the scorecardpy package and then applying a logisitic regression to the data. Results of these two can be found in Tables (\ref{table:covid_woe}) \& (\ref{table:covid_results}) respectively. You can see in Table (\ref{table:covid_woe}) that age is the variable with the highest IV at 2.93 and sex has an IV at 0.01. \\
 
-Cough and fever, although their IV's are high the reason for that appears to be reversed. Both of their bad probabilities are much higher when the symptom is not present, 0.74 and 0.81. My assumption would be that any symptom would increase the probability of death but in these cases it is the opposite. Since we cannot determine how the data was collected for these patients we can only assume possibilites for the reasons. One such reason could be that patients with more severe symptoms such as respiratory problems did not have the symptoms of cough and fever recorded as they were deemed insignificant symptoms compared the prior. This would create a case where patients who only ever developed minor symptoms would be the only ones to have those symptoms recorded. \\
+Cough and fever, although their IV's are high the reason for that appears to be reversed. Both of their bad probabilities are much higher when the symptom is not present, 0.74 and 0.81. Our assumption would be that any symptom would increase the probability of death but in these cases it is the opposite. Since we cannot determine how the data was collected for these patients we can only assume possibilites for the reasons. One such reason could be that patients with more severe symptoms such as respiratory problems did not have the symptoms of cough and fever recorded as they were deemed insignificant symptoms compared the prior. This would create a case where patients who only ever developed minor symptoms would be the only ones to have those symptoms recorded. \\
 
 \begin{table}[H]
 	\centering
@@ -81,9 +81,9 @@ Cough and fever, although their IV's are high the reason for that appears to be 
 	\caption{WOE results table. \label{table:covid_woe}}
 \end{table}
 
-Now looking at the results of the Logistic Regression, Table (\ref{table:covid_results}). As expected from the p-values, age is our most siginificant variable with respiratory coming second. Sex, even though it is not significant, it still has the highest coefficient. When looking back to Table (\ref{table:covid_woe}), we see that the bad probability from sex is quite similar, the closest of any other variables, and as such I was not expecting the coefficient to be this large. That along with its insignificance, I chose to drop the variable and compare the resulting model which can be seen in Table (\ref{table:covid_results_2}). Both AIC and BIC are lower and the siginificance of the remaining variables stayed relatively the same. \\
+Now looking at the results of the Logistic Regression, Table (\ref{table:covid_results}). As expected from the p-values, age is our most siginificant variable with respiratory coming second. Sex, even though it is not significant, still has the highest coefficient. When looking back to Table (\ref{table:covid_woe}), we see that the bad probability from sex is quite similar, the closest of any other variables, and as such we was not expecting the coefficient to be this large. That along with its insignificance, we chose to drop the variable and compare the resulting model which can be seen in Table (\ref{table:covid_results_2}). Both AIC and BIC are lower and the siginificance of the remaining variables stayed relatively the same. \\
 
-Going one step further I chose to also drop cough as its p-value was 0.8145, much higher than the other variables and then repeated this step until I could no longer improve the AIC. The resulting Table can be seen in (\ref{table:covid_results_3}) with cough and hypertension removed. The remaining variables have fairly low p-values with all being less than 0.1 and age remains our most significant variable. Fever remains in the model with the effect of lowering the probability if the symptom is observed, although it is significant for the data I would suspect this would not be reflected in other data sets. \\
+Going one step further we chose to also drop cough as its p-value was 0.8145, much higher than the other variables and then repeated this step until we could no longer improve the AIC. The resulting Table can be seen in (\ref{table:covid_results_3}) with cough and hypertension removed. The remaining variables have fairly low p-values with all being less than 0.1 and age remains our most significant variable. Fever remains in the model with the effect of lowering the probability if the symptom is observed, although it is significant for the data we would suspect this would not be reflected in other data sets. \\
 
 \begin{table}[H]
 	\renewcommand{\arraystretch}{1.25}
@@ -171,7 +171,7 @@ Going one step further I chose to also drop cough as its p-value was 0.8145, muc
 	\caption{Results: Generalized linear model (cough \& hypertension dropped) \label{table:covid_results_3}}
 \end{table}
 
-Seen below is the confusion matrices for each model. From these it can be seen that Model 2 (sex dropped) appears to be categorizing the test data the best with only 4.69\% incorrect where as Model 3 (cough and hypertension dropped) is performing the worst with 14.06\% categorized incorrectly. Considering that the AIC is similar in all cases and the type of data this is, the choice of model I would go with would be based on accuracy and as such would go with Model 2.
+Seen below is the confusion matrices for each model. From these it can be seen that Model 2 (sex dropped) appears to be categorizing the test data the best with only 4.69\% incorrect where as Model 3 (cough and hypertension dropped) is performing the worst with 14.06\% categorized incorrectly. Considering that the AIC is similar in all cases and the type of data this is, the choice of model we would go with would be based on accuracy and as such would go with Model 2.
 
 \begin{table}[H]
     \begin{minipage}{.33\linewidth}
