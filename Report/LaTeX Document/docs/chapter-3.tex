@@ -28,7 +28,7 @@ The data we are using for this project is a collection of observations of 5,960 
 
 \section{Data Cleaning}
 
-The data provided needed some initial cleaning. 2,596 observations were missing atleast one value with some missing several variables and even a few missing everything except the outcome. The biggest culprit of this would be DEBTINC with 1,267 missing values. We decided to handle these missing values on a case by case basis applying different methods. Before we went forward with any imputing we considered any possible outliers within my numerical data, using the summary Table (\ref{SUM_BFR_TBL}). You can see from the quantile ranges that there will most likely be some outliers occuring in the majority of the numerical variables. The gerneral consesus is that there is a necessity to handle outliers but a lack of definitive way to handle them \parencite{nyitrai2019effects}. For this project we chose to removed the 99th percentile for every numerical variable excluding BAD, this ended up removing 613 rows. \\
+The data provided needed some initial cleaning. 2,596 observations were missing at least one value with some missing several variables and even a few missing everything except the outcome. The biggest culprit of this would be DEBTINC with 1,267 missing values. We decided to handle these missing values on a case by case basis applying different methods. Before we went forward with any imputing we considered any possible outliers within my numerical data, using the summary Table (\ref{SUM_BFR_TBL}). You can see from the quantile ranges that there will most likely be some outliers occuring in the majority of the numerical variables. The gerneral consesus is that there is a necessity to handle outliers but a lack of definitive way to handle them \parencite{nyitrai2019effects}. For this project we chose to removed the 99th percentile for every numerical variable excluding BAD, this ended up removing 613 rows. \\
 
 Moving onto imputing variable, for MORTDUE and VALUE, we imputed their values using a simple linear regression of the other. This was going on the assumption that the mortgage due on a house had a strong relationship with the value of property. The assumption is further backed up with the correlation between the two being 0.8748 before imputing, far higher than any of the other correlations in the data. So for MORTDUE we used Equation (\ref{MORTDUE_IMPUTE}) and for VALUE we used Equation (\ref{VALUE_IMPUTE}). This was applied to any missing value where the other was present and for the remaining we took the mean of each variable from the original data before the imputations were added.
 
@@ -165,7 +165,7 @@ P(Z \geq 3.7181) =& 0.00012
 
 \subsection*{JOB}
 
-JOB, categorical job occupation. Categories can be seen in \ref{job_cat}. Occupation could be used as an indicator for the applicants economic status e.g. a ProfExe, professional executive is more likely to have a higher income than office staff or someone who is self employed. It could also be used to see how volatile their employement status is, someone who is self employed can be seen as a possible risk due to their income being potentially unstable. Although we do not have a way of looking at their job security, we do have YOJ, years at present job, as an indicator of Job security. Comparing Figure (\ref{job_yoj_cat}) and Figure (\ref{job_cat}), Sales, the job with the lowest average YOJ has the highest bad rate at 31.52\% followed by Self at 24.14\%. 
+JOB, categorical job occupation. Categories can be seen in Figure (\ref{job_cat}). Occupation could be used as an indicator for the applicants economic status e.g. a ProfExe, professional executive is more likely to have a higher income than office staff or someone who is self employed. It could also be used to see how volatile their employement status is, someone who is self employed can be seen as a possible risk due to their income being potentially unstable. Although we do not have a way of looking at their job security, we do have YOJ, years at present job, as an indicator of Job security. Comparing Figure (\ref{job_yoj_cat}) and Figure (\ref{job_cat}), Sales, the job with the lowest average YOJ has the highest bad rate at 31.52\% followed by Self at 24.14\%. 
 
 \begin{table}[H]
 	\centering
@@ -199,7 +199,7 @@ JOB, categorical job occupation. Categories can be seen in \ref{job_cat}. Occupa
 
 \subsection*{YOJ}
 
-YOJ, number of years the applicant has been at present job. Can be an indicator of job security, an applicant losing their job can be a high risk of defaulting on their loan. Figure (\ref{yoj_dist} shows that the majority of applicants are between 3 to 14 years at their current job with the mean for bads and goods being relatively the same. The difference between them starts to become noticable at higher values where an applicant who has been at their present job for more than 20 years starts to become less likely to default.
+YOJ, number of years the applicant has been at present job. Can be an indicator of job security, an applicant losing their job can be a high risk of defaulting on their loan. Figure (\ref{yoj_dist})  shows that the majority of applicants are between 3 to 14 years at their current job with the mean for bads and goods being relatively the same. The difference between them starts to become noticable at higher values where an applicant who has been at their present job for more than 20 years starts to become less likely to default.
 
 \begin{figure}[H]
 	\centering
@@ -229,7 +229,7 @@ DELINQ,  Number of delinquent credit lines. Assumption here would be that an app
 
 \subsection*{CLAGE}
 
-CLAGE, Age of oldest credit line in months. Assumption here is the longer an applicant has held credit lines the more experienced they are in repaying payments. A applicant who has experience in credit repayments for 20 years is going to have a better time in avoiding delinqency and defaulting than someone who is new to credit. Figure (\ref{clage_dist}) reinforces this assumption,  there is a clear difference in the distributions of goods and bads. Applicants between 100 and 150 months on thier oldest credit line have a bad rate of 21.8\% and applicants between 200 and 300 have a bad rate of 9.5\%. Expecting this value to have a strong signifance for the credit score.
+CLAGE, Age of oldest credit line in months. Assumption here is the longer an applicant has held credit lines the more experienced they are in repaying payments. A applicant who has experience in credit repayments for 20 years is going to have a better time in avoiding delinqency and defaulting than someone who is new to credit. Figure (\ref{clage_dist}) reinforces this assumption,  there is a clear difference in the distributions of goods and bads. Applicants between 100 and 150 months on thier oldest credit line have a bad rate of 21.8\% and applicants between 200 and 300 have a bad rate of 9.5\%. We will be expecting this value to have a strong signifance for the credit score.
 
 \begin{figure}[H]
 	\centering
@@ -249,7 +249,7 @@ NINQ,  number of recent credit enquiries. Figure (\ref{ninq_cat}) indicates that
 
 \subsection*{CLNO}
 
-CLNO, number of credit lines. A credit line can be any method in which someone can receive credit such as an overdraft, credit card, etc. Figure (\ref{clno_dist}) suggests that applicants with low or high values for credit lines have a higher bad rate than the applicants in the centre. A reason behind this could be that an applicant with a low number of credit lines could be inexperience with debt management or don't have access to other credit to ensure payments on loans are on time. On the other end it could be that applicants with a large number of credit lines become incapable of managing the potential debt from the numerous sources. Where as the centre is seen to be where applicants have a good control over their credit lines. Applicants with a CLNO value between 20 and 30 have a bad rate of 15.1\% where applicants outside of this group have a bad rate of 23.1\%. A difference of 8\%.
+CLNO, number of credit lines. A credit line can be any method in which someone can receive credit such as an overdraft, credit card, etc. Figure (\ref{clno_dist}) suggests that applicants with low or high values for credit lines have a higher bad rate than the applicants in the centre. A reason behind this could be that an applicant with a low number of credit lines could be inexperienced with debt management or don't have access to other credit to ensure payments on loans are on time. On the other end, it could be that applicants with a large number of credit lines become incapable of managing the potential debt from the numerous sources. Where as the centre is seen to be where applicants have a good control over their credit lines. Applicants with a CLNO value between 20 and 30 have a bad rate of 15.1\% where applicants outside of this group have a bad rate of 23.1\%. A difference of 8\%.
 
 \begin{figure}[H]
 	\centering
@@ -259,11 +259,11 @@ CLNO, number of credit lines. A credit line can be any method in which someone c
 
 \section{WOE and IV}
 
-WOE binning and calculation was done using the scorecardpy package provided by ShichenXie \parencite{scorecardpy},  results can be found in the two Tables (\ref{woe_1}) \& (\ref{woe_2}). We allowed the function to determine optimal bins itself using the chimerge method described in Section \ref{chimerge}. In the table there is a breakdown for each bin providing their woe value and individual information values. We can also see the total information value of each variable in the last column (total\_iv). Based on IV, our strongest predictor by a large margin is DELINQ with a IV value of 0.40 and our weakest is Reason with an IV of 0.02. Referring back to Bailey's guideline (\ref{IV})\parencite{bailey2004credit}, we can categorise each variable on their strength from the IV.\\
+WOE binning and calculation was done using the scorecardpy package provided by ShichenXie \parencite{scorecardpy},  results can be found in the two Tables (\ref{woe_1}) \& (\ref{woe_2}). We allowed the function to determine optimal bins itself using the chimerge method described in Section \ref{chimerge}. We applied this binning method to every variable because we intended to use the scorecardpy package for other other sections of this project such as demonstrated in Section (\ref{sec:scorecard_building}). For this the package requires every variable to be binned. In the table there is a breakdown for each bin providing their woe value and individual information values. We can also see the total information value of each variable in the last column (total\_iv). Based on IV, our strongest predictor by a large margin is DELINQ with a IV value of 0.40 and our weakest is Reason with an IV of 0.02. Referring back to Bailey's guideline (\ref{IV})\parencite{bailey2004credit}, we can categorise each variable on their strength from the IV which is seen in Table (\ref{table:iv_vals}).\\
 
-Looking back on our data exploration we can see that our assumption about some of the variables appear to be reflecting in the WOE bins. Reason, a variable we expected to be rather insignifcant due to the bad rate being similar in both categories has the lowest IV. NINQ appears to have been binned appropriately with the upper bin being [4.0, inf) meaning the drop in bad rate at 7.0, assumed to be from a small sample, should not have a siginicant effect on the woe value of the group. The assumption on CLAGE, the variable with the second highest IV, is also reflected in the WOE values with a clear trend appearing in the bad probabilities of each bin seen in Figure (\ref{fig:ClageWoe}). The increase in bad probability in bin [170.0, 180.0) is most likely an error created by the single imputation used in the data cleaning, referring to the summary table before cleaning, Table (\ref{SUM_BFR_TBL}), you can see the median is 173.63 which is within the bin not following the trend.
+Looking back on our data exploration we can see that our assumption about some of the variables appear to be reflecting in the WOE bins. Reason, a variable we expected to be rather insignifcant due to the bad rate being similar in both categories has the lowest IV. NINQ appears to have been binned appropriately with the upper bin being [4.0, inf) meaning the drop in bad rate at 7.0, assumed to be from a small sample, should not have a siginicant effect on the WOE value of the group. The assumption on CLAGE, the variable with the second highest IV, is also reflected in the WOE values with a clear trend appearing in the bad probabilities of each bin seen in Figure (\ref{fig:ClageWoe}). The increase in bad probability in bin [170.0, 180.0) is most likely an error created by the single imputation used in the data cleaning, referring to the summary table before cleaning, Table (\ref{SUM_BFR_TBL}), you can see the median is 173.63 which is within the bin not following the trend.
 
-\begin{figure}[ht]\label{Table2}
+\begin{table}[ht]\label{Table2}
 	\centering
 	\renewcommand{\arraystretch}{1.25}
 	\begin{tabular}{llr}
@@ -284,20 +284,21 @@ Looking back on our data exploration we can see that our assumption about some o
 	CLNO & Average & 0.15\\
 	\bottomrule
 	\end{tabular}
-\end{figure}
+	\caption{Variable IV Values \label{table:iv_vals}}
+\end{table}
 
 \begin{figure}
 \centering
   \centering
   \includegraphics[width=0.9\linewidth]{figs/ninq_woe_plot.png}
-  \caption{NINQ woe plot}
+  \caption{NINQ WOE plot}
   \label{fig:NinqWoe}
 \end{figure}
 
 \begin{figure}
   \centering
  \includegraphics[width=0.9\linewidth]{figs/clage_woe_plot.png}
-  \caption{Clage woe plot}
+  \caption{CLAGE WOE plot}
   \label{fig:ClageWoe}
 \end{figure}
 

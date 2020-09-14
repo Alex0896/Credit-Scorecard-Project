@@ -2,11 +2,11 @@
 
 \section{Logistic Regression Results}
 
-For the modelling, the data was split into train and test sets with proportions 0.7 and 0.3 respectively. The bad rate was maintained in each data at 17\% to ensure fairness and the variables were converted to their woe values for their respective bin from tables  (\ref{woe_1}) \& (\ref{woe_2}). Once split, the train data was passed through a glm model with logit link, for this the python package statsmodels was used \parencite{statsmodels}. Three models were created, first, seen in Table (\ref{table:results_1}), was the base model with every variable included with no changes. Looking at the results table we can see that the majority of variables are highly significant with p-values less than 0.001. Mortdue is deemed the most insignificant, most likely due to its high correlation with VALUE and as such the variance it explains is already captured by VALUE. This is confirmed if we run the model again with VALUE dropped, seen in Table (\ref{table:results_val_dropped}). The p-value for MORTDUE is now 0.0005. \\
+For the modelling, the data was split into train and test sets with proportions 0.7 and 0.3 respectively. The bad rate was maintained in each data at 17\% to ensure fairness and the variables were converted to their WOE values for their respective bin from tables  (\ref{woe_1}) \& (\ref{woe_2}). Once split, the train data was passed through a glm model with logit link, for this the python package statsmodels was used \parencite{statsmodels}. Three models were created, first, seen in Table (\ref{table:results_1}), was the base model with every variable included with no changes. Looking at the results table we can see that the majority of variables are highly significant with p-values less than 0.001. Mortdue is deemed the most insignificant, most likely due to its high correlation with VALUE and as such the variance it explains is already captured by VALUE. This is confirmed if we run the model again with VALUE dropped, seen in Table (\ref{table:results_val_dropped}). The p-value for MORTDUE is now 0.0005. \\
 
-For the second model we looked at applying log transformations to the variables which had a heavy right skew, LOAN, MORTDUE, VALUE and YOJ to try to improve their p-values. These values were then passed through the woe binning and the values converted. The IV of LOAN and YOJ improved by 0.01 and 0.03 respectively whilst MORTDUE and VALUE's IV decreased, based on this, only the log transformations of LOAN and YOJ were kept and used for the second model. The results for the second model can be seen in Table (\ref{table:results_2}). \\
+For the second model we looked at applying log transformations to the variables which had a heavy right skew, LOAN, MORTDUE, VALUE and YOJ to try to improve their p-values. These values were then passed through the WOE binning and the values converted. The IV of LOAN and YOJ improved by 0.01 and 0.03 respectively whilst MORTDUE and VALUE's IV decreased, based on this, only the log transformations of LOAN and YOJ were kept and used for the second model. The results for the second model can be seen in Table (\ref{table:results_2}). \\
 
-Finally, a third model was made from dropping variables with high p-values, these were MORTDUE and REASON. The results are displayed in Table (\ref{table:results_3}). All the remaining variables have a p-value of less than 0.0001. Every coefficient is positive, implying that an increase in all variables increase in the probability of BAD, which from initial observation shouldn't be right. Looking back on Section (\ref{sec:variables}) we have some assumptions of large values decreasing the probability of BAD such as CLAGE and YOJ. The reason for this is a result of the WOE methods, changing the values of our binned variables to their respective WOE value seen in Tables (\ref{woe_1}) \& (\ref{woe_2}). Higher values of CLAGE have negative values, for example values of CLAGE between 180 and 240 have a woe value of -0.47. So in reality, a CLAGE value in this range would have the effect of decreasing the probability of BAD. \\
+Finally, a third model was made from dropping variables with high p-values, these were MORTDUE and REASON. The results are displayed in Table (\ref{table:results_3}). All the remaining variables have a p-value of less than 0.0001. Every coefficient is positive, implying that an increase in all variables increase in the probability of BAD, which from initial observation shouldn't be right. Looking back on Section (\ref{sec:variables}) we have some assumptions of large values decreasing the probability of BAD such as CLAGE and YOJ. The reason for this is a result of the WOE methods, changing the values of our binned variables to their respective WOE value seen in Tables (\ref{woe_1}) \& (\ref{woe_2}). Higher values of CLAGE have negative values, for example values of CLAGE between 180 and 240 have a WOE value of -0.47. So in reality, a CLAGE value in this range would have the effect of decreasing the probability of BAD. \\
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
@@ -76,26 +76,40 @@ YOJ\_woe    &  0.8988 &   0.1660 &   5.4148 &      0.0000 &  0.5735 &  1.2241  \
 \caption{Results: Model 3 \label{table:results_3}}
 \end{table}
 
-The performance of each model is shown and compared in Table (\ref{perf_eval}). It can be seen from this table that based on the performance evaulation mentioned in Section (\ref{sec:perf_eval}). Model 2 and 3 appear to out perform Model 1. But, when comparing the Model 2 to 3, the difference between performance indicators becomes smaller. Model 3 improves on every performance indicator but only by a small margin when compared to the change from Model 1 to Model 2. Based on Table (\ref{perf_eval}) either Model 2 or 3 would be an appropriate choice but we will go with Model 3. Even though the AIC of model 3 is smaller, this is still only a difference of 1.08. Where as the log-likelihood has a difference of 1.5 with model 2 performing better. This implies that Model 3 is only considered better when evaluting the AIC because of the removal of two variables and being a smaller model. Despite this, Model 3 still out performs Model 2 in the other 3, it has a higher K-S Statisitc, meaning it's best point of seperation is stronger than Model 2, a higher GINI coefficient implies it has a higher discriminatory power and the higher divergence value tells us that the scorecard has a stronger seperation of the distribution of goods and bads. \\
+\pagebreak
+
+The performance of each model is shown and compared in Table (\ref{perf_eval}). It can be seen from this table that based on the performance evaulation mentioned in Section (\ref{sec:perf_eval}). Model 2 and 3 appear to out perform Model 1. But, when comparing the Model 2 to 3, the difference between performance indicators becomes smaller. Model 3 improves on every performance indicator but only by a small margin when compared to the change from Model 1 to Model 2. Based on Table (\ref{perf_eval}) either Model 2 or 3 would be an appropriate choice but we will go with Model 3. Even though the AIC of model 3 is smaller, this is still only a difference of 1.08. Where as the log-likelihood has a difference of 1.5 with model 2 performing better. This implies that Model 3 is only considered better when evaluting the AIC because of the removal of two variables and being a smaller model. Despite this, Model 3 still out performs Model 2 in K-S, GINI and Divergence. It has a higher K-S Statisitc, meaning its best point of seperation is stronger than Model 2, a higher GINI coefficient implies it has a higher discriminatory power and the higher divergence value tells us that the scorecard has a stronger seperation of the distribution of goods and bads. \\
 
 \begin{table}[H]
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
 \begin{tabular}{lcccc}
 \toprule
-Model & AIC & KS & GINI & Divergence \\
+Model & AIC & K-S & GINI & Divergence \\
 Model 1 (Default) & 2514.39 & 0.4581 & 0.5956 & 1.3802  \\
 Model 2 (Log transformations) & 2495.42 & 0.4814 & 0.6078 & 1.4439  \\
-Model 3 (REASON and MORTDUE dropped) & 2494.34 & 0.4822 & 0.6116 & 1.4568 \\
+Model 3 (REASON and MORTDUE dropped) & 2494.34 & 0.4890 & 0.6186 & 1.4568 \\
 \bottomrule
 \end{tabular}
 \caption{Performance Evaluation Results On Test \label{perf_eval}}
 \end{center}
 \end{table}
 
-\section{Scorecard Building}
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[scale=0.90]{figs/ks_plot.png}
+%	\caption{K-S Plot \label{ks_plot}}
+%\end{figure}
+%
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[scale=0.90]{figs/roc_plot.png}
+%	\caption{ROC Plot \label{roc_plot}}
+%\end{figure}
 
-With the model selected we then needed to turn the logistic regression results into a readable scorecard. To do this, we again used the scorcard package in python \parencite{statsmodels} and used the function \textit{scorecard(bins, model, xcolumns, point0, odds0, pdo)}. The function takes the woe bins in Tables (\ref{woe_1}) \& (\ref{woe_2}) and the logistic coefficients from Table (\ref{table:results_3}) and develops a points system for each variable and their bins. The function uses Equation (\ref{eq:scorecard}) to calculate each bin's point value.\\
+\section{Scorecard Building}\label{sec:scorecard_building}
+
+With the model selected we then needed to turn the logistic regression results into a readable scorecard. To do this, we again used the scorcard package in python \parencite{statsmodels} and used the function \textit{scorecard(bins, model, xcolumns, point0, odds0, pdo)}. The function takes the WOE bins in Tables (\ref{woe_1}) \& (\ref{woe_2}) and the logistic coefficients from Table (\ref{table:results_3}) and develops a points system for each variable and their bins. The function uses Equation (\ref{eq:scorecard}) to calculate each bin's point value.\\
 
 \begin{equation}\label{eq:scorecard}
 Score_{i,j} = -\dfrac{pdo}{\ln(2)} \cdot WOE_{j} \cdot \beta_{i}
@@ -133,17 +147,6 @@ In Figure (\ref{scorecard_plot}) the score of every applicant in the train and t
 
 The PSI value of our scorecard is 1.1\% indicating the two samples don't have a shift in population. In Figures (\ref{fig:sc_dist_train}) \& (\ref{fig:sc_dist_test}) we can also see a clear seperation of goods and bads within our scorecard with bads clearly on the lower end of the scorecard and goods on the upper. 
 
-%\begin{figure}[!ht]
-%	\centering
-%	\includegraphics[scale=0.90]{figs/ks_plot.png}
-%	\caption{KS Plot \label{ks_plot}}
-%\end{figure}
-%
-%\begin{figure}[!ht]
-%	\centering
-%	\includegraphics[scale=0.90]{figs/roc_plot.png}
-%	\caption{ROC Plot \label{roc_plot}}
-%\end{figure}
 
 \begin{landscape}
 \begin{figure}[!ht]

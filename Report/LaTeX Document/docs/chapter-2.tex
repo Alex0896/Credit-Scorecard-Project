@@ -12,7 +12,7 @@ The cut-off scores can be determined by varying factors which can change dependi
 
 \section{Weight of evidence and Information value}  \label{sec:woe_and_iv}
 
-Weight of evidence, WOE. Is a popular method used for data preperation in scorecard modelling. Often used because, the variables can either have a large amount of categories, which would require creation of many dummy variables. Or, the numerical variables do not follow a linear relationship with the goods and bads, creating difficulties for the logistic regression when assigning a coefficient. An example of this issue can be seen later in Section (\ref{sec:variables}) and the variable CLNO, the variable will also be used as an example here. WOE is a solution to these problems, rather than creating a many dummy variables, the method produces a numerical value (weight of evidence) for each category/bin. The binning method used to create the bins for WOE is detailed in Section (\ref{chimerge}). WOE is produced by Equation (\ref{WOE}). 
+Weight of evidence, WOE. Is a popular method used for data preperation in scorecard modelling. Often used because, the variables can either have a large amount of categories, which would require creation of many dummy variables. Or, the numerical variables do not follow a linear relationship with the goods and bads, creating difficulties for the logistic regression when assigning a coefficient. An example of this issue can be seen later in Section (\ref{sec:variables}) and the variable CLNO, the variable will also be used as an example here. WOE is a solution to these problems, rather than creating many dummy variables, the method produces a numerical value (weight of evidence) for each category/bin. The binning method used to create the bins for WOE is detailed in Section (\ref{chimerge}). WOE is produced by Equation (\ref{WOE}). 
 
 \begin{equation}\label{WOE}
 WOE = \ln \frac{f(X=x|y=1)}{f(X=x|y=0)}
@@ -113,12 +113,12 @@ gini = (2 \cdot AUC) - 1
 The K-S Statistic (Kolmogorov-Smirnov Statistic) is a measurement of the scorecards ability to seperate the goods from bads. The K-S Statistic is the maximum distance between the cumulative distributions of both the goods and bads. This can be calculate by Equation (\ref{KS}). \\
 
 \begin{equation}\label{KS}
-KS = max(F_{g}(x) - F_{b}(x))
+K-S = max(F_{g}(x) - F_{b}(x))
 \end{equation}
 
 where $F_{g}(x)$ is the cumulative distribution of goods at score $x$ and $F_{b}(x)$ is the distribution of bads at score $x$. \\
 
-An issue of this measurement is that it only provides the score at which the scordcard seperates the goods and bads the most. The cut-off score for the card might not necessarily be this score and a higher K-S score does not imply the scorecard is a better fit. 
+An issue of this measurement is that it only provides the score at which the scorecard seperates the goods and bads the most. The cut-off score for the card might not necessarily be this score and a higher K-S score does not imply the scorecard is a better fit. 
 
 \subsection*{Divergence}
 

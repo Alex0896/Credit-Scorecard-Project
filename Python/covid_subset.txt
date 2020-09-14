@@ -1,0 +1,216 @@
+ID,age,sex,symptoms,chronic_disease,outcome
+000-1-129,44,female,"fatigue, fever",,discharged
+000-1-130,39,female,"systemic weakness, runny nose, fever",,discharged
+000-1-131,46,male,fever,,discharged
+000-1-133,40,male,"fever, pneumonia, sore throat",,discharged
+000-1-134,30,male,"cough, fever, sore throat",,discharged
+000-1-135,32,male,"cough, fever, shortness of breath",,discharged
+000-1-136,66,male,"cough, fever",,discharged
+000-1-137,40,male,"cough, fever",,discharged
+000-1-138,51,male,"cough, fever, myalgia",,discharged
+000-1-144,33,male,"chills, fever, myalgias, sore throat",,discharged
+000-1-163,1,female,diarrhea,,discharged
+000-1-173,30,female,"chills, cough, fatigue, fever",,Discharged
+000-1-174,31,male,"chills, conjunctivitis, cough, fever",,Discharged
+000-1-18,52,female,"severe, kidney failure and hypertension","diabetes, hypertension",death
+000-1-197,47,male,lesions on chest radiographs,,stable
+000-1-2,80-89,male,difficulty breathing,,dead
+000-1-211,27,male,"cough, fever, sputum",,stable
+000-1-216,67,female,"chills, cough, fever",,stable
+000-1-217,37,male,fever,,stable
+000-1-22,39,male,"cough, fever",,died
+000-1-23,44,male,"cough, sore throat","""thought to have had other pre-existing conditions""",died
+000-1-265,50-59,male,"cough, fever, malaise",,treated in an intensive care unit (14.02.2020)
+000-1-4,73,female,fever,,death
+000-1-40988,61,male,"fever, cough, running nose",,discharged
+000-1-40989,32,male,"fever, cough, sore throat, mialgia, headache",,discharged
+000-1-41,29,male,discomfort,,discharge
+000-1-42,55,male,fever,,discharge
+000-1-5,80-89,female,"anorexia, fatigue",,death
+000-1-59,73,male,respiratory symptoms,prostate hypertrophy,discharge
+000-1-6,60-69,male,"cough, shortness of breath","hepatitis B, diabetes",death
+000-1-60,25,female,"cough, fever",,discharge
+000-1-63,42,female,"cough, fever, runny nose",,discharge
+000-1-65,28,female,"fever, sore throat",,discharge
+000-1-70,49,female,cough,,discharge
+000-1-71,16,female,"cough, fever",,discharge
+000-1-80,29,male,"eye irritation, fever",,discharge
+000-1-82,55,female,"fever, headache, runny nose",,discharge
+000-1-83,0.25,female,"cough, runny nose",,discharge
+000-1-84,50,male,transient fatigue,,discharge
+000-1-96,61,male,fever,,discharge
+000-2-215,70,male,"cough, fever",,died
+000-2-216,76,female,fever,"hypertension, diabetes",died
+000-2-217,72,male,"cough, fever",chronic bronchitis,died
+000-2-218,79,male,"cough, fever, gasp","hypertension, diabetes",died
+000-2-219,55,male,"cough, fever",,died
+000-2-220,87,male,"diarrhea, fever",diabetes,died
+000-2-221,66,female,"chest distress, fever",hypertension,died
+000-2-222,58,male,"chest distress, cough, fever, gasp",hypertension,died
+000-2-223,66,male,"cough, fever",,died
+000-2-224,78,male,"cough, fever",coronary heart disease,died
+000-2-225,65,male,"cough, fever, sensation of chill","diabetes, coronary heart disease",died
+000-2-226,67,male,"dizziness, fever",chronic bronchitis,died
+000-2-227,58,male,"cough, expectoration, fever",,died
+000-2-228,67,female,fever,"hypertension, diabetes",died
+000-2-229,82,female,"chest distress, chest pain, fever, weak, dyspnea",hypertension,died
+000-2-231,69,female,"cough, fever, muscular soreness",,died
+000-2-232,36,male,"fatigue, fever",,died
+000-2-233,73,male,"cough, fever, dyspnea",,died
+000-2-234,70,female,fever,,died
+000-2-235,81,male,fever,"hypertension, coronary heart disease, diabetes, Tuberculosis",died
+000-2-34,49,female,"chest discomfort, cough, fever",,discharged
+000-2-548,65,female,primary myelofibrosis,,died
+000-2-60,15-88,female,"dyspnea, respiratory stress",,died
+000-2-61,66,male,"cough, fatigue, fever, headache","hypertension, chronic obstructive pulmonary disease, diabetes, chronic renal insufficiency",died
+000-2-62,48,female,"cough, fatigure, fever, little sputum, muscular soreness","diabetes, cerebral infarction",died
+000-2-63,89,male,dyspnea,"hypertension, diabetes, coronary heart disease, frequent ventricular premature beat (FVPB), coronary artery stenting",died
+000-2-65,69,male,"cough, fever",,died
+000-2-66,89,male,"obnubilation, somnolence","hypertension, cerebral infarction, encephalomalacia",died
+000-2-67,75,male,"cough, expectoration, emesis, fever","hypertension, hip replacement",died
+000-2-68,82,male,"cold chills, muscular soreness",,died
+000-2-69,66,male,dry cough,,died
+000-2-70,81,male,fever,,died
+000-2-71,82,female,"chest distress, cough, fatigue, fever","Parkinson's disease for five years, taking medicine of Madopar",died
+000-2-72,65,male,"fatigue, shortness of breath",,died
+000-2-73,80,female,"cough, fever, grasp, dyspnea","hypertension for more than 20 years, diabetes for more than 20 years, Parkinson's disease",died
+000-2-74,53,male,"chest distress, cough, fever",,died
+000-2-75,86,male,fatigue,"hypertension, diabetes, colon cancer surgery four years ago",died
+000-2-76,70,female,fever,,died
+000-2-77,84,male,"cough, fever, grasp","chronic bronchitis, stenocardia, hypertension, coronary stenting, hemorrhage of digestive tract",died
+001-323,70,male,Severe,Diabetes,Deceased
+002-11028,55,female,"fever, headache, runny nose",,discharge
+002-11029,0.25,female,"cough, runny nose",,discharge
+002-11030,50,male,transient fatigue,,discharge
+002-11368,80-89,female,"anorexia, fatigue",,death
+002-11378,50-59,male,"cough, fever, malaise",,treated in an intensive care unit (14.02.2020)
+002-11380,61,male,fever,,discharge
+002-11410,60-69,male,"cough, shortness of breath","hepatitis B, diabetes",death
+002-11856,80-89,male,difficulty breathing,,dead
+002-188,29,male,discomfort,,discharge
+002-19292,62,male,acute respiratory distress syndrome:severe pneumonia,hypertension:diabetes,died
+002-19293,59,female,acute respiratory distress syndrome:severe pneumonia,diabetes,died
+002-19296,86,male,acute respiratory failure:pneumonia,chronic kidney disease:hypertension:diabetes,died
+002-19298,72,male,cough,,recovered
+002-19299,56,male,fever:cough:acute respiratory distress syndrome,asthma,died
+002-19300,34,male,fever,,recovered
+002-19301,46,male,fever:cough,,recovered
+002-19303,70,male,cough:sore throat:colds,hypertension,recovered
+002-19305,41,male,fever:headache:body malaise,,recovered
+002-19306,46,female,none,,recovered
+002-19307,38,male,cough:body malaise,,recovered
+002-19309,51,female,cough:colds:dysphagia,hypertension,recovered
+002-19310,30,female,cough:sore throat:headache,,recovered
+002-19312,31,male,none,,recovered
+002-19313,34,male,none,,recovered
+002-19316,82,female,septic shock:cardiogenic shock:acute respiratory distress syndrome:acute renal failure,hypertension:diabetes:valvular heart disease,died
+002-19322,67,female,severe pneumonia,hypertension:diabetes,died
+002-19324,88,female,acute respiratory failure,hypertension,died
+002-19327,54,male,acute respiratory distress syndrome:severe pneumonia,,died
+002-19339,79,female,multiple organ failure:pneumonia,hypertensive,died
+002-19341,39,male,acute respiratory distress syndrome:pneumonia,,died
+002-19344,65,male,acute respiratory distress syndrome:pneumonia,hypertension:diabetes,died
+002-19366,68,male,acute respiratory failure:pneumonia,Hypertension,died
+002-19376,67,male,acute respiratory failure:pneumonia,diabetes:hypertension:chronic kidney disease,died
+002-19411,65,male,acute respiratory failure:pneumonia,diabetes:hypertenstion:upper git bleeding,died
+002-19413,76,male,acute respiratory distress syndrome:pneumonia,diabetes:hypertension,died
+002-19416,67,male,acute respiratory distress syndrome:pneumonia,hypertension,died
+002-19436,61,female,acute respiratory failure:pneumonia,hypertension,died
+002-19447,86,female,septic shock:pneumonia,Chronic kidney disease:hypertension,died
+002-19465,74,male,acute respiratory distress syndrome:pneumonia,hypertension,died
+002-19487,34,male,acute respiratory distress syndrome,diabetes,died
+002-19488,58,male,acute respiratory distress syndrome,diabetes,died
+002-19497,81,male,cardiac arrhythmia:septic shock:pneumonia,diabetes:hypertension,died
+002-19502,71,male,pneumonia,hypertension:diabetes,died
+002-19526,76,male,pneumonia:acute respiratory failure:heart failure,diabetes,died
+002-19553,71,male,septic shock:pneumonia,Pre-renal azotemia:cardiomyopathy:hypertension:diabetes,died
+002-19564,72,female,acute respiratory distress syndrome:pneumonia:septic shock,hypertension:diabetes:asthma,died
+002-19565,72,female,septic shock:pneumonia,hypertension:colon cancer,died
+002-19566,73,male,pneumonia,chronic kidney disease:hypertension:diabetes:ischemic heart disease,died
+002-19568,57,male,septic shock:pneumonia,pre-renal azotemia:diabetes:hypertension,died
+002-198,80,male,"chest distress, dyspnea",,died
+002-19893,89,male,myocardial infarction:pneumonia:multiple electrolyte imbalance,benign prostatic hyperplasia,died
+002-19895,67,female,acute respiratory disease,hypertension:bronchial asthma:impaired fasting glucose,died
+002-19899,60,female,acute respiratory distress:pneumonia,,died
+002-19908,56,male,pneumonia,hypertension:diabetes,died
+002-19910,46,male,pneumonia,hypertension,died
+002-19915,57,male,acute respiratory distress:pneumonia,hypertension:diabetes:dislipidemia,died
+002-19916,46,male,acute myocardial infarction,hypertension:renal disease,died
+002-19917,74,male,acute respiratory failure:pneumonia,hypertension:chronic kidney disease,died
+002-19922,65,male,acute respiratory distress syndrome:pneumonia,hypertension:chronic kidney disease,died
+002-19938,56,male,acute respiratory failure:pneumonia,diabetes:hypertension,died
+002-19940,56,male,septic shock:pneumonia,,died
+002-19943,80,female,acute coronary syndrome:congestive heart failure:severe acute respiratory infection,,died
+002-19955,63,male,acute respiratory failure:pneumonia:sepsis,asthma:hypertension:atherosclerosis:coronary artery disease,died
+002-19956,78,male,acute respiratory distress syndrome:septic shock:pneumonia,chronic obstructive pulmonary disease,died
+002-19971,63,female,pneumonia,hypertension:diabetes:chronic kidney disease,died
+002-19978,71,female,acute respiratory failure:sepsis:pneumonia,hypertension:diabetes,died
+002-19980,80,female,pneumonia,atrial fibrillation:hypertension:atherosclerosis:cerebrovascular infarct,died
+002-19982,74,female,septic shock:pneumonia,hypertension:cardiac disease,died
+002-19990,62,male,acute respiratory failure:pneumonia,hypertension:coronary artery disease:diabetes,died
+002-20004,78,female,acute respiratory distress syndrome:pneumonia,hypertension:hypothyroidism,died
+002-20026,57,male,cardiogenic shock:acute coronary syndrome:heart failure:pneumonia,hypertension,died
+002-20051,83,female,acute respiratory failure:pneumonia:myocardial infarction,chronic kidney disease,died
+002-20111,61,female,acute kidney injury:septic shock:acute respiratory distress syndrome,chronic kidney disease,died
+002-20129,50,male,acute respiratory failure:pneumonia,diabetes,died
+002-20170,79,female,arrhythmia:acute respiratory distress syndrome:pneumonia,,died
+002-20176,79,male,acute respiratory failure,,died
+002-20189,87,male,acute respiratory failure:pneumonia,chronic obstructive pulmonary disease,died
+002-20193,60,male,acute respiratory distress syndrome:pneumonia,hypertension:diabetes:dyslipidemia,died
+002-20210,77,male,sepsis:pneumonia,prostate cancer:chronic obstructive pulmonary disease,died
+002-20224,80,female,acute respiratory distress:pneumonia,hypertension:hypothyroidism:renal disease,died
+002-20225,56,male,acute respiratory distress syndrome:pneumonia:acute respiratory failure,hypertension,died
+002-20226,75,male,acute respiratory failure:acute kidney injury,hypertension:diabetes:tongue cancer:cardiovascular disease:benign prostatic hypertrophy,died
+002-20236,43,male,acute respiratory failure:myocardial dysfunction,,died
+002-20237,71,male,acute respiratory distress syndrome:septic shock:pneumonia:gastritis:acute kidney injury,diabetes:cardiac dysrhythmia,died
+002-20265,64,male,heart failure:pneumonia,hypertension:diabetes:chronic kidney disease,died
+002-20266,60,male,heart failure:pneumonia,,died
+002-20307,78,male,acute respiratory distress syndrome,hypertension:chronic kidney disease,died
+002-20318,67,male,pneumonia:congestive heart failure,hypertension:diabetes,died
+002-20319,86,male,cardiac arrhythmia:pneumonia,hypertension,died
+002-20320,82,male,myocardial infarction:acute respiratory distress syndrome:pneumonia,hypertension:diabetes,died
+002-20387,74,male,pneumonia,hypertension:diabetes:cardiac disease,died
+002-20448,70,male,cardiopulmonary arrest; acute respiratory failure; pneumonia,hypertension; diabetes; asthma,died
+002-20451,78,male,acute respiratory failure:pneumonia,hypertension,died
+002-20489,71,male,acute respiratory distress syndrome:pneumonia,hypertension:cardiac disease,died
+002-20524,83,male,acute respiratory distress syndrome,chronic kidney disease:hypertension:diabetes,died
+002-20621,64,female,acute respiratory distress syndrome:pneumonia,hypertension:diabetes,died
+002-20829,51,male,arrhythmia:septic shock:acute respiratory disease syndrome: acute kidney injury,hyperthyroidism,died
+002-20961,89,male,arrhythmia:sepsis:acute respiratory distress syndrome:pneumonia:acute kidney injury,chronic obstructive pulmonary disease:diabetes:dyslipidemia,died
+002-21008,69,male,septic shock:pneumonia,hypertension:cerebrovascular accident infarct,died
+002-21035,59,male,acute respiratory distress syndrome:pneumonia:hypoxia,cardiac disease,died
+002-21036,45,male,cardiopulmonary arrest: acute respiratory distress syndrome: pneumonia: hypoxia,,died
+002-21077,60,male,acute respiratory distress syndrome:septic shock,,died
+002-21078,74,male,acute respiratory distress syndrome: pneumonia,diabetes:hypertension,died
+002-212,39,male,"cough, fever",,died
+002-368,39,female,"systemic weakness, runny nose, fever",,discharged
+002-392,46,male,fever,,discharged
+002-5227,73,male,respiratory symptoms,prostate hypertrophy,discharge
+002-5228,25,female,"cough, fever",,discharge
+002-5230,44,male,"cough, sore throat","""thought to have had other pre-existing conditions""",died
+002-5477,73,female,fever,,death
+002-6120,47,male,lesions on chest radiographs,,stable
+002-6278,42,female,"cough, fever, runny nose",,discharge
+002-6280,28,female,"fever, sore throat",,discharge
+002-64,44,female,"fatigue, fever",,discharged
+002-6491,49,female,cough,,discharge
+002-6492,16,female,"cough, fever",,discharge
+002-806,40,male,"fever, pneumonia, sore throat",,discharged
+002-807,30,male,"cough, fever, sore throat",,discharged
+002-812,32,male,"cough, fever, shortness of breath",,discharged
+002-813,66,male,"cough, fever",,discharged
+002-821,55,male,fever,,discharge
+002-845,40,male,"cough, fever",,discharged
+002-850,51,male,"cough, fever, myalgia",,discharged
+002-9038,1,female,diarrhea,,discharged
+002-9301,27,male,"cough, fever, sputum",,stable
+002-9783,67,female,"chills, cough, fever",,stable
+002-9784,37,male,fever,,stable
+003-45078,47,male,"asymptomatic, afebrile",,discharged
+003-50163,16,male,asymptomatic,,discharged
+003-50167,44,male,fever,,discharged
+004-1139,57,female,significant clinical suspicion,,died
+004-1302,61.0,male,"fever, cough, running nose",,discharged
+004-1303,32.0,male,"fever, cough, sore throat, mialgia, headache",,discharged
+004-20582,52.0,female,"severe, kidney failure and hypertension","diabetes, hypertension",death
+004-8243,38,male,torpid evolution with respiratory distress and severe bronchopneumonia,,death
